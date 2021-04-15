@@ -14,3 +14,56 @@ a {
 * {
   box-sizing: border-box;
 }
+
+nav.custom {
+  height: 100px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+nav.custom a.navbar-brand {
+  font-weight: 700;
+  font-size: 29px;
+  line-height: 40px;
+  color: #6379f4 !important;
+}
+
+nav.custom .profile span.name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 31px;
+  text-align: center;
+  color: #3a3d42;
+}
+
+nav.custom .profile span.number {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
+  color: rgba(58, 61, 66, 0.9);
+}
+
+nav.custom .bell {
+  cursor: pointer;
+}
+
+footer.small {
+  height: 68px;
+  background-color: #6379f4;
+  box-sizing: border-box;
+  padding-top: 23px;
+  padding-bottom: 20px;
+}
+
+footer.small p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: rgba(239, 239, 239, 0.9);
+}
+
+footer.small span {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+  color: #efefef;
+}

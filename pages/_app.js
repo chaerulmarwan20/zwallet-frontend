@@ -1,11 +1,23 @@
 import Head from "next/head";
 import { GoogleFonts } from "next-google-fonts";
 import "bootstrap/dist/css/bootstrap.css";
+import "../styles/globals.css";
 import "../styles/home.css";
 import "../styles/login.css";
 import "../styles/sign-up.css";
 import "../styles/reset.css";
 import "../styles/pin.css";
+import "../styles/history.css";
+import "../styles/top-up.css";
+import "../styles/transfer.css";
+import "../styles/confirmation.css";
+import "../styles/status.css";
+import "../styles/profile.css";
+import "../styles/personal-info.css";
+import "../styles/manage.css";
+import "../styles/change-password.css";
+import "../styles/change-pin.css";
+import "../styles/phone.css";
 
 function MyApp({ Component, pageProps }) {
   return (

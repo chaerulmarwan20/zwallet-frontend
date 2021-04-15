@@ -1,0 +1,184 @@
+section.status {
+  margin-top: 150px;
+}
+
+section.status .sidebar {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  position: relative;
+}
+
+section.status .sidebar div.active::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 35px;
+  left: 0;
+  background-color: #6379f4;
+}
+
+section.status .sidebar a {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 31px;
+  color: rgba(58, 61, 66, 0.8);
+  transition: 0.5s ease;
+}
+
+section.status .sidebar a.active {
+  font-weight: 700;
+  color: #6379f4;
+}
+
+section.status .sidebar a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.status .logout-menu {
+  margin-top: 582px;
+}
+
+section.status .transfer {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
+section.status .transfer h1 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.status .transfer h1.transfer-status {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 30px;
+  color: #4d4b57;
+}
+
+section.status .transfer .failed p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #7a7886;
+}
+
+section.status .transfer .users {
+  height: 110px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+section.status .transfer .users .profile span.name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #4d4b57;
+}
+
+section.status .transfer .users .profile span.number {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #7a7886;
+}
+
+section.status .transfer .details {
+  height: 92px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+section.status .transfer .details span {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #7a7886;
+}
+
+section.status .transfer .details p {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 30px;
+  color: #514f5b;
+}
+
+section.status .transfer .button-container {
+  margin-top: 55px;
+}
+
+section.status .transfer .btn-back {
+  width: 197px;
+  height: 57px;
+  border-radius: 12px;
+  background-color: #6379f4;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+section.status .transfer .btn-back:hover {
+  background-color: #ffffff;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+}
+
+section.status .transfer .btn-download {
+  width: 243px;
+  height: 57px;
+  background-color: rgba(99, 121, 244, 0.15);
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+}
+
+section.status .transfer .btn-download span {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #6379f4;
+}
+
+section.status .transfer .btn-share {
+  width: 57px;
+  height: 57px;
+  background-color: rgba(99, 121, 244, 0.15);
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+}
+
+section.status .transfer .btn-try {
+  width: 170px;
+  height: 57px;
+  border-radius: 12px;
+  background-color: #6379f4;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+section.status .transfer .btn-try:hover {
+  background-color: #ffffff;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+}

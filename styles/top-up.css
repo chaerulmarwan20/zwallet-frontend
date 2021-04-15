@@ -1,0 +1,77 @@
+section.top-up {
+  margin-top: 150px;
+}
+
+section.top-up .sidebar {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  position: relative;
+}
+
+section.top-up .sidebar div.active::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 35px;
+  left: 0;
+  background-color: #6379f4;
+}
+
+section.top-up .sidebar a {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 31px;
+  color: rgba(58, 61, 66, 0.8);
+  transition: 0.5s ease;
+}
+
+section.top-up .sidebar a.active {
+  font-weight: 700;
+  color: #6379f4;
+}
+
+section.top-up .sidebar a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.top-up .logout-menu {
+  margin-top: 620px;
+}
+
+section.top-up .step-top-up {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
+section.top-up .step-top-up h1 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.top-up .step-top-up .step {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  height: 88px;
+}
+
+section.top-up .step-top-up .step p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  color: #7a7886;
+}
+
+section.top-up .step-top-up .step p span {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #6379f4;
+  margin-right: 25px;
+}

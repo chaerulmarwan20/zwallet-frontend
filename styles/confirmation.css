@@ -1,0 +1,182 @@
+section.confirmation {
+  margin-top: 150px;
+}
+
+section.confirmation .sidebar {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  position: relative;
+}
+
+section.confirmation .sidebar div.active::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 35px;
+  left: 0;
+  background-color: #6379f4;
+}
+
+section.confirmation .sidebar a {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 31px;
+  color: rgba(58, 61, 66, 0.8);
+  transition: 0.5s ease;
+}
+
+section.confirmation .sidebar a.active {
+  font-weight: 700;
+  color: #6379f4;
+}
+
+section.confirmation .sidebar a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.confirmation .logout-menu {
+  margin-top: 453px;
+}
+
+section.confirmation .transfer {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
+section.confirmation .transfer h1 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.confirmation .transfer .users {
+  height: 110px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+section.confirmation .transfer .users .profile span.name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #4d4b57;
+}
+
+section.confirmation .transfer .users .profile span.number {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #7a7886;
+}
+
+section.confirmation .transfer .details {
+  height: 92px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+section.confirmation .transfer .details span {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #7a7886;
+}
+
+section.confirmation .transfer .details p {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 30px;
+  color: #514f5b;
+}
+
+section.confirmation .transfer .btn-continue,
+section.confirmation .modal-content .modal-footer .btn-continue {
+  width: 170px;
+  height: 57px;
+  border-radius: 12px;
+  background-color: #6379f4;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 55px;
+  transition: 0.5s ease;
+}
+
+section.confirmation .transfer .btn-continue:hover,
+section.confirmation .modal-content .modal-footer .btn-continue:hover {
+  background-color: #ffffff;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+}
+
+section.confirmation .modal-content {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
+section.confirmation .modal-content h5 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.confirmation .modal-content .modal-header {
+  border: 0;
+}
+
+section.confirmation .modal-content .modal-body p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  color: rgba(58, 61, 66, 0.6);
+  transform: translateY(-15px);
+}
+
+section.confirmation .modal-content .modal-body input.form-control.pin {
+  width: 53px;
+  height: 65px;
+  background-color: #ffffff;
+  border: 1px solid rgba(169, 169, 169, 0.6);
+  box-sizing: border-box;
+  box-shadow: 0px 10px 75px rgba(147, 147, 147, 0.1);
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 41px;
+  color: #3a3d42;
+  text-align: center;
+  padding-bottom: 0px;
+}
+
+section.confirmation
+  .modal-content
+  .modal-body
+  input.form-control.pin::-webkit-input-placeholder {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 41px;
+  color: rgba(169, 169, 169, 0.8);
+}
+
+section.confirmation .modal-content .modal-body input.form-control.pin.active {
+  border: 1.5px solid #6379f4;
+}
+
+section.confirmation .modal-content .modal-footer {
+  border: 0;
+}

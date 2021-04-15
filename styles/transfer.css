@@ -1,0 +1,198 @@
+section.search {
+  margin-top: 150px;
+}
+
+section.search .sidebar {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  position: relative;
+}
+
+section.search .sidebar div.active::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 35px;
+  left: 0;
+  background-color: #6379f4;
+}
+
+section.search .sidebar a {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 31px;
+  color: rgba(58, 61, 66, 0.8);
+  transition: 0.5s ease;
+}
+
+section.search .sidebar a.active {
+  font-weight: 700;
+  color: #6379f4;
+}
+
+section.search .sidebar a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.search .logout-menu {
+  margin-top: 340px;
+}
+
+section.search .search-receiver {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
+section.search .search-receiver h1 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.search .search-receiver .receiver {
+  position: relative;
+}
+
+section.search .search-receiver .receiver img.search-img {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+}
+
+section.search .search-receiver .receiver input.form-control {
+  height: 54px;
+  background-color: rgba(58, 61, 66, 0.1);
+  border-radius: 12px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(58, 61, 66, 0.4);
+  padding-left: 60px;
+}
+
+section.search
+  .search-receiver
+  .receiver
+  input.form-control::-webkit-input-placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(58, 61, 66, 0.4);
+}
+
+section.search .search-receiver .users {
+  height: 110px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+section.search .search-receiver .users .profile span.name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #4d4b57;
+}
+
+section.search .search-receiver .users .profile span.number {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #7a7886;
+}
+
+section.search .search-receiver p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #7a7886;
+}
+
+section.search .search-receiver input.form-control.amount {
+  border: inherit;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 56px;
+  color: #6379f4;
+  text-align: center;
+}
+
+section.search
+  .search-receiver
+  input.form-control.amount::-webkit-input-placeholder {
+  color: #b5bdcc;
+  text-align: center;
+}
+
+section.search .search-receiver p.credit {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #3a3d42;
+}
+
+section.search .search-receiver .pencil {
+  position: relative;
+}
+
+section.search .search-receiver .pencil input.form-control.notes {
+  width: 343px;
+  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
+  border-top: inherit;
+  border-left: inherit;
+  border-right: inherit;
+  border-radius: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 27px;
+  color: #3a3d42;
+  padding-left: 40px;
+}
+
+section.search .search-receiver .pencil input.form-control.notes.active {
+  border-bottom: 1.5px solid #6379f4;
+}
+
+section.search
+  .search-receiver
+  .pencil
+  input.form-control.notes::-webkit-input-placeholder {
+  font-weight: 400;
+  line-height: 23px;
+  color: rgba(169, 169, 169, 0.8);
+}
+
+section.search .search-receiver .pencil img.pencil-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+section.search .search-receiver .btn-continue {
+  width: 170px;
+  height: 57px;
+  border-radius: 12px;
+  background-color: #6379f4;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 55px;
+  transition: 0.5s ease;
+}
+
+section.search .search-receiver .btn-continue:hover {
+  background-color: #ffffff;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+}

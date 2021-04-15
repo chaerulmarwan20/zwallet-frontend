@@ -1,0 +1,90 @@
+section.history {
+  margin-top: 150px;
+}
+
+section.history .sidebar {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  position: relative;
+}
+
+section.history .sidebar div.active::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 35px;
+  left: 0;
+  background-color: #6379f4;
+}
+
+section.history .sidebar a {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 31px;
+  color: rgba(58, 61, 66, 0.8);
+  transition: 0.5s ease;
+}
+
+section.history .sidebar a.active {
+  font-weight: 700;
+  color: #6379f4;
+}
+
+section.history .sidebar a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.history .logout-menu {
+  margin-top: 210px;
+}
+
+section.history .transaction {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
+section.history .transaction h1 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.history .transaction p.time {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  color: #7a7886;
+}
+
+section.history .transaction .users span.name {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #4d4b57;
+}
+
+section.history .transaction .users span.type {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #7a7886;
+}
+
+section.history .transaction .users div.price p.transfer {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1ec15f;
+}
+
+section.history .transaction .users div.price p.left {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #ff5b37;
+}
