@@ -1,0 +1,158 @@
+.reset-page {
+  background-image: url(../public/images/bg-big.png);
+  background-repeat: no-repeat;
+  background-size: 55vw;
+  background-position-x: 0;
+}
+
+section.reset .main a.zwallet {
+  font-weight: 700;
+  font-size: 29px;
+  line-height: 40px;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+section.reset .main a.zwallet:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.reset .main .phone-2 {
+  transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
+}
+
+section.reset .main .phone {
+  transform: matrix(0.99, 0.16, -0.16, 0.99, 0, 0);
+}
+
+section.reset .main .image-2 {
+  transform: translateX(-110px);
+}
+
+section.reset .main h1 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #ffffff;
+}
+
+section.reset .main p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+section.reset .aside h1 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #3a3d42;
+}
+
+section.reset .aside p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  color: rgba(58, 61, 66, 0.6);
+}
+
+section.reset .aside .mail,
+section.reset .aside .password,
+section.reset .aside .confirm-password {
+  position: relative;
+}
+
+section.reset .aside .password,
+section.reset .aside .confirm-password {
+  margin-top: 70px;
+}
+
+section.reset .aside .mail img.mail-img,
+section.reset .aside .password img.password-img,
+section.reset .aside .confirm-password img.confirm-password-img,
+section.reset .aside .password img.eye-img,
+section.reset .aside .confirm-password img.eye-img {
+  position: absolute;
+  top: 2px;
+  left: 0;
+}
+
+section.reset .aside .password img.password-img,
+section.reset .aside .confirm-password img.confirm-password-img {
+  top: 0;
+}
+
+section.reset .aside .password img.eye-img,
+section.reset .aside .confirm-password img.eye-img {
+  left: inherit;
+  right: 10px;
+  cursor: pointer;
+}
+
+section.reset .aside input.form-control {
+  width: 433px;
+  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
+  border-top: inherit;
+  border-left: inherit;
+  border-right: inherit;
+  border-radius: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 27px;
+  color: #3a3d42;
+  padding-left: 40px;
+  padding-bottom: 11px;
+}
+
+section.reset .aside input.form-control::-webkit-input-placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(169, 169, 169, 0.8);
+}
+
+section.reset .aside input.form-control.active {
+  border-bottom: 1.5px solid #6379f4;
+}
+
+section.reset .aside input.form-control.error {
+  border-bottom: 1.5px solid #ff5b37;
+}
+
+section.reset .aside button.btn-confirm,
+section.reset .aside button.btn-reset {
+  width: 438px;
+  height: 57px;
+  background-color: #dadada;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #88888f;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  transition: 0.5s ease;
+}
+
+section.reset .aside button.btn-confirm:hover,
+section.reset .aside button.btn-reset:hover {
+  cursor: no-drop;
+}
+
+section.reset .aside button.btn-confirm.active,
+section.reset .aside button.btn-reset.active {
+  background-color: #6379f4;
+  color: #ffffff;
+}
+
+section.reset .aside button.btn-confirm.active:hover,
+section.reset .aside button.btn-reset.active:hover {
+  cursor: pointer;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+  background-color: #ffffff;
+}

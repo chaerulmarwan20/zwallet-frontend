@@ -1,10 +1,16 @@
 import Head from "next/head";
-import "../styles/home.css";
+import { GoogleFonts } from "next-google-fonts";
 import "bootstrap/dist/css/bootstrap.css";
+import "../styles/home.css";
+import "../styles/login.css";
+import "../styles/sign-up.css";
+import "../styles/reset.css";
+import "../styles/pin.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <GoogleFonts href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" />
       <Head>
         <script
           src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

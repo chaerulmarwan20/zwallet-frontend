@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div className="container">
-      <nav className="navbar navbar-expand-md navbar-light bg-transparent mt-4">
+    <nav className="navbar navbar-expand-md navbar-light bg-transparent">
+      <div className="container mt-4">
         <Link href="#">
           <a className="navbar-brand">Zwallet</a>
         </Link>
@@ -29,7 +29,7 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 }

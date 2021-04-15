@@ -1,0 +1,147 @@
+.pin-page {
+  background-image: url(../public/images/bg-big.png);
+  background-repeat: no-repeat;
+  background-size: 55vw;
+  background-position-x: 0;
+}
+
+section.pin .main a.zwallet {
+  font-weight: 700;
+  font-size: 29px;
+  line-height: 40px;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+section.pin .main a.zwallet:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.pin .main .phone-2 {
+  transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
+}
+
+section.pin .main .phone {
+  transform: matrix(0.99, 0.16, -0.16, 0.99, 0, 0);
+}
+
+section.pin .main .image-2 {
+  transform: translateX(-110px);
+}
+
+section.pin .main h1 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #ffffff;
+}
+
+section.pin .main p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+section.pin .aside h1 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #3a3d42;
+}
+
+section.pin .aside p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  color: rgba(58, 61, 66, 0.6);
+}
+
+section.pin .aside input.form-control {
+  width: 53px;
+  height: 65px;
+  background-color: #ffffff;
+  border: 1px solid rgba(169, 169, 169, 0.6);
+  box-sizing: border-box;
+  box-shadow: 0px 10px 75px rgba(147, 147, 147, 0.1);
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 41px;
+  color: #3a3d42;
+  text-align: center;
+  padding-bottom: 0px;
+}
+
+section.pin .aside input.form-control::-webkit-input-placeholder {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 41px;
+  color: rgba(169, 169, 169, 0.8);
+}
+
+section.pin .aside input.form-control.active {
+  border: 1.5px solid #6379f4;
+}
+
+section.pin .aside input.form-control.error {
+  border: 1.5px solid #ff5b37;
+}
+
+section.pin .aside button.btn-confirm {
+  width: 438px;
+  height: 57px;
+  background-color: #dadada;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #88888f;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  transition: 0.5s ease;
+  margin-top: 90px;
+}
+
+section.pin .aside button.btn-confirm:hover {
+  cursor: no-drop;
+}
+
+section.pin .aside button.btn-confirm.active {
+  background-color: #6379f4;
+  color: #ffffff;
+}
+
+section.pin .aside button.btn-confirm.active:hover {
+  cursor: pointer;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+  background-color: #ffffff;
+}
+
+section.pin .aside button.btn-login-now {
+  width: 438px;
+  height: 57px;
+  background-color: #6379f4;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  transition: 0.5s ease;
+  margin-top: 90px;
+}
+
+section.pin .aside button.btn-login-now:hover {
+  cursor: pointer;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+  background-color: #ffffff;
+}

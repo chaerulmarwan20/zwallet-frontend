@@ -4,10 +4,15 @@
 
 body {
   background-color: #fafcff !important;
+}
+
+.landing-page {
   background-image: url(../public/images/bg.png);
   background-repeat: no-repeat;
   background-size: 658px;
   background-position-x: 100%;
+  position: relative;
+  z-index: -999;
 }
 
 nav {

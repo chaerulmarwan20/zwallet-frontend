@@ -1,0 +1,187 @@
+.login-page {
+  background-image: url(../public/images/bg-big.png);
+  background-repeat: no-repeat;
+  background-size: 55vw;
+  background-position-x: 0;
+}
+
+section.login .main a.zwallet {
+  font-weight: 700;
+  font-size: 29px;
+  line-height: 40px;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+section.login .main a.zwallet:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.login .main .phone-2 {
+  transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
+}
+
+section.login .main .phone {
+  transform: matrix(0.99, 0.16, -0.16, 0.99, 0, 0);
+}
+
+section.login .main .image-2 {
+  transform: translateX(-110px);
+}
+
+section.login .main h1 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #ffffff;
+}
+
+section.login .main p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+section.login .aside h1 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: #3a3d42;
+}
+
+section.login .aside p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  color: rgba(58, 61, 66, 0.6);
+}
+
+section.login .aside .mail,
+section.login .aside .password {
+  position: relative;
+}
+
+section.login .aside .password {
+  margin-top: 70px;
+}
+
+section.login .aside .mail img.mail-img,
+section.login .aside .password img.password-img,
+section.login .aside .password img.eye-img {
+  position: absolute;
+  top: 2px;
+  left: 0;
+}
+
+section.login .aside .password img.password-img {
+  top: 0;
+}
+
+section.login .aside .password img.eye-img {
+  left: inherit;
+  right: 10px;
+  cursor: pointer;
+}
+
+section.login .aside input.form-control {
+  width: 433px;
+  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
+  border-top: inherit;
+  border-left: inherit;
+  border-right: inherit;
+  border-radius: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 27px;
+  color: #3a3d42;
+  padding-left: 40px;
+  padding-bottom: 11px;
+}
+
+section.login .aside input.form-control::-webkit-input-placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(169, 169, 169, 0.8);
+}
+
+section.login .aside input.form-control.active {
+  border-bottom: 1.5px solid #6379f4;
+}
+
+section.login .aside input.form-control.error {
+  border-bottom: 1.5px solid #ff5b37;
+}
+
+section.login .aside a.forgot {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: rgba(58, 61, 66, 0.8);
+  transform: translateX(-10px);
+  transition: 0.5s ease;
+}
+
+section.login .aside a.forgot:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.login .aside button.btn-login {
+  width: 438px;
+  height: 57px;
+  background-color: #dadada;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #88888f;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  transition: 0.5s ease;
+}
+
+section.login .aside button.btn-login:hover {
+  cursor: no-drop;
+}
+
+section.login .aside button.btn-login.active {
+  background-color: #6379f4;
+  color: #ffffff;
+}
+
+section.login .aside button.btn-login.active:hover {
+  cursor: pointer;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+  background-color: #ffffff;
+}
+
+section.login .aside p.account {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: rgba(58, 61, 66, 0.8);
+}
+
+section.login .aside p.account a {
+  font-weight: 700;
+  color: #6379f4;
+  transition: 0.5s ease;
+}
+
+section.login .aside p.account a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.login .aside p.error {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 32px;
+  color: #ff5b37;
+}
