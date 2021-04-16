@@ -9,7 +9,7 @@ export default function Footer() {
             <div className="copyright">
               <p>2020 Zwallet. All right reserved.</p>
             </div>
-            <div class="contact">
+            <div className="contact">
               <span className="mr-5">+62 5637 8882 9901</span>
               <span>contact@zwallet.com</span>
             </div>

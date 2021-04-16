@@ -1,0 +1,167 @@
+section.dashboard {
+  margin-top: 150px;
+}
+
+section.dashboard .sidebar {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  position: relative;
+}
+
+section.dashboard .sidebar div.active::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 35px;
+  left: 0;
+  background-color: #6379f4;
+}
+
+section.dashboard .sidebar a {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 31px;
+  color: rgba(58, 61, 66, 0.8);
+  transition: 0.5s ease;
+}
+
+section.dashboard .sidebar a.active {
+  font-weight: 700;
+  color: #6379f4;
+}
+
+section.dashboard .sidebar a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.dashboard .logout-menu {
+  margin-top: 210px;
+}
+
+section.dashboard .balance {
+  background-color: #6379f4;
+  border-radius: 20px;
+}
+
+section.dashboard .balance .info p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 31px;
+  color: #e0e0e0;
+}
+
+section.dashboard .balance .info h1 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 55px;
+  color: #ffffff;
+  transform: translateY(-5px);
+}
+
+section.dashboard .balance .info span {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  color: #dfdcdc;
+}
+
+section.dashboard .balance .button-container .btn-balance {
+  width: 162px;
+  height: 57px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #ffffff;
+}
+
+section.dashboard .charts,
+section.dashboard .history {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
+section.dashboard .charts p {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  color: #1ec15f;
+}
+
+section.dashboard .charts .income span,
+section.dashboard .charts .expense span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #6a6a6a;
+}
+
+section.dashboard .charts .income p,
+section.dashboard .charts .expense p {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.dashboard .charts span.day {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #8f8f8f;
+}
+
+section.dashboard .history h2 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.dashboard .history a {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  color: #6379f4;
+  transition: 0.5s ease;
+}
+
+section.dashboard .history a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+section.dashboard .history .transaction .profile span.name {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #4d4b57;
+  white-space: nowrap;
+}
+
+section.dashboard .history .transaction .profile span.type {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #7a7886;
+}
+
+section.dashboard .history .transaction p.income,
+section.dashboard .history .transaction p.expense {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1ec15f;
+}
+
+section.dashboard .history .transaction p.expense {
+  color: #ff5b37;
+}

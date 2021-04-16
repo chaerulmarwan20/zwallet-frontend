@@ -4,14 +4,23 @@
 
 body {
   background-color: #fafcff !important;
+  position: relative;
 }
 
 .landing-page {
-  background-image: url(../public/images/bg.png);
-  background-repeat: no-repeat;
-  background-size: 658px;
-  background-position-x: 100%;
   position: relative;
+}
+
+.landing-page::before {
+  content: "";
+  display: block;
+  width: 658px;
+  height: 610px;
+  background-image: url(../public/images/bg.png);
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
   z-index: -1;
 }
 

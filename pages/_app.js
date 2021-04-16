@@ -7,6 +7,7 @@ import "../styles/login.css";
 import "../styles/sign-up.css";
 import "../styles/reset.css";
 import "../styles/pin.css";
+import "../styles/dashboard.css";
 import "../styles/history.css";
 import "../styles/top-up.css";
 import "../styles/transfer.css";

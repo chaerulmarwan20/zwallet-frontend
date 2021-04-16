@@ -17,7 +17,10 @@ a {
 
 nav.custom {
   height: 100px;
+  background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 nav.custom a.navbar-brand {
@@ -66,4 +69,45 @@ footer.small span {
   font-size: 16px;
   line-height: 28px;
   color: #efefef;
+}
+
+.notification {
+  position: absolute;
+  top: 120px;
+  right: 0;
+  z-index: 9999;
+}
+
+.notification {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 70px rgba(99, 99, 99, 0.15);
+  border-radius: 20px;
+}
+
+.notification h3 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  color: #7a7886;
+}
+
+.notification .history {
+  width: 343px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.notification .history .detail span.info {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #7a7a7a;
+}
+
+.notification .history .detail span.price {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #43484f;
 }
