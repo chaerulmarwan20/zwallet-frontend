@@ -3,6 +3,7 @@ section.profile {
 }
 
 section.profile .sidebar {
+  min-height: 100%;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 25px;
@@ -35,10 +36,6 @@ section.profile .sidebar a.active {
 section.profile .sidebar a:hover {
   text-decoration: none;
   opacity: 0.6;
-}
-
-section.profile .logout-menu {
-  margin-top: 270px;
 }
 
 section.profile .details {

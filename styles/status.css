@@ -3,6 +3,7 @@ section.status {
 }
 
 section.status .sidebar {
+  min-height: 100%;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 25px;
@@ -35,10 +36,6 @@ section.status .sidebar a.active {
 section.status .sidebar a:hover {
   text-decoration: none;
   opacity: 0.6;
-}
-
-section.status .logout-menu {
-  margin-top: 582px;
 }
 
 section.status .transfer {

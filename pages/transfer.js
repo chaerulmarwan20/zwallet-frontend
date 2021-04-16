@@ -5,7 +5,7 @@ import Main from "../parts/Transfer";
 export default function transfer() {
   return (
     <>
-      <Layout title="Transfer">
+      <Layout title="Transfer" className="search">
         <Main></Main>
       </Layout>
     </>

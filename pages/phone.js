@@ -5,7 +5,7 @@ import Main from "../parts/Phone";
 export default function phone() {
   return (
     <>
-      <Layout title="Add Phone Number">
+      <Layout title="Add Phone Number" className="phone">
         <Main></Main>
       </Layout>
     </>

@@ -1,9 +1,9 @@
 import { React, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
+import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
@@ -15,48 +15,7 @@ export default function index() {
         <Container>
           <Row>
             <Col className="col-md-7 main">
-              <div className="row">
-                <div className="col-md-12">
-                  <Link href="#">
-                    <a className="zwallet">Zwallet</a>
-                  </Link>
-                </div>
-              </div>
-              <div className="row mt-4">
-                <div className="col-md-12 d-flex">
-                  <div className="image-1">
-                    <Image
-                      src="/images/phone2.png"
-                      alt="Phone2"
-                      width={278}
-                      height={530}
-                      className="phone-2"
-                    />
-                  </div>
-                  <div className="image-2">
-                    <Image
-                      src="/images/phone.png"
-                      alt="Phone"
-                      width={278}
-                      height={536}
-                      className="phone"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row mt-2">
-                <div className="col-md-12">
-                  <h1>App that Covering Banking Needs.</h1>
-                </div>
-                <div className="col-md-12 mt-3">
-                  <p>
-                    Zwallet is an application that focussing in banking needs
-                    for all users <br /> in the world. Always updated and always
-                    following world trends. <br /> 5000+ users registered in
-                    Zwallet everyday with worldwide <br /> users coverage.
-                  </p>
-                </div>
-              </div>
+              <Auth />
             </Col>
             <Col className="col-md-5 aside">
               {showSuccess === true && (
@@ -90,22 +49,22 @@ export default function index() {
               <form className="mt-5">
                 <Row>
                   <Col className="col-md-2">
-                    <input type="text" className="form-control" />
+                    <Input type="text" isMax />
                   </Col>
                   <Col className="col-md-2">
-                    <input type="text" className="form-control" />
+                    <Input type="text" isMax />
                   </Col>
                   <Col className="col-md-2">
-                    <input type="text" className="form-control" />
+                    <Input type="text" isMax />
                   </Col>
                   <Col className="col-md-2">
-                    <input type="text" className="form-control" />
+                    <Input type="text" isMax />
                   </Col>
                   <Col className="col-md-2">
-                    <input type="text" className="form-control" />
+                    <Input type="text" isMax />
                   </Col>
                   <Col className="col-md-2">
-                    <input type="text" className="form-control" />
+                    <Input type="text" isMax />
                   </Col>
                 </Row>
               </form>

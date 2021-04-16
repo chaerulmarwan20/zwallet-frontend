@@ -5,7 +5,7 @@ import Main from "../parts/Dashboard";
 export default function dashboard() {
   return (
     <>
-      <Layout title="Dashboard">
+      <Layout title="Dashboard" className="dashboard">
         <Main></Main>
       </Layout>
     </>

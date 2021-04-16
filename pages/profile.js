@@ -5,7 +5,7 @@ import Main from "../parts/Profile";
 export default function profile() {
   return (
     <>
-      <Layout title="Profile">
+      <Layout title="Profile" className="profile">
         <Main></Main>
       </Layout>
     </>

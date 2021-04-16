@@ -5,7 +5,7 @@ import Main from "../parts/Manage";
 export default function manage() {
   return (
     <>
-      <Layout title="Manage Phone Number">
+      <Layout title="Manage Phone Number" className="manage">
         <Main></Main>
       </Layout>
     </>

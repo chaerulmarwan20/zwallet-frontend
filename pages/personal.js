@@ -5,7 +5,7 @@ import Main from "../parts/PersonalInformation";
 export default function personal() {
   return (
     <>
-      <Layout title="Personal Information">
+      <Layout title="Personal Information" className="personal">
         <Main></Main>
       </Layout>
     </>

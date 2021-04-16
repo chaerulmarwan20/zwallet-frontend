@@ -5,7 +5,7 @@ import Main from "../parts/Topup";
 export default function topup() {
   return (
     <>
-      <Layout title="Top Up">
+      <Layout title="Top Up" className="top-up">
         <Main></Main>
       </Layout>
     </>

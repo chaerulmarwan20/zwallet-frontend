@@ -5,7 +5,7 @@ import Main from "../parts/History";
 export default function history() {
   return (
     <>
-      <Layout title="History">
+      <Layout title="History" className="history">
         <Main></Main>
       </Layout>
     </>
