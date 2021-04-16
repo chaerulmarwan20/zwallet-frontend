@@ -82,3 +82,8 @@ section.manage .information .details p {
   line-height: 30px;
   color: #514f5b;
 }
+
+section.manage .information .details img.trash {
+  transform: translateY(-5px);
+  cursor: pointer;
+}

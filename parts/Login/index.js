@@ -1,7 +1,10 @@
 import { React, useState } from "react";
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
+import Button from "../../components/module/Button";
 
 export default function index() {
   const [type, setType] = useState("password");
@@ -17,23 +20,19 @@ export default function index() {
 
   return (
     <>
-      <Head>
-        <title>Zwallet | Login</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <section className="login py-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-7 main">
-              <div className="row">
-                <div className="col-md-12">
-                  <Link href="#">
+        <Container>
+          <Row>
+            <Col className="col-md-7 main">
+              <Row>
+                <Col className="col-md-12">
+                  <Link href="/">
                     <a className="zwallet">Zwallet</a>
                   </Link>
-                </div>
-              </div>
-              <div className="row mt-4">
-                <div className="col-md-12 d-flex">
+                </Col>
+              </Row>
+              <Row className="mt-4">
+                <Col className="col-md-12 d-flex">
                   <div className="image-1">
                     <Image
                       src="/images/phone2.png"
@@ -52,23 +51,23 @@ export default function index() {
                       className="phone"
                     />
                   </div>
-                </div>
-              </div>
-              <div className="row mt-2">
-                <div className="col-md-12">
+                </Col>
+              </Row>
+              <Row className="mt-2">
+                <Col className="col-md-12">
                   <h1>App that Covering Banking Needs.</h1>
-                </div>
-                <div className="col-md-12 mt-3">
+                </Col>
+                <Col className="col-md-12 mt-3">
                   <p>
                     Zwallet is an application that focussing in banking needs
                     for all users <br /> in the world. Always updated and always
                     following world trends. <br /> 5000+ users registered in
                     Zwallet everyday with worldwide <br /> users coverage.
                   </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-5 aside">
+                </Col>
+              </Row>
+            </Col>
+            <Col className="col-md-5 aside">
               <h1 className="mt-5">
                 Start Accessing Banking Needs <br /> With All Devices and All
                 Platforms <br />
@@ -121,7 +120,7 @@ export default function index() {
                   />
                 </div>
               </form>
-              <Link href="#">
+              <Link href="/reset">
                 <a className="forgot float-right mt-2">Forgot password?</a>
               </Link>
               <br />
@@ -130,23 +129,23 @@ export default function index() {
                   Email or Password Invalid
                 </p>
               )}
-              <button
+              <Button
                 type="button"
                 className={`btn btn-login ${
                   showError === true ? "mt-3" : "mt-5"
                 }`}
               >
                 Login
-              </button>
+              </Button>
               <p className="text-center mt-5 account">
                 Don’t have an account? Let’s{" "}
-                <Link href="#">
+                <Link href="/signup">
                   <a>Sign Up</a>
                 </Link>
               </p>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </section>
     </>
   );

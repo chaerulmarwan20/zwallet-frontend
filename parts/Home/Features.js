@@ -1,20 +1,20 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Features() {
+export default function Features({ container: Container, row: Row, col: Col }) {
   return (
     <section className="features py-4">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
+      <Container>
+        <Row>
+          <Col className="col-md-6">
             <Image
               src="/images/phone2.png"
               alt="Phone2"
               width={450}
               height={856}
             />
-          </div>
-          <div className="col-md-6">
+          </Col>
+          <Col className="col-md-6">
             <h1>
               All The <span>Great</span>
               <br />
@@ -47,9 +47,9 @@ export default function Features() {
                 complicated.
               </p>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

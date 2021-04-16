@@ -17,7 +17,7 @@ export default function Navbar() {
     <>
       <nav className="navbar navbar-expand-md navbar-light fixed-top custom">
         <div className="container">
-          <Link href="#">
+          <Link href="/">
             <a className="navbar-brand">Zwallet</a>
           </Link>
           <button

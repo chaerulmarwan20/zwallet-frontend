@@ -1,13 +1,31 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
 
 export default function index() {
+  const router = useRouter();
+
+  const handleClickPersonal = () => {
+    router.push("/personal");
+  };
+
+  const handleClickPassword = () => {
+    router.push("/password");
+  };
+
+  const handleClickPin = () => {
+    router.push("/changepin");
+  };
+
   return (
     <section className="profile">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3">
+      <Container>
+        <Row>
+          <Col className="col-md-3">
             <div className="sidebar d-flex flex-column justify-content-between p-5">
               <div className="main-menu d-flex flex-column justify-content-between">
                 <div className="d-flex align-items-center">
@@ -69,8 +87,8 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-9">
+          </Col>
+          <Col className="col-md-9">
             <div className="details p-5">
               <div className="d-flex flex-column justify-content-center align-items-center">
                 <div>
@@ -94,7 +112,10 @@ export default function index() {
                 <p className="mt-1">+62 813-9387-7946</p>
               </div>
               <div className="d-flex flex-column justify-content-center align-items-center mt-4">
-                <div className="option pt-4 pl-4 pb-1 pr-3 d-flex justify-content-between">
+                <div
+                  className="option pt-4 pl-4 pb-1 pr-3 d-flex justify-content-between"
+                  onClick={() => handleClickPersonal()}
+                >
                   <p>Personal Information</p>
                   <div>
                     <Image
@@ -105,7 +126,10 @@ export default function index() {
                     />
                   </div>
                 </div>
-                <div className="option pt-4 pl-4 pb-1 pr-3 d-flex justify-content-between mt-3">
+                <div
+                  className="option pt-4 pl-4 pb-1 pr-3 d-flex justify-content-between mt-3"
+                  onClick={() => handleClickPassword()}
+                >
                   <p>Change Password</p>
                   <div>
                     <Image
@@ -116,7 +140,10 @@ export default function index() {
                     />
                   </div>
                 </div>
-                <div className="option pt-4 pl-4 pb-1 pr-3 d-flex justify-content-between mt-3">
+                <div
+                  className="option pt-4 pl-4 pb-1 pr-3 d-flex justify-content-between mt-3"
+                  onClick={() => handleClickPin()}
+                >
                   <p>Change PIN</p>
                   <div>
                     <Image
@@ -132,9 +159,9 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

@@ -1,9 +1,24 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { BarChart, Bar } from "recharts";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
+import Button from "../../components/module/Button";
 
 export default function index() {
+  const router = useRouter();
+
+  const handleClickTransfer = () => {
+    router.push("/transfer");
+  };
+
+  const handleClickTopUp = () => {
+    router.push("/topup");
+  };
+
   const data = [
     {
       name: "Sat",
@@ -37,9 +52,9 @@ export default function index() {
 
   return (
     <section className="dashboard">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3">
+      <Container>
+        <Row>
+          <Col className="col-md-3">
             <div className="sidebar d-flex flex-column justify-content-between p-5">
               <div className="main-menu d-flex flex-column justify-content-between">
                 <div className="d-flex align-items-center active">
@@ -101,8 +116,8 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-9">
+          </Col>
+          <Col className="col-md-9">
             <div className="balance p-4 d-flex justify-content-between">
               <div className="info">
                 <p>Balance</p>
@@ -110,9 +125,10 @@ export default function index() {
                 <span>+62 813-9387-7946</span>
               </div>
               <div className="button-container">
-                <button
+                <Button
                   type="button"
                   className="btn btn-balance d-flex justify-content-center align-items-center"
+                  onClick={() => handleClickTransfer()}
                 >
                   <Image
                     src="/images/arrow-up-purple.png"
@@ -121,10 +137,11 @@ export default function index() {
                     alt="Transfer"
                   />
                   <span className="ml-2">Transfer</span>
-                </button>
-                <button
+                </Button>
+                <Button
                   type="button"
                   className="btn btn-balance d-flex justify-content-center align-items-center mt-3"
+                  onClick={() => handleClickTopUp()}
                 >
                   <Image
                     src="/images/plus-purple.png"
@@ -133,11 +150,11 @@ export default function index() {
                     alt="Top Up"
                   />
                   <span className="ml-2">Top Up</span>
-                </button>
+                </Button>
               </div>
             </div>
-            <div className="row mt-3">
-              <div className="col-md-7">
+            <Row className="mt-3">
+              <Col className="col-md-7">
                 <div className="charts p-4">
                   <div className="d-flex justify-content-between">
                     <div className="income">
@@ -181,12 +198,12 @@ export default function index() {
                     <span className="day">Fri</span>
                   </div>
                 </div>
-              </div>
-              <div className="col-md-5">
+              </Col>
+              <Col className="col-md-5">
                 <div className="history p-4">
                   <div className="d-flex justify-content-between">
                     <h2>Transaction History</h2>
-                    <Link href="#">
+                    <Link href="/history">
                       <a className="mt-1">See all</a>
                     </Link>
                   </div>
@@ -251,11 +268,11 @@ export default function index() {
                     <p className="expense mt-3">-Rp249.000</p>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

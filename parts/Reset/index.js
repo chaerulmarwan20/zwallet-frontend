@@ -1,7 +1,10 @@
 import { React, useState } from "react";
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
+import Button from "../../components/module/Button";
 
 export default function index() {
   const [type, setType] = useState("password");
@@ -26,14 +29,10 @@ export default function index() {
 
   return (
     <>
-      <Head>
-        <title>Zwallet | Reset Password</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <section className="reset py-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-7 main">
+        <Container>
+          <Row>
+            <Col className="col-md-7 main">
               <div className="row">
                 <div className="col-md-12">
                   <Link href="#">
@@ -76,8 +75,8 @@ export default function index() {
                   </p>
                 </div>
               </div>
-            </div>
-            <div className="col-md-5 aside">
+            </Col>
+            <Col className="col-md-5 aside">
               <h1 className="mt-5">
                 Did You Forgot Your Password? <br /> Don’t Worry, You Can Reset
                 Your <br />
@@ -166,17 +165,17 @@ export default function index() {
                   </>
                 )}
               </form>
-              <button type="button" className="btn btn-confirm mt-5">
+              <Button type="button" className="btn btn-confirm mt-5">
                 Confirm
-              </button>
+              </Button>
               {showConfirm === true && (
-                <button type="button" className="btn btn-reset mt-5">
+                <Button type="button" className="btn btn-reset mt-5">
                   Reset Password
-                </button>
+                </Button>
               )}
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </section>
     </>
   );

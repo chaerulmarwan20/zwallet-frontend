@@ -1,13 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
 
 export default function index() {
   return (
     <section className="history">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3">
+      <Container>
+        <Row>
+          <Col className="col-md-3">
             <div className="sidebar d-flex flex-column justify-content-between p-5">
               <div className="main-menu d-flex flex-column justify-content-between">
                 <div className="d-flex align-items-center active">
@@ -69,8 +72,8 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-9">
+          </Col>
+          <Col className="col-md-9">
             <div className="transaction p-5">
               <h1>Transaction History</h1>
               <p className="time mt-3">This Week</p>
@@ -144,9 +147,9 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

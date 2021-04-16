@@ -1,27 +1,27 @@
 import React from "react";
 import Image from "next/image";
 
-export default function About() {
+export default function About({ container: Container, row: Row, col: Col }) {
   return (
     <section className="about">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
+      <Container>
+        <Row>
+          <Col className="col-md-12">
             <h1 className="text-center">
               <span>About</span> the Application.
             </h1>
-          </div>
-          <div className="col-md-12 mt-3">
+          </Col>
+          <Col className="col-md-12 mt-3">
             <p className="text-center">
               We have some great features from the application and it’s totally
               free
               <br />
               to use by all users around the world.
             </p>
-          </div>
-        </div>
-        <div className="row mt-5">
-          <div className="col-md-4">
+          </Col>
+        </Row>
+        <Row className="mt-5">
+          <Col className="col-md-4">
             <div className="apps text-center mt-4 py-4">
               <Image src="/images/call.png" alt="call" width={80} height={80} />
               <h2 className="mt-3">24/7 Support</h2>
@@ -31,8 +31,8 @@ export default function About() {
                 respond it.
               </p>
             </div>
-          </div>
-          <div className="col-md-4">
+          </Col>
+          <Col className="col-md-4">
             <div className="apps text-center mt-4 py-4">
               <Image
                 src="/images/privacy.png"
@@ -46,8 +46,8 @@ export default function About() {
                 will encrypt any <br /> data you submitted to us.
               </p>
             </div>
-          </div>
-          <div className="col-md-4">
+          </Col>
+          <Col className="col-md-4">
             <div className="apps text-center mt-4 py-4">
               <Image
                 src="/images/download.png"
@@ -61,9 +61,9 @@ export default function About() {
                 Google Play Store <br /> and App Store.
               </p>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

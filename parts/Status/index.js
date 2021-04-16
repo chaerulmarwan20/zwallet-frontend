@@ -1,15 +1,26 @@
 import { React, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
+import Button from "../../components/module/Button";
 
 export default function index() {
+  const router = useRouter();
+
+  const handleClickHome = () => {
+    router.push("/dashboard");
+  };
+
   const [showFailed, setShowFailed] = useState(false);
 
   return (
     <section className="status">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3">
+      <Container>
+        <Row>
+          <Col className="col-md-3">
             <div className="sidebar d-flex flex-column justify-content-between p-5">
               <div className="main-menu d-flex flex-column justify-content-between">
                 <div className="d-flex align-items-center">
@@ -71,8 +82,8 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-9">
+          </Col>
+          <Col className="col-md-9">
             <div className="transfer p-5">
               <div className="success text-center">
                 <Image
@@ -130,7 +141,7 @@ export default function index() {
                 </div>
               </div>
               <div className="d-flex justify-content-end button-container">
-                <button
+                <Button
                   type="button"
                   className="btn btn-share d-flex justify-content-center align-items-center mr-3"
                 >
@@ -140,8 +151,8 @@ export default function index() {
                     height={24}
                     alt="Share"
                   />
-                </button>
-                <button
+                </Button>
+                <Button
                   type="button"
                   className="btn btn-download d-flex justify-content-center align-items-center mr-3"
                 >
@@ -152,10 +163,14 @@ export default function index() {
                     alt="Download"
                   />
                   <span className="ml-2">Download PDF</span>
-                </button>
-                <button type="button" className="btn btn-back">
+                </Button>
+                <Button
+                  type="button"
+                  className="btn btn-back"
+                  onClick={() => handleClickHome()}
+                >
                   Back to Home
-                </button>
+                </Button>
                 {showFailed === true && (
                   <button type="button" className="btn btn-try">
                     Try Again
@@ -163,9 +178,9 @@ export default function index() {
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

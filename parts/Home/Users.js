@@ -1,25 +1,25 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Users() {
+export default function Users({ container: Container, row: Row, col: Col }) {
   return (
     <section className="users">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
+      <Container>
+        <Row>
+          <Col className="col-md-12">
             <h1 className="text-center">
               What Users are <span>Saying.</span>
             </h1>
-          </div>
-          <div className="col-md-12">
+          </Col>
+          <Col className="col-md-12">
             <p className="text-center mt-3">
               We have some great features from the application and it’s totally
               free <br /> to use by all users around the world.
             </p>
-          </div>
-        </div>
-        <div className="row mt-5">
-          <div className="col-md-4">
+          </Col>
+        </Row>
+        <Row className="mt-5">
+          <Col className="col-md-4">
             <div className="testimony pb-4 pt-5 px-3 text-center">
               <Image
                 src="/images/users1.png"
@@ -33,8 +33,8 @@ export default function Users() {
                 app that I’ve ever use <br /> in my entire life”
               </p>
             </div>
-          </div>
-          <div className="col-md-4">
+          </Col>
+          <Col className="col-md-4">
             <div className="testimony pb-4 pt-5 px-3 text-center">
               <Image
                 src="/images/users2.png"
@@ -49,8 +49,8 @@ export default function Users() {
                 <br /> 100% free app”
               </p>
             </div>
-          </div>
-          <div className="col-md-4">
+          </Col>
+          <Col className="col-md-4">
             <div className="testimony pb-4 pt-5 px-3 text-center">
               <Image
                 src="/images/users3.png"
@@ -65,9 +65,9 @@ export default function Users() {
                 Thank you Zwallet!”
               </p>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

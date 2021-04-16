@@ -1,21 +1,20 @@
 import { React, useState } from "react";
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
+import Button from "../../components/module/Button";
 
 export default function index() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   return (
     <>
-      <Head>
-        <title>Zwallet | Create Pin</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <section className="pin py-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-7 main">
+        <Container>
+          <Row>
+            <Col className="col-md-7 main">
               <div className="row">
                 <div className="col-md-12">
                   <Link href="#">
@@ -58,8 +57,8 @@ export default function index() {
                   </p>
                 </div>
               </div>
-            </div>
-            <div className="col-md-5 aside">
+            </Col>
+            <Col className="col-md-5 aside">
               {showSuccess === true && (
                 <>
                   <img
@@ -89,40 +88,40 @@ export default function index() {
                 Zwallet account password and the PIN.
               </p>
               <form className="mt-5">
-                <div className="row">
-                  <div className="col-md-2">
+                <Row>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control" />
-                  </div>
-                </div>
+                  </Col>
+                </Row>
               </form>
               <div className="d-flex justify-content-center">
-                <button type="button" className="btn btn-confirm">
+                <Button type="button" className="btn btn-confirm">
                   Confirm
-                </button>
+                </Button>
                 {showSuccess === true && (
-                  <button type="button" className="btn btn-login-now">
+                  <Button type="button" className="btn btn-login-now">
                     Login Now
-                  </button>
+                  </Button>
                 )}
               </div>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </section>
     </>
   );

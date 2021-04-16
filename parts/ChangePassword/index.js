@@ -1,6 +1,10 @@
 import { React, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
+import Button from "../../components/module/Button";
 
 export default function index() {
   const [type, setType] = useState("password");
@@ -33,9 +37,9 @@ export default function index() {
 
   return (
     <section className="change-password">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3">
+      <Container>
+        <Row>
+          <Col className="col-md-3">
             <div className="sidebar d-flex flex-column justify-content-between p-5">
               <div className="main-menu d-flex flex-column justify-content-between">
                 <div className="d-flex align-items-center">
@@ -97,8 +101,8 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-9">
+          </Col>
+          <Col className="col-md-9">
             <div className="details p-5">
               <h1>Change Password</h1>
               <p className="mt-3">
@@ -178,14 +182,14 @@ export default function index() {
                     onClick={handleToggleRepeat}
                   />
                 </div>
-                <button type="button" className="btn btn-password mt-5">
+                <Button type="button" className="btn btn-password mt-5">
                   Change Password
-                </button>
+                </Button>
               </form>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

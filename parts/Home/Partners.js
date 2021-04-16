@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Partners() {
+export default function Partners({ container: Container, row: Row, col: Col }) {
   return (
     <section className="partners">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
+      <Container>
+        <Row>
+          <Col className="col-md-6">
             <h1>
               100+ <span>Trusted</span>
               <br />
@@ -17,8 +17,8 @@ export default function Partners() {
               <br />
               brand partners around the globe.
             </p>
-          </div>
-          <div className="col-md-6">
+          </Col>
+          <Col className="col-md-6">
             <Image
               src="/images/airbnb.png"
               alt="AirBnb"
@@ -46,9 +46,9 @@ export default function Partners() {
               height={120}
             />
             <Image src="/images/hm.png" alt="H&M" width={173} height={120} />
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

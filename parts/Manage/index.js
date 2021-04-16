@@ -1,13 +1,47 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Swal from "sweetalert2";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
 
 export default function index() {
+  const handleClickTrash = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "#FF5B37",
+      cancelButtonText: "No, cancel!",
+      cancelButtonColor: "#1EC15F",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your phone number has been deleted.",
+          icon: "success",
+          confirmButtonColor: "#6379F4",
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Cancelled!",
+          text: "Your phone number is safe :)",
+          icon: "info",
+          confirmButtonColor: "#6379F4",
+        });
+      }
+    });
+  };
+
   return (
     <section className="manage">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3">
+      <Container>
+        <Row>
+          <Col className="col-md-3">
             <div className="sidebar d-flex flex-column justify-content-between p-5">
               <div className="main-menu d-flex flex-column justify-content-between">
                 <div className="d-flex align-items-center">
@@ -69,8 +103,8 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-9">
+          </Col>
+          <Col className="col-md-9">
             <div className="information p-5">
               <h1>Manage Phone Number</h1>
               <p className="mt-3">
@@ -83,18 +117,20 @@ export default function index() {
                   <p className="mt-2">+62 813-9387-7946</p>
                 </div>
                 <div>
-                  <Image
+                  <img
                     src="/images/trash.png"
                     width={28}
                     height={28}
                     alt="Trash"
+                    className="trash"
+                    onClick={() => handleClickTrash()}
                   />
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

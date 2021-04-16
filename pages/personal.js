@@ -1,19 +1,13 @@
 import React from "react";
-import Head from "next/head";
-import Navbar from "../components/Navbar";
+import Layout from "../components/base/Layout";
 import Main from "../parts/PersonalInformation";
-import Footer from "../components/Footer";
 
 export default function personal() {
   return (
     <>
-      <Head>
-        <title>Zwallet | Personal Information</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Navbar></Navbar>
-      <Main></Main>
-      <Footer></Footer>
+      <Layout title="Personal Information">
+        <Main></Main>
+      </Layout>
     </>
   );
 }

@@ -1,35 +1,46 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function Navbar() {
+export default function Navbar({ container: Container, button: Button }) {
+  const router = useRouter();
+
+  const handleClickLogin = () => {
+    router.push("/login");
+  };
+
+  const handleClickSignUp = () => {
+    router.push("/signup");
+  };
+
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-transparent">
-      <div className="container mt-4">
-        <Link href="#">
+      <Container className="mt-4">
+        <Link href="/">
           <a className="navbar-brand">Zwallet</a>
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <Button className="navbar-toggler" type="button" isNavbar>
           <span className="navbar-toggler-icon"></span>
-        </button>
+        </Button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav ml-auto">
-            <button type="button" className="btn btn-login">
+            <Button
+              type="button"
+              className="btn btn-login"
+              onClick={() => handleClickLogin()}
+            >
               Login
-            </button>
-            <button type="button" className="btn btn-sign-up ml-4">
+            </Button>
+            <Button
+              type="button"
+              className="btn btn-sign-up ml-4"
+              onClick={() => handleClickSignUp()}
+            >
               Sign Up
-            </button>
+            </Button>
           </div>
         </div>
-      </div>
+      </Container>
     </nav>
   );
 }

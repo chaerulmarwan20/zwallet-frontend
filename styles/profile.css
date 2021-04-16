@@ -72,6 +72,7 @@ section.profile .option {
   width: 433px;
   background-color: #e5e8ed;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 section.profile .option p {

@@ -1,12 +1,24 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
-export default function Hero() {
+export default function Hero({
+  container: Container,
+  row: Row,
+  col: Col,
+  button: Button,
+}) {
+  const router = useRouter();
+
+  const handleClickTry = () => {
+    router.push("/signup");
+  };
+
   return (
     <section className="hero">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
+      <Container>
+        <Row>
+          <Col className="col-md-6">
             <h1 className="mt-4">
               Awesome App <br /> For Saving <span>Time.</span>
             </h1>
@@ -14,11 +26,15 @@ export default function Hero() {
               We bring you a mobile app for banking problems that <br /> oftenly
               wasting much of your times.
             </p>
-            <button type="button" className="btn btn-try mt-4">
+            <Button
+              type="button"
+              className="btn btn-try mt-4"
+              onClick={() => handleClickTry()}
+            >
               Try It Free
-            </button>
-          </div>
-          <div className="col-md-6">
+            </Button>
+          </Col>
+          <Col className="col-md-6">
             <div className="phone">
               <Image
                 src="/images/phone.png"
@@ -27,9 +43,9 @@ export default function Hero() {
                 height={846}
               />
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }

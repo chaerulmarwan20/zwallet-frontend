@@ -1,13 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Container from "../../components/module/Container";
+import Row from "../../components/module/Row";
+import Col from "../../components/module/Col";
+import Button from "../../components/module/Button";
 
 export default function index() {
   return (
     <section className="confirmation">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3">
+      <Container>
+        <Row>
+          <Col className="col-md-3">
             <div className="sidebar d-flex flex-column justify-content-between p-5">
               <div className="main-menu d-flex flex-column justify-content-between">
                 <div className="d-flex align-items-center">
@@ -69,8 +73,8 @@ export default function index() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-9">
+          </Col>
+          <Col className="col-md-9">
             <div className="transfer p-5">
               <h1>Transfer To</h1>
               <div className="users d-flex align-items-center py-2 pl-3 mt-4">
@@ -105,19 +109,14 @@ export default function index() {
                 <p className="mt-2">For buying some socks</p>
               </div>
               <div className="d-flex justify-content-end">
-                <button
-                  type="button"
-                  className="btn btn-continue"
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                >
+                <Button type="button" className="btn btn-continue" isModal>
                   Continue
-                </button>
+                </Button>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
       <div
         className="modal fade"
         id="exampleModal"
@@ -130,14 +129,9 @@ export default function index() {
               <h5 className="modal-title" id="exampleModalLabel">
                 Enter PIN to Transfer
               </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
+              <Button type="button" className="close" isDismiss>
                 <span aria-hidden="true">&times;</span>
-              </button>
+              </Button>
             </div>
             <div className="modal-body">
               <p>
@@ -145,36 +139,32 @@ export default function index() {
                 transferring money.
               </p>
               <form className="mt-5">
-                <div className="row">
-                  <div className="col-md-2">
+                <Row>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control pin" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control pin" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control pin" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control pin" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control pin" />
-                  </div>
-                  <div className="col-md-2">
+                  </Col>
+                  <Col className="col-md-2">
                     <input type="text" className="form-control pin" />
-                  </div>
-                </div>
+                  </Col>
+                </Row>
               </form>
             </div>
             <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-continue"
-                data-dismiss="modal"
-              >
+              <Button type="button" className="btn btn-continue" isDismiss>
                 Continue
-              </button>
+              </Button>
             </div>
           </div>
         </div>
