@@ -1,70 +1,137 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import Image from "next/image";
+import axios from "axios";
+import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
+import Button from "../../components/module/Button";
 
 export default function index() {
+  const Url = process.env.api;
+  const UrlImage = process.env.image;
+
+  const [history, setHistory] = useState([]);
+  const [order, setOrder] = useState("ASC");
+  const [sort, setSort] = useState("id");
+
+  const handleClickSort = (params) => {
+    setSort(params);
+  };
+
+  const handleClickOrder = (params) => {
+    setOrder(params);
+  };
+
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    axios
+      .get(`${Url}/transactions/${id}?order=${order}&sortBy=${sort}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data.data;
+        setHistory(data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      });
+  }, [order, sort]);
+
   return (
     <Col className="col-md-9">
       <div className="transaction p-5">
         <h1>Transaction History</h1>
-        <p className="time mt-3">This Week</p>
-        <div className="users mt-4 d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
-            <Image src="/images/suhi.png" width={56} height={56} alt="User" />
-            <div className="d-flex flex-column ml-3">
-              <span className="name">Samuel Suhi</span>
-              <span className="type mt-1">Transfer</span>
+        {/* <p className="time mt-3">This Week</p> */}
+        {history.map((item, index) => {
+          return (
+            <div
+              className="users mt-4 d-flex justify-content-between align-items-center"
+              key={index}
+            >
+              <div className="d-flex align-items-center">
+                <img
+                  src={`${UrlImage}${item.image}`}
+                  width={56}
+                  height={56}
+                  alt="User"
+                  className="user"
+                />
+                <div className="d-flex flex-column ml-3">
+                  <span className="name">{item.fullName}</span>
+                  <span className="type mt-1">{item.type}</span>
+                </div>
+              </div>
+              <div className="price">
+                <p
+                  className={`${
+                    item.type === "Transfer" ? "left" : "transfer"
+                  } mt-3`}
+                >
+                  {item.type === "Transfer"
+                    ? `-Rp${item.amount}`
+                    : `+Rp${item.amount}`}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="price">
-            <p className="transfer">+Rp50.000</p>
-          </div>
-        </div>
-        <div className="users mt-5 d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
+          );
+        })}
+        <div className="d-flex justify-content-center mt-5">
+          <Button
+            type="button"
+            className={`btn btn-order mr-3 ${order === "ASC" ? "active" : ""}`}
+            onClick={() => handleClickOrder("ASC")}
+          >
             <Image
-              src="/images/netflix.png"
-              width={56}
-              height={56}
-              alt="Netflix"
+              src="/images/arrow-left-red.png"
+              width={30}
+              height={30}
+              alt="Order"
             />
-            <div className="d-flex flex-column ml-3">
-              <span className="name">Netflix</span>
-              <span className="type mt-1">Subscription</span>
-            </div>
-          </div>
-          <div className="price">
-            <p className="left">-Rp149.000</p>
-          </div>
-        </div>
-        <p className="time mt-5">This Month</p>
-        <div className="users mt-4 d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
+          </Button>
+          <Button
+            type="button"
+            className={`btn btn-order mr-3 ${order === "DESC" ? "active" : ""}`}
+            onClick={() => handleClickOrder("DESC")}
+          >
             <Image
-              src="/images/christine.png"
-              width={56}
-              height={56}
-              alt="Christine"
+              src="/images/arrow-left-green.png"
+              width={30}
+              height={30}
+              alt="Order"
             />
-            <div className="d-flex flex-column ml-3">
-              <span className="name">Christine Mar...</span>
-              <span className="type mt-1">Transfer</span>
+          </Button>
+          <div className="dropdown">
+            <button
+              className="btn btn-filter dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Sort by {sort}
+            </button>
+            <div className="dropdown-menu">
+              <p
+                className="dropdown-item"
+                onClick={() => handleClickSort("id")}
+              >
+                Id
+              </p>
+              <p
+                className="dropdown-item"
+                onClick={() => handleClickSort("date")}
+              >
+                Date
+              </p>
             </div>
-          </div>
-          <div className="price">
-            <p className="transfer">+Rp150.000</p>
-          </div>
-        </div>
-        <div className="users mt-5 d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
-            <Image src="/images/adobe.png" width={56} height={56} alt="Adobe" />
-            <div className="d-flex flex-column ml-3">
-              <span className="name">Adobe Inc.</span>
-              <span className="type mt-1">Subscription</span>
-            </div>
-          </div>
-          <div className="price">
-            <p className="left">-Rp249.000</p>
           </div>
         </div>
       </div>

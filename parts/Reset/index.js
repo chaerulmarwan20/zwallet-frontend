@@ -1,4 +1,6 @@
 import { React, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -7,24 +9,43 @@ import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
-  const [type, setType] = useState("password");
-  const [typeConfirm, setTypeConfirm] = useState("password");
-  const [showConfirm, setShowConfirm] = useState(false);
+  const Url = process.env.api;
 
-  const handleToggle = () => {
-    if (type === "text") {
-      setType("password");
-    } else {
-      setType("text");
-    }
+  const [data, setData] = useState({
+    email: "",
+  });
+
+  const handleFormChange = (event) => {
+    const dataNew = { ...data };
+    dataNew[event.target.name] = event.target.value;
+    setData(dataNew);
   };
 
-  const handleToggleConfirm = () => {
-    if (typeConfirm === "text") {
-      setTypeConfirm("password");
-    } else {
-      setTypeConfirm("text");
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post(`${Url}/users/auth/forgot-password`, { email: data.email })
+      .then((res) => {
+        setData({
+          email: "",
+        });
+        Swal.fire({
+          title: "Success!",
+          text: res.data.message,
+          icon: "success",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      });
   };
 
   return (
@@ -46,18 +67,14 @@ export default function index() {
                 will send a link to your email and you will be directed to the
                 <br /> reset password screens.
               </p>
-              {showConfirm === true && (
-                <p className="mt-3">
-                  Now you can create a new password for your Zwallet <br />
-                  account. Type your password twice so we can confirm your{" "}
-                  <br />
-                  new passsword.
-                </p>
-              )}
               <form className="mt-5">
                 <div className="form-group mail">
                   <img
-                    src="/images/mail-grey.png"
+                    src={`${
+                      data.email !== ""
+                        ? "/images/mail-blue.png"
+                        : "/images/mail-grey.png"
+                    }`}
                     width={24}
                     height={24}
                     alt="Mail"
@@ -66,66 +83,22 @@ export default function index() {
                   <Input
                     type="text"
                     name="email"
+                    className={`${data.email !== "" ? "active" : ""}`}
+                    value={data.email}
                     placeholder="Enter your e-mail"
+                    onChange={handleFormChange}
                   />
                 </div>
-                {showConfirm === true && (
-                  <>
-                    <div className="form-group password">
-                      <img
-                        src="/images/lock-grey.png"
-                        width={24}
-                        height={24}
-                        alt="Lock"
-                        className="password-img"
-                      />
-                      <Input
-                        type={type}
-                        name="password"
-                        placeholder="Create new password"
-                      />
-                      <img
-                        src="/images/eye-crossed.png"
-                        width={24}
-                        height={24}
-                        alt="Eye"
-                        className="eye-img"
-                        onClick={handleToggle}
-                      />
-                    </div>
-                    <div className="form-group confirm-password">
-                      <img
-                        src="/images/lock-grey.png"
-                        width={24}
-                        height={24}
-                        alt="Lock"
-                        className="confirm-password-img"
-                      />
-                      <Input
-                        type={typeConfirm}
-                        name="confirmPassword"
-                        placeholder="Create new password"
-                      />
-                      <img
-                        src="/images/eye-crossed.png"
-                        width={24}
-                        height={24}
-                        alt="Eye"
-                        className="eye-img"
-                        onClick={handleToggleConfirm}
-                      />
-                    </div>
-                  </>
-                )}
               </form>
-              <Button type="button" className="btn btn-confirm mt-5">
+              <Button
+                type="button"
+                className={`btn btn-confirm mt-5 ${
+                  data.email !== "" ? "active" : ""
+                }`}
+                onClick={handleSubmit}
+              >
                 Confirm
               </Button>
-              {showConfirm === true && (
-                <Button type="button" className="btn btn-reset mt-5">
-                  Reset Password
-                </Button>
-              )}
             </Col>
           </Row>
         </Container>

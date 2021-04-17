@@ -4,6 +4,10 @@ import Link from "next/link";
 import Col from "./Col";
 
 export default function Sidebar() {
+  let id;
+  if (typeof window !== "undefined") {
+    id = localStorage.getItem("id");
+  }
   return (
     <Col className="col-md-3">
       <div className="sidebar d-flex flex-column justify-content-between p-5">
@@ -15,7 +19,7 @@ export default function Sidebar() {
               height={28}
               alt="Dashboard"
             />
-            <Link href="#">
+            <Link href="/dashboard">
               <a className="ml-4 active">Dashboard</a>
             </Link>
           </div>
@@ -26,7 +30,7 @@ export default function Sidebar() {
               height={28}
               alt="Transfer"
             />
-            <Link href="#">
+            <Link href="/transfer">
               <a className="ml-4">Transfer</a>
             </Link>
           </div>
@@ -37,7 +41,7 @@ export default function Sidebar() {
               height={28}
               alt="Top Up"
             />
-            <Link href="#">
+            <Link href="/topup">
               <a className="ml-4">Top Up</a>
             </Link>
           </div>
@@ -48,9 +52,11 @@ export default function Sidebar() {
               height={28}
               alt="Profile"
             />
-            <Link href="#">
-              <a className="ml-4">Profile</a>
-            </Link>
+            {id !== undefined && (
+              <Link href={`/profile/${id}`}>
+                <a className="ml-4">Profile</a>
+              </Link>
+            )}
           </div>
         </div>
         <div className="logout-menu">

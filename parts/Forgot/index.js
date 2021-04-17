@@ -1,8 +1,7 @@
 import { React, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -10,25 +9,20 @@ import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
-export default function index() {
+export default function index(props) {
   const Url = process.env.api;
+
+  const email = props.email;
+  const token = props.token;
 
   const router = useRouter();
 
   const [type, setType] = useState("password");
-  const [showError, setShowError] = useState(false);
+  const [typeConfirm, setTypeConfirm] = useState("password");
   const [data, setData] = useState({
-    email: "",
     password: "",
+    confirmPassword: "",
   });
-
-  const handleToggle = () => {
-    if (type === "text") {
-      setType("password");
-    } else {
-      setType("text");
-    }
-  };
 
   const handleFormChange = (event) => {
     const dataNew = { ...data };
@@ -39,14 +33,15 @@ export default function index() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(`${Url}/users/auth/login`, data)
+      .put(
+        `${Url}/users/auth/reset-password/?email=${email}&token=${token}`,
+        data
+      )
       .then((res) => {
         setData({
-          email: "",
           password: "",
+          confirmPassword: "",
         });
-        localStorage.setItem("token", res.data.data.token);
-        localStorage.setItem("id", res.data.data.id);
         Swal.fire({
           title: "Success!",
           text: res.data.message,
@@ -55,9 +50,9 @@ export default function index() {
           confirmButtonColor: "#6379F4",
         }).then((result) => {
           if (result.isConfirmed) {
-            router.push("/dashboard");
+            router.push("/auth/login");
           } else {
-            router.push("/dashboard");
+            router.push("/auth/login");
           }
         });
       })
@@ -72,9 +67,25 @@ export default function index() {
       });
   };
 
+  const handleToggle = () => {
+    if (type === "text") {
+      setType("password");
+    } else {
+      setType("text");
+    }
+  };
+
+  const handleToggleConfirm = () => {
+    if (typeConfirm === "text") {
+      setTypeConfirm("password");
+    } else {
+      setTypeConfirm("text");
+    }
+  };
+
   return (
     <>
-      <section className="login py-5">
+      <section className="reset py-5">
         <Container>
           <Row>
             <Col className="col-md-7 main">
@@ -82,39 +93,22 @@ export default function index() {
             </Col>
             <Col className="col-md-5 aside">
               <h1 className="mt-5">
-                Start Accessing Banking Needs <br /> With All Devices and All
-                Platforms <br />
-                With 30.000+ Users
+                Did You Forgot Your Password? <br /> Don’t Worry, You Can Reset
+                Your <br />
+                Password In a Minutes.
               </h1>
               <p className="mt-3">
-                Transfering money is eassier than ever, you can access <br />
-                Zwallet wherever you are. Desktop, laptop, mobile phone? <br />
-                we cover all of that for you!
+                Now you can create a new password for your Zwallet <br />
+                account. Type your password twice so we can confirm your <br />
+                new passsword.
               </p>
               <form className="mt-5">
-                <div className="form-group mail">
-                  <img
-                    src={`/images/${
-                      data.email !== "" ? "mail-blue.png" : "mail-grey.png"
-                    }`}
-                    width={24}
-                    height={24}
-                    alt="Mail"
-                    className="mail-img"
-                  />
-                  <Input
-                    type="text"
-                    name="email"
-                    className={`${data.email !== "" ? "active" : ""}`}
-                    value={data.email}
-                    placeholder="Enter your e-mail"
-                    onChange={handleFormChange}
-                  />
-                </div>
                 <div className="form-group password">
                   <img
-                    src={`/images/${
-                      data.password !== "" ? "lock-blue.png" : "lock-grey.png"
+                    src={`${
+                      data.password !== ""
+                        ? "/images/lock-blue.png"
+                        : "/images/lock-grey.png"
                     }`}
                     width={24}
                     height={24}
@@ -126,7 +120,7 @@ export default function index() {
                     name="password"
                     className={`${data.password !== "" ? "active" : ""}`}
                     value={data.password}
-                    placeholder="Enter your password"
+                    placeholder="Create new password"
                     onChange={handleFormChange}
                   />
                   <img
@@ -138,31 +132,47 @@ export default function index() {
                     onClick={handleToggle}
                   />
                 </div>
+                <div className="form-group confirm-password">
+                  <img
+                    src={`${
+                      data.confirmPassword !== ""
+                        ? "/images/lock-blue.png"
+                        : "/images/lock-grey.png"
+                    }`}
+                    width={24}
+                    height={24}
+                    alt="Lock"
+                    className="confirm-password-img"
+                  />
+                  <Input
+                    type={typeConfirm}
+                    name="confirmPassword"
+                    className={`${data.confirmPassword !== "" ? "active" : ""}`}
+                    value={data.confirmPassword}
+                    placeholder="Repeat new password"
+                    onChange={handleFormChange}
+                  />
+                  <img
+                    src="/images/eye-crossed.png"
+                    width={24}
+                    height={24}
+                    alt="Eye"
+                    className="eye-img"
+                    onClick={handleToggleConfirm}
+                  />
+                </div>
               </form>
-              <Link href="/auth/reset">
-                <a className="forgot float-right mt-2">Forgot password?</a>
-              </Link>
-              <br />
-              {showError === true && (
-                <p className="error text-center mt-4">
-                  Email or Password Invalid
-                </p>
-              )}
               <Button
                 type="button"
-                className={`btn btn-login ${
-                  data.email !== "" && data.password !== "" ? "active" : ""
-                } ${showError === true ? "mt-3" : "mt-5"}`}
+                className={`btn btn-reset mt-5 ${
+                  data.password !== "" && data.confirmPassword !== ""
+                    ? "active"
+                    : ""
+                }`}
                 onClick={handleSubmit}
               >
-                Login
+                Reset Password
               </Button>
-              <p className="text-center mt-5 account">
-                Don’t have an account? Let’s{" "}
-                <Link href="/auth/signup">
-                  <a>Sign Up</a>
-                </Link>
-              </p>
             </Col>
           </Row>
         </Container>

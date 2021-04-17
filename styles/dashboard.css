@@ -162,3 +162,7 @@ section.dashboard .history .transaction p.expense {
 section.dashboard .history .transaction p.expense {
   color: #ff5b37;
 }
+
+section.dashboard .history .transaction img.user {
+  border-radius: 10px;
+}

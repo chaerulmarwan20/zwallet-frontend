@@ -1,13 +1,20 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { BarChart, Bar } from "recharts";
+import axios from "axios";
+import Swal from "sweetalert2";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
 export default function index() {
+  const Url = process.env.api;
+  const UrlImage = process.env.image;
+
+  const [user, setUser] = useState([]);
+  const [history, setHistory] = useState([]);
+
   const router = useRouter();
 
   const handleClickTransfer = () => {
@@ -18,44 +25,58 @@ export default function index() {
     router.push("/topup");
   };
 
-  const data = [
-    {
-      name: "Sat",
-      income: 4000,
-    },
-    {
-      name: "Sun",
-      income: 3000,
-    },
-    {
-      name: "Mon",
-      income: 2000,
-    },
-    {
-      name: "Tue",
-      income: 2780,
-    },
-    {
-      name: "Wed",
-      income: 1890,
-    },
-    {
-      name: "Thu",
-      income: 2390,
-    },
-    {
-      name: "Fri",
-      income: 3490,
-    },
-  ];
+  useEffect(() => {
+    axios
+      .get(`${Url}/users/find-one`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data.data[0];
+        setUser(data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      });
+  }, []);
+
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    axios
+      .get(`${Url}/transactions/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data.data;
+        setHistory(data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      });
+  }, []);
 
   return (
     <Col className="col-md-9">
       <div className="balance p-4 d-flex justify-content-between">
         <div className="info">
           <p>Balance</p>
-          <h1>Rp120.000</h1>
-          <span>+62 813-9387-7946</span>
+          <h1>Rp{user.credit}</h1>
+          <span>{user.phoneNumber}</span>
         </div>
         <div className="button-container">
           <Button
@@ -116,20 +137,6 @@ export default function index() {
               </div>
             </div>
             <p className="text-center mt-5">+Rp65.000</p>
-            <div className="d-flex justify-content-center">
-              <BarChart width={150} height={220} data={data} barGap={50}>
-                <Bar dataKey="income" fill="#6379F4" radius={15} />
-              </BarChart>
-            </div>
-            <div className="d-flex justify-content-center">
-              <span className="day">Sat</span>
-              <span className="day">Sun</span>
-              <span className="day">Mon</span>
-              <span className="day">Tue</span>
-              <span className="day">Wed</span>
-              <span className="day">Thu</span>
-              <span className="day">Fri</span>
-            </div>
           </div>
         </Col>
         <Col className="col-md-5">
@@ -140,66 +147,40 @@ export default function index() {
                 <a className="mt-1">See all</a>
               </Link>
             </div>
-            <div className="transaction d-flex justify-content-between align-items-center mt-4">
-              <div className="d-flex align-items-center">
-                <Image
-                  src="/images/suhi.png"
-                  width={56}
-                  height={56}
-                  alt="User"
-                />
-                <div className="profile d-flex flex-column ml-2">
-                  <span className="name">Samuel Suhi</span>
-                  <span className="type mt-1">Transfer</span>
+            {history.map((item, index) => {
+              return (
+                <div
+                  className="transaction d-flex justify-content-between align-items-center mt-4"
+                  key={index}
+                >
+                  <div className="d-flex align-items-center">
+                    <img
+                      src={`${UrlImage}${item.image}`}
+                      width={56}
+                      height={56}
+                      alt="User"
+                      className="user"
+                    />
+                    <div className="profile d-flex flex-column ml-2">
+                      <span className="name">{`${item.fullName.substring(
+                        0,
+                        10
+                      )}...`}</span>
+                      <span className="type mt-1">{item.type}</span>
+                    </div>
+                  </div>
+                  <p
+                    className={`${
+                      item.type === "Transfer" ? "expense" : "income"
+                    } mt-3`}
+                  >
+                    {item.type === "Transfer"
+                      ? `-Rp${item.amount}`
+                      : `+Rp${item.amount}`}
+                  </p>
                 </div>
-              </div>
-              <p className="income mt-3">+Rp50.000</p>
-            </div>
-            <div className="transaction d-flex justify-content-between align-items-center mt-4">
-              <div className="d-flex align-items-center">
-                <Image
-                  src="/images/netflix.png"
-                  width={56}
-                  height={56}
-                  alt="Netflix"
-                />
-                <div className="profile d-flex flex-column ml-2">
-                  <span className="name">Netflix</span>
-                  <span className="type mt-1">Subscription</span>
-                </div>
-              </div>
-              <p className="expense mt-3">-Rp149.000</p>
-            </div>
-            <div className="transaction d-flex justify-content-between align-items-center mt-4">
-              <div className="d-flex align-items-center">
-                <Image
-                  src="/images/christine.png"
-                  width={56}
-                  height={56}
-                  alt="User"
-                />
-                <div className="profile d-flex flex-column ml-2">
-                  <span className="name">Christine Mar...</span>
-                  <span className="type mt-1">Transfer</span>
-                </div>
-              </div>
-              <p className="income mt-3">+Rp150.000</p>
-            </div>
-            <div className="transaction d-flex justify-content-between align-items-center mt-4">
-              <div className="d-flex align-items-center">
-                <Image
-                  src="/images/adobe.png"
-                  width={56}
-                  height={56}
-                  alt="Adobe"
-                />
-                <div className="profile d-flex flex-column ml-2">
-                  <span className="name">Adobe Inc.</span>
-                  <span className="type mt-1">Subscription</span>
-                </div>
-              </div>
-              <p className="expense mt-3">-Rp249.000</p>
-            </div>
+              );
+            })}
           </div>
         </Col>
       </Row>

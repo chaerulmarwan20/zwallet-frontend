@@ -1,5 +1,7 @@
 import { React, useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import Swal from "sweetalert2";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -8,7 +10,23 @@ import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
+  const Url = process.env.api;
+
   const [type, setType] = useState("password");
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    firstName: "firstName",
+    lastName: "lastName",
+    phoneNumber: "000000000000",
+  });
+
+  const handleFormChange = (event) => {
+    const dataNew = { ...data };
+    dataNew[event.target.name] = event.target.value;
+    setData(dataNew);
+  };
 
   const handleToggle = () => {
     if (type === "text") {
@@ -16,6 +34,38 @@ export default function index() {
     } else {
       setType("text");
     }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post(`${Url}/users/`, data)
+      .then((res) => {
+        setData({
+          username: "",
+          email: "",
+          password: "",
+          firstName: "firstName",
+          lastName: "lastName",
+          phoneNumber: "000000000000",
+        });
+        Swal.fire({
+          title: "Success!",
+          text: res.data.message,
+          icon: "success",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      });
   };
 
   return (
@@ -40,7 +90,11 @@ export default function index() {
               <form className="mt-5">
                 <div className="form-group person">
                   <img
-                    src="/images/person-grey.png"
+                    src={`/images/${
+                      data.username !== ""
+                        ? "person-blue.png"
+                        : "person-grey.png"
+                    }`}
                     width={24}
                     height={24}
                     alt="Person"
@@ -50,11 +104,16 @@ export default function index() {
                     type="text"
                     name="username"
                     placeholder="Enter your username"
+                    className={`${data.username !== "" ? "active" : ""}`}
+                    value={data.username}
+                    onChange={handleFormChange}
                   />
                 </div>
                 <div className="form-group mail">
                   <img
-                    src="/images/mail-grey.png"
+                    src={`/images/${
+                      data.email !== "" ? "mail-blue.png" : "mail-grey.png"
+                    }`}
                     width={24}
                     height={24}
                     alt="Mail"
@@ -64,11 +123,16 @@ export default function index() {
                     type="text"
                     name="email"
                     placeholder="Enter your e-mail"
+                    className={`${data.email !== "" ? "active" : ""}`}
+                    value={data.email}
+                    onChange={handleFormChange}
                   />
                 </div>
                 <div className="form-group password">
                   <img
-                    src="/images/lock-grey.png"
+                    src={`/images/${
+                      data.password !== "" ? "lock-blue.png" : "lock-grey.png"
+                    }`}
                     width={24}
                     height={24}
                     alt="Lock"
@@ -78,6 +142,9 @@ export default function index() {
                     type={type}
                     name="password"
                     placeholder="Create your password"
+                    className={`${data.password !== "" ? "active" : ""}`}
+                    value={data.password}
+                    onChange={handleFormChange}
                   />
                   <img
                     src="/images/eye-crossed.png"
@@ -90,7 +157,17 @@ export default function index() {
                 </div>
               </form>
               <br />
-              <Button type="button" className="btn btn-sign-up mt-5">
+              <Button
+                type="button"
+                className={`btn btn-sign-up mt-5 ${
+                  data.username !== "" &&
+                  data.email !== "" &&
+                  data.password !== ""
+                    ? "active"
+                    : ""
+                }`}
+                onClick={handleSubmit}
+              >
                 Sign Up
               </Button>
               <p className="text-center mt-5 account">

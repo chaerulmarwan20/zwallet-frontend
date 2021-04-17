@@ -44,11 +44,24 @@ section.profile .details {
   border-radius: 25px;
 }
 
+section.profile .details img.user {
+  border-radius: 10px;
+}
+
+section.profile .details .edit {
+  cursor: pointer;
+}
+
 section.profile .details span {
   font-weight: 400;
   font-size: 16px;
   line-height: 27px;
   color: #7a7886;
+  transition: 0.5s ease;
+}
+
+section.profile .details span:hover {
+  opacity: 0.6;
 }
 
 section.profile .details h1 {

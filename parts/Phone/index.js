@@ -1,9 +1,55 @@
-import React from "react";
+import { React, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
+  const Url = process.env.api;
+
+  const [data, setData] = useState({
+    phoneNumber: "",
+  });
+
+  const handleFormChange = (event) => {
+    const dataNew = { ...data };
+    dataNew[event.target.name] = event.target.value;
+    setData(dataNew);
+  };
+
+  const handleSubmit = (event) => {
+    const id = localStorage.getItem("id");
+    event.preventDefault();
+    axios
+      .post(`${Url}/users/phoneNumber/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setData({
+          phoneNumber: "",
+        });
+        Swal.fire({
+          title: "Success!",
+          text: res.data.message,
+          icon: "success",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      });
+  };
+
   return (
     <Col className="col-md-9">
       <div className="details p-5">
@@ -15,7 +61,11 @@ export default function index() {
         <form className="mt-5">
           <div className="form-group phone">
             <img
-              src="/images/phone-2-grey.png"
+              src={`${
+                data.phoneNumber !== ""
+                  ? "/images/phone-2-blue.png"
+                  : "/images/phone-2-grey.png"
+              }`}
               width={24}
               height={24}
               alt="Phone"
@@ -31,10 +81,19 @@ export default function index() {
             <Input
               type="text"
               name="phoneNumber"
+              className={`${data.phoneNumber !== "" ? "active" : ""}`}
+              value={data.phoneNumber}
               placeholder="Enter your phone number"
+              onChange={handleFormChange}
             />
           </div>
-          <Button type="button" className="btn btn-phone mt-5">
+          <Button
+            type="button"
+            className={`btn btn-phone mt-5 ${
+              data.phoneNumber !== "" ? "active" : ""
+            }`}
+            onClick={handleSubmit}
+          >
             Add Phone Number
           </Button>
         </form>

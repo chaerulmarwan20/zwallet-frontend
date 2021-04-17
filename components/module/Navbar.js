@@ -1,8 +1,15 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function Navbar() {
+  const Url = process.env.api;
+  const UrlImage = process.env.image;
+
+  const [user, setUser] = useState([]);
+
   const [notification, setNotification] = useState(false);
 
   const showNotification = () => {
@@ -12,6 +19,28 @@ export default function Navbar() {
       setNotification(false);
     }
   };
+
+  useEffect(() => {
+    axios
+      .get(`${Url}/users/find-one`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data.data[0];
+        setUser(data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      });
+  }, []);
 
   return (
     <>
@@ -33,16 +62,18 @@ export default function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav ml-auto">
-              <Image
-                src="/images/profile.png"
-                width={52}
-                height={52}
-                alt="Profile"
-              />
+              {user.image !== undefined && (
+                <img
+                  src={`${UrlImage}${user.image}`}
+                  width={52}
+                  height={52}
+                  alt="Profile"
+                />
+              )}
             </div>
             <div className="profile mx-4 d-flex flex-column">
-              <span className="name">Robert Chandler</span>
-              <span className="number">+62 8139 3877 7946</span>
+              <span className="name">{user.fullName}</span>
+              <span className="number">{user.phoneNumber}</span>
             </div>
             <Image
               src="/images/bell.png"

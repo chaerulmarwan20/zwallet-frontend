@@ -13,6 +13,7 @@ export default function Input(props) {
           name={props.name}
           id={props.name}
           placeholder={props.placeholder}
+          value={props.value}
           onChange={props.onChange}
           maxLength={1}
         />
@@ -23,6 +24,7 @@ export default function Input(props) {
           name={props.name}
           id={props.name}
           placeholder={props.placeholder}
+          value={props.value}
           onChange={props.onChange}
         />
       )}

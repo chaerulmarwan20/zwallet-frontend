@@ -1,9 +1,37 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
+import axios from "axios";
 import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 
 export default function index() {
+  const Url = process.env.api;
+
+  const [user, setUser] = useState([]);
+
+  const getData = () => {
+    axios
+      .get(`${Url}/users/find-one`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data.data[0];
+        setUser(data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      });
+  };
+
   const handleClickTrash = () => {
+    const id = localStorage.getItem("id");
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -16,12 +44,30 @@ export default function index() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your phone number has been deleted.",
-          icon: "success",
-          confirmButtonColor: "#6379F4",
-        });
+        axios
+          .delete(`${Url}/users/phoneNumber/${id}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((res) => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your phone number has been deleted.",
+              icon: "success",
+              confirmButtonColor: "#6379F4",
+            });
+            getData();
+          })
+          .catch((err) => {
+            Swal.fire({
+              title: "Error!",
+              text: err.response.data.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
           title: "Cancelled!",
@@ -32,6 +78,10 @@ export default function index() {
       }
     });
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Col className="col-md-9">
@@ -44,7 +94,7 @@ export default function index() {
         <div className="details pt-3 pl-3 pr-4 mt-4 d-flex justify-content-between align-items-center">
           <div>
             <span>Primary</span>
-            <p className="mt-2">+62 813-9387-7946</p>
+            <p className="mt-2">{user.phoneNumber}</p>
           </div>
           <div>
             <img
