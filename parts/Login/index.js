@@ -76,7 +76,7 @@ export default function index() {
                   />
                 </div>
               </form>
-              <Link href="/reset">
+              <Link href="/auth/reset">
                 <a className="forgot float-right mt-2">Forgot password?</a>
               </Link>
               <br />
@@ -95,7 +95,7 @@ export default function index() {
               </Button>
               <p className="text-center mt-5 account">
                 Don’t have an account? Let’s{" "}
-                <Link href="/signup">
+                <Link href="/auth/signup">
                   <a>Sign Up</a>
                 </Link>
               </p>

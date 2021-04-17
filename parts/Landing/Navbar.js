@@ -6,11 +6,11 @@ export default function Navbar({ container: Container, button: Button }) {
   const router = useRouter();
 
   const handleClickLogin = () => {
-    router.push("/login");
+    router.push("/auth/login");
   };
 
   const handleClickSignUp = () => {
-    router.push("/signup");
+    router.push("/auth/signup");
   };
 
   return (

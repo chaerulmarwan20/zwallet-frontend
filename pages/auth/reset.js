@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import Main from "../parts/Reset";
+import Main from "../../parts/Reset";
 
 export default function reset() {
   return (

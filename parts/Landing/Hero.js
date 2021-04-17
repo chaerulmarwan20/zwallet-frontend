@@ -11,7 +11,7 @@ export default function Hero({
   const router = useRouter();
 
   const handleClickTry = () => {
-    router.push("/signup");
+    router.push("/auth/signup");
   };
 
   return (

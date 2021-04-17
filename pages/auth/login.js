@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import Main from "../parts/Login";
+import Main from "../../parts/Login";
 
 export default function login() {
   return (

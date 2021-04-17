@@ -1,7 +1,5 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";

@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { useRouter } from "next/router";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -7,7 +8,13 @@ import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
+  const router = useRouter();
+
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleClickLogin = () => {
+    router.push("/auth/login");
+  };
 
   return (
     <>
@@ -73,7 +80,11 @@ export default function index() {
                   Confirm
                 </Button>
                 {showSuccess === true && (
-                  <Button type="button" className="btn btn-login-now">
+                  <Button
+                    type="button"
+                    className="btn btn-login-now"
+                    onClick={() => handleClickLogin()}
+                  >
                     Login Now
                   </Button>
                 )}

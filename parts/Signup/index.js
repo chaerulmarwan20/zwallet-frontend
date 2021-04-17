@@ -95,7 +95,7 @@ export default function index() {
               </Button>
               <p className="text-center mt-5 account">
                 Already have an account? Let’s{" "}
-                <Link href="/login">
+                <Link href="/auth/login">
                   <a>Login</a>
                 </Link>
               </p>

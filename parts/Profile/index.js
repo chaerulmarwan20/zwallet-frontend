@@ -7,15 +7,15 @@ export default function index() {
   const router = useRouter();
 
   const handleClickPersonal = () => {
-    router.push("/personal");
+    router.push("/profile/info");
   };
 
   const handleClickPassword = () => {
-    router.push("/password");
+    router.push("/profile/password/change");
   };
 
   const handleClickPin = () => {
-    router.push("/changepin");
+    router.push("/profile/pin/change");
   };
 
   return (

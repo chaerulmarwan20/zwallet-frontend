@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../components/base/Layout";
-import Main from "../parts/Status";
+import Layout from "../../components/base/Layout";
+import Main from "../../parts/Status";
 
 export default function status() {
   return (

@@ -93,9 +93,9 @@ export default function index() {
             Back to Home
           </Button>
           {showFailed === true && (
-            <button type="button" className="btn btn-try">
+            <Button type="button" className="btn btn-try">
               Try Again
-            </button>
+            </Button>
           )}
         </div>
       </div>

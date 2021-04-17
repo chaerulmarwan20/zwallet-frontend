@@ -1,17 +1,17 @@
 import Head from "next/head";
-import Navbar from "../parts/Home/Navbar";
-import Hero from "../parts/Home/Hero";
-import About from "../parts/Home/About";
-import Partners from "../parts/Home/Partners";
-import Features from "../parts/Home/Features";
-import Users from "../parts/Home/Users";
-import Footer from "../parts/Home/Footer";
+import Navbar from "../parts/Landing/Navbar";
+import Hero from "../parts/Landing/Hero";
+import About from "../parts/Landing/About";
+import Partners from "../parts/Landing/Partners";
+import Features from "../parts/Landing/Features";
+import Users from "../parts/Landing/Users";
+import Footer from "../parts/Landing/Footer";
 import Container from "../components/module/Container";
 import Row from "../components/module/Row";
 import Col from "../components/module/Col";
 import Button from "../components/module/Button";
 
-export default function Home() {
+export default function index() {
   return (
     <div className="landing-page">
       <Head>

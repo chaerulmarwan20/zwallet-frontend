@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../components/base/Layout";
-import Main from "../parts/Manage";
+import Layout from "../../../components/base/Layout";
+import Main from "../../../parts/Manage";
 
 export default function manage() {
   return (

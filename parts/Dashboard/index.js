@@ -136,7 +136,7 @@ export default function index() {
           <div className="history p-4">
             <div className="d-flex justify-content-between">
               <h2>Transaction History</h2>
-              <Link href="/history">
+              <Link href="/dashboard/history">
                 <a className="mt-1">See all</a>
               </Link>
             </div>

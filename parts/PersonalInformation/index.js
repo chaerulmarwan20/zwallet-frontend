@@ -29,7 +29,7 @@ export default function index() {
             <span>Phone Number</span>
             <p className="mt-2">+62 813-9387-7946</p>
           </div>
-          <Link href="/manage">
+          <Link href="/profile/phone/manage">
             <a className="mb-3">Manage</a>
           </Link>
         </div>

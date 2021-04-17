@@ -3,6 +3,7 @@ import { GoogleFonts } from "next-google-fonts";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/globals.css";
 import "../styles/home.css";
+import "../styles/landing.css";
 import "../styles/login.css";
 import "../styles/sign-up.css";
 import "../styles/reset.css";
