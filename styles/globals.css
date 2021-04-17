@@ -49,6 +49,10 @@ nav.custom .bell {
   cursor: pointer;
 }
 
+nav.custom .navbar-nav img.user {
+  border-radius: 10px;
+}
+
 footer.small {
   height: 68px;
   background-color: #6379f4;
@@ -110,4 +114,8 @@ footer.small span {
   font-size: 18px;
   line-height: 25px;
   color: #43484f;
+}
+
+.sidebar .logout-menu a.logout {
+  cursor: pointer;
 }

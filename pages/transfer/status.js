@@ -5,7 +5,7 @@ import Main from "../../parts/Status";
 export default function status() {
   return (
     <>
-      <Layout title="Status" className="status">
+      <Layout title="Status" className="status" active="transfer">
         <Main></Main>
       </Layout>
     </>

@@ -68,6 +68,7 @@ export default function Navbar() {
                   width={52}
                   height={52}
                   alt="Profile"
+                  className="user"
                 />
               )}
             </div>

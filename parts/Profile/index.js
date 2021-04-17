@@ -38,11 +38,18 @@ export default function index() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
+        localStorage.clear();
         Swal.fire({
           title: "Logout!",
           text: "Successfull.",
           icon: "success",
           confirmButtonColor: "#6379F4",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/");
+          } else {
+            router.push("/");
+          }
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({

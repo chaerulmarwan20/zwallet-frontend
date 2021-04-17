@@ -17,7 +17,7 @@ export default function Layout(props) {
       <section className={props.className}>
         <Container>
           <Row>
-            <Sidebar></Sidebar>
+            <Sidebar active={props.active}></Sidebar>
             {props.children}
           </Row>
         </Container>

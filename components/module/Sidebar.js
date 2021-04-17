@@ -1,60 +1,154 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 import Col from "./Col";
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+  const router = useRouter();
+
   let id;
   if (typeof window !== "undefined") {
     id = localStorage.getItem("id");
   }
+
+  const handleClickLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be removed from this page!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, logout!",
+      confirmButtonColor: "#FF5B37",
+      cancelButtonText: "No, cancel!",
+      cancelButtonColor: "#1EC15F",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        Swal.fire({
+          title: "Logout!",
+          text: "Successfull.",
+          icon: "success",
+          confirmButtonColor: "#6379F4",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/");
+          } else {
+            router.push("/");
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Logout!",
+          text: "Cancelled :)",
+          icon: "info",
+          confirmButtonColor: "#6379F4",
+        });
+      }
+    });
+  };
+
   return (
     <Col className="col-md-3">
       <div className="sidebar d-flex flex-column justify-content-between p-5">
         <div className="main-menu d-flex flex-column justify-content-between">
-          <div className="d-flex align-items-center active">
+          <div
+            className={`d-flex align-items-center ${
+              props.active === "dashboard" ? "active" : ""
+            }`}
+          >
             <Image
-              src="/images/grid-blue.png"
+              src={`${
+                props.active === "dashboard"
+                  ? "/images/grid-blue.png"
+                  : "/images/grid-grey.png"
+              }`}
               width={28}
               height={28}
               alt="Dashboard"
             />
             <Link href="/dashboard">
-              <a className="ml-4 active">Dashboard</a>
+              <a
+                className={`ml-4 ${
+                  props.active === "dashboard" ? "active" : ""
+                }`}
+              >
+                Dashboard
+              </a>
             </Link>
           </div>
-          <div className="d-flex align-items-center mt-5">
+          <div
+            className={`d-flex align-items-center mt-5 ${
+              props.active === "transfer" ? "active" : ""
+            }`}
+          >
             <Image
-              src="/images/arrow-up-grey.png"
+              src={`${
+                props.active === "transfer"
+                  ? "/images/arrow-up-blue.png"
+                  : "/images/arrow-up-grey.png"
+              }`}
               width={28}
               height={28}
               alt="Transfer"
             />
             <Link href="/transfer">
-              <a className="ml-4">Transfer</a>
+              <a
+                className={`ml-4 ${
+                  props.active === "transfer" ? "active" : ""
+                }`}
+              >
+                Transfer
+              </a>
             </Link>
           </div>
-          <div className="d-flex align-items-center mt-5">
+          <div
+            className={`d-flex align-items-center mt-5 ${
+              props.active === "topup" ? "active" : ""
+            }`}
+          >
             <Image
-              src="/images/plus-grey.png"
+              src={`${
+                props.active === "topup"
+                  ? "/images/plus-blue.png"
+                  : "/images/plus-grey.png"
+              }`}
               width={28}
               height={28}
               alt="Top Up"
             />
             <Link href="/topup">
-              <a className="ml-4">Top Up</a>
+              <a className={`ml-4 ${props.active === "topup" ? "active" : ""}`}>
+                Top Up
+              </a>
             </Link>
           </div>
-          <div className="d-flex align-items-center mt-5">
+          <div
+            className={`d-flex align-items-center mt-5 ${
+              props.active === "profile" ? "active" : ""
+            }`}
+          >
             <Image
-              src="/images/user-grey.png"
+              src={`${
+                props.active === "profile"
+                  ? "/images/user-blue.png"
+                  : "/images/user-grey.png"
+              }`}
               width={28}
               height={28}
               alt="Profile"
             />
             {id !== undefined && (
               <Link href={`/profile/${id}`}>
-                <a className="ml-4">Profile</a>
+                <a
+                  className={`ml-4 ${
+                    props.active === "profile" ? "active" : ""
+                  }`}
+                >
+                  Profile
+                </a>
               </Link>
             )}
           </div>
@@ -67,9 +161,9 @@ export default function Sidebar() {
               height={28}
               alt="Log Out"
             />
-            <Link href="#">
-              <a className="ml-4">Log Out</a>
-            </Link>
+            <a className="ml-4 logout" onClick={() => handleClickLogout()}>
+              Log Out
+            </a>
           </div>
         </div>
       </div>

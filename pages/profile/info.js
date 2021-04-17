@@ -5,7 +5,11 @@ import Main from "../../parts/PersonalInformation";
 export default function info() {
   return (
     <>
-      <Layout title="Personal Information" className="personal">
+      <Layout
+        title="Personal Information"
+        className="personal"
+        active="profile"
+      >
         <Main></Main>
       </Layout>
     </>

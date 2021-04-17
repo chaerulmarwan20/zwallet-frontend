@@ -5,7 +5,7 @@ import Main from "../../parts/Topup";
 export default function index() {
   return (
     <>
-      <Layout title="Top Up" className="top-up">
+      <Layout title="Top Up" className="top-up" active="topup">
         <Main></Main>
       </Layout>
     </>

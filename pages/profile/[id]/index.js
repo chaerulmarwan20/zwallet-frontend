@@ -5,7 +5,7 @@ import Main from "../../../parts/Profile";
 export default function index() {
   return (
     <>
-      <Layout title="Profile" className="profile">
+      <Layout title="Profile" className="profile" active="profile">
         <Main></Main>
       </Layout>
     </>

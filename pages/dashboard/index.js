@@ -5,7 +5,7 @@ import Main from "../../parts/Dashboard";
 export default function index() {
   return (
     <>
-      <Layout title="Dashboard" className="dashboard">
+      <Layout title="Dashboard" className="dashboard" active="dashboard">
         <Main></Main>
       </Layout>
     </>

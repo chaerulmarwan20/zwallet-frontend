@@ -5,7 +5,7 @@ import Main from "../../parts/Confirmation";
 export default function confirmation() {
   return (
     <>
-      <Layout title="Confirmation" className="confirmation">
+      <Layout title="Confirmation" className="confirmation" active="transfer">
         <Main></Main>
       </Layout>
     </>

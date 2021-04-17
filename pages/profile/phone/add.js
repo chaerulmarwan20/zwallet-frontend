@@ -5,7 +5,7 @@ import Main from "../../../parts/Phone";
 export default function add() {
   return (
     <>
-      <Layout title="Add Phone Number" className="phone">
+      <Layout title="Add Phone Number" className="phone" active="profile">
         <Main></Main>
       </Layout>
     </>
