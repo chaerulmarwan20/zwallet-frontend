@@ -53,19 +53,24 @@ export default function index() {
       <section className="reset py-5">
         <Container>
           <Row>
-            <Col className="col-md-7 main">
+            <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
               <Auth />
             </Col>
-            <Col className="col-md-5 aside">
-              <h1 className="mt-5">
+            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+              <h1 className="mt-5 d-none d-lg-block">
                 Did You Forgot Your Password? <br /> Don’t Worry, You Can Reset
                 Your <br />
                 Password In a Minutes.
               </h1>
-              <p className="mt-3">
+              <h1 className="zwallet d-lg-none">Zwallet</h1>
+              <p className="mt-3 d-none d-lg-block">
                 To reset your password, you must type your e-mail and we <br />
                 will send a link to your email and you will be directed to the
                 <br /> reset password screens.
+              </p>
+              <p className="mt-3 text-center d-lg-none">
+                Enter your Zwallet e-mail so we can send <br /> you a password
+                reset link.
               </p>
               <form className="mt-5">
                 <div className="form-group mail">

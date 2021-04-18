@@ -103,7 +103,7 @@ section.history .transaction .btn-order {
   height: 50px;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 section.history .transaction .btn-order.active {
@@ -115,7 +115,7 @@ section.history .transaction .btn-filter {
   height: 50px;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 700;
   font-size: 18px;
   line-height: 25px;
@@ -125,7 +125,7 @@ section.history .transaction .btn-filter {
 section.history .transaction .dropdown-menu {
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 section.history .transaction .dropdown-item {
@@ -151,7 +151,7 @@ section.history .transaction ul.pagination-custom {
 section.history .transaction ul.pagination-custom li button {
   width: 45px;
   height: 45px;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: #ffffff;
   border: 0.5px solid #dedede;
   box-sizing: border-box;

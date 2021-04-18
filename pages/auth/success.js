@@ -24,22 +24,31 @@ export default function success() {
         <section className="pin py-5">
           <Container>
             <Row>
-              <Col className="col-md-7 main">
+              <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
                 <Auth />
               </Col>
-              <Col className="col-md-5 aside">
+              <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+                <h1 className="zwallet d-lg-none">Zwallet</h1>
                 <img
                   src="/images/success.png"
                   width="70"
                   alt="Success"
                   className="mt-5"
                 />
-                <h1 className="mt-5">Your PIN Was Successfully Created</h1>
-                <p className="mt-3">
+                <h1 className="mt-5 d-none d-lg-block">
+                  Your PIN Was Successfully Created
+                </h1>
+                <h1 className="mt-5 d-lg-none">PIN Successfully Created</h1>
+                <p className="mt-3 d-none d-lg-block">
                   Your PIN was successfully created and you can now access{" "}
                   <br />
                   all the features in Zwallet. Login to your new account and
                   <br /> start exploring!
+                </p>
+                <p className="mt-3 text-center d-lg-none">
+                  Your PIN was successfully created and you can <br /> now
+                  access all the features in Zwallet. Login to <br /> your new
+                  account and start exploring!
                 </p>
                 <div className="d-flex justify-content-center">
                   <Button

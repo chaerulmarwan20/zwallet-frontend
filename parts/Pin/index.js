@@ -63,24 +63,29 @@ export default function index(props) {
       <section className="pin py-5">
         <Container>
           <Row>
-            <Col className="col-md-7 main">
+            <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
               <Auth />
             </Col>
-            <Col className="col-md-5 aside">
-              <h1 className="mt-5">
+            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+              <h1 className="mt-5 d-none d-lg-block">
                 Secure Your Account, Your Wallet, <br /> and Your Data With 6
                 Digits PIN <br /> That You Created Yourself.
               </h1>
-              <p className="mt-3">
+              <h1 className="zwallet d-lg-none">Zwallet</h1>
+              <p className="mt-3 d-none d-lg-block">
                 Create 6 digits pin to secure all your money and your data in
                 <br />
                 Zwallet app. Keep it secret and don’t tell anyone about your
                 <br />
                 Zwallet account password and the PIN.
               </p>
+              <p className="mt-3 text-center d-lg-none">
+                Create a PIN that’s contain 6 digits number for <br /> security
+                purpose in Zwallet.
+              </p>
               <form className="mt-5">
                 <Row>
-                  <Col className="col-md-2">
+                  <Col className="col-2 col-md-2">
                     <Input
                       type="text"
                       name="one"
@@ -90,7 +95,7 @@ export default function index(props) {
                       isMax
                     />
                   </Col>
-                  <Col className="col-md-2">
+                  <Col className="col-2 col-md-2">
                     <Input
                       type="text"
                       name="two"
@@ -100,7 +105,7 @@ export default function index(props) {
                       isMax
                     />
                   </Col>
-                  <Col className="col-md-2">
+                  <Col className="col-2 col-md-2">
                     <Input
                       type="text"
                       name="three"
@@ -110,7 +115,7 @@ export default function index(props) {
                       isMax
                     />
                   </Col>
-                  <Col className="col-md-2">
+                  <Col className="col-2 col-md-2">
                     <Input
                       type="text"
                       name="four"
@@ -120,7 +125,7 @@ export default function index(props) {
                       isMax
                     />
                   </Col>
-                  <Col className="col-md-2">
+                  <Col className="col-2 col-md-2">
                     <Input
                       type="text"
                       name="five"
@@ -130,7 +135,7 @@ export default function index(props) {
                       isMax
                     />
                   </Col>
-                  <Col className="col-md-2">
+                  <Col className="col-2 col-md-2">
                     <Input
                       type="text"
                       name="six"

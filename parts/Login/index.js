@@ -77,19 +77,25 @@ export default function index() {
       <section className="login py-5">
         <Container>
           <Row>
-            <Col className="col-md-7 main">
+            <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
               <Auth />
             </Col>
-            <Col className="col-md-5 aside">
-              <h1 className="mt-5">
+            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+              <h1 className="mt-5 d-none d-lg-block">
                 Start Accessing Banking Needs <br /> With All Devices and All
                 Platforms <br />
                 With 30.000+ Users
               </h1>
-              <p className="mt-3">
+              <h1 className="zwallet d-lg-none">Zwallet</h1>
+              <h1 className="mt-5 d-lg-none">Login</h1>
+              <p className="mt-3 d-none d-lg-block">
                 Transfering money is eassier than ever, you can access <br />
                 Zwallet wherever you are. Desktop, laptop, mobile phone? <br />
                 we cover all of that for you!
+              </p>
+              <p className="mt-3 text-center d-lg-none">
+                Login to your existing account to access <br /> all the features
+                in Zwallet.
               </p>
               <form className="mt-5">
                 <div className="form-group mail">

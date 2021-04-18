@@ -51,6 +51,13 @@ section.pin .aside h1 {
   color: #3a3d42;
 }
 
+section.pin .aside h1.zwallet {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 35px;
+  color: #6379f4;
+}
+
 section.pin .aside p {
   font-weight: 400;
   font-size: 16px;
@@ -144,4 +151,42 @@ section.pin .aside button.btn-login-now:hover {
   border: 2px solid #6379f4;
   color: #6379f4;
   background-color: #ffffff;
+}
+
+@media screen and (max-width: 1225px) {
+  .pin-page {
+    background-image: inherit;
+    background-repeat: inherit;
+    background-size: inherit;
+    background-position-x: inherit;
+  }
+
+  section.pin .main a.zwallet,
+  section.pin .main p,
+  section.pin .main h1 {
+    color: #6379f4;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  section.pin .aside input.form-control {
+    width: 47px;
+    height: 58px;
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  section.pin .aside input.form-control::-webkit-input-placeholder {
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  section.pin .aside button.btn-confirm,
+  section.pin .aside button.btn-login-now {
+    width: 343px;
+  }
+
+  section.pin .aside button.btn-confirm {
+    margin-top: 80px;
+  }
 }

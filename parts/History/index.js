@@ -102,7 +102,7 @@ export default function index() {
         })}
         {empty === false && (
           <>
-            <div className="d-flex justify-content-center mt-5">
+            <div className="d-flex justify-content-center mt-4">
               <ul className="pagination-custom">
                 {Array.from(Array(paginate).keys()).map((data, index) => {
                   return (

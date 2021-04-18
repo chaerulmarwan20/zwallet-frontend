@@ -51,6 +51,13 @@ section.sign-up .aside h1 {
   color: #3a3d42;
 }
 
+section.sign-up .aside h1.zwallet {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 35px;
+  color: #6379f4;
+}
+
 section.sign-up .aside p {
   font-weight: 400;
   font-size: 16px;
@@ -167,4 +174,29 @@ section.sign-up .aside p.account a {
 section.sign-up .aside p.account a:hover {
   text-decoration: none;
   opacity: 0.6;
+}
+
+@media screen and (max-width: 1225px) {
+  .sign-up-page {
+    background-image: inherit;
+    background-repeat: inherit;
+    background-size: inherit;
+    background-position-x: inherit;
+  }
+
+  section.sign-up .main a.zwallet,
+  section.sign-up .main p,
+  section.sign-up .main h1 {
+    color: #6379f4;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  section.sign-up .aside input.form-control {
+    width: 343px;
+  }
+
+  section.sign-up .aside button.btn-sign-up {
+    width: 343px;
+  }
 }

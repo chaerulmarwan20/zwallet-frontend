@@ -51,6 +51,13 @@ section.login .aside h1 {
   color: #3a3d42;
 }
 
+section.login .aside h1.zwallet {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 35px;
+  color: #6379f4;
+}
+
 section.login .aside p {
   font-weight: 400;
   font-size: 16px;
@@ -184,4 +191,29 @@ section.login .aside p.error {
   font-size: 18px;
   line-height: 32px;
   color: #ff5b37;
+}
+
+@media screen and (max-width: 1225px) {
+  .login-page {
+    background-image: inherit;
+    background-repeat: inherit;
+    background-size: inherit;
+    background-position-x: inherit;
+  }
+
+  section.login .main a.zwallet,
+  section.login .main p,
+  section.login .main h1 {
+    color: #6379f4;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  section.login .aside input.form-control {
+    width: 343px;
+  }
+
+  section.login .aside button.btn-login {
+    width: 343px;
+  }
 }
