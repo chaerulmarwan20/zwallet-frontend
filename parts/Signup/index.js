@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Auth from "../../components/module/Auth";
@@ -11,6 +12,8 @@ import Button from "../../components/module/Button";
 
 export default function index() {
   const Url = process.env.api;
+
+  const router = useRouter();
 
   const [type, setType] = useState("password");
   const [data, setData] = useState({
@@ -26,6 +29,10 @@ export default function index() {
     const dataNew = { ...data };
     dataNew[event.target.name] = event.target.value;
     setData(dataNew);
+  };
+
+  const handleClick = () => {
+    router.push("/");
   };
 
   const handleToggle = () => {
@@ -82,7 +89,9 @@ export default function index() {
                 Platforms <br />
                 With 30.000+ Users
               </h1>
-              <h1 className="zwallet d-lg-none">Zwallet</h1>
+              <h1 className="zwallet d-lg-none" onClick={() => handleClick()}>
+                Zwallet
+              </h1>
               <p className="mt-3 d-none d-lg-block">
                 Transfering money is eassier than ever, you can access <br />
                 Zwallet wherever you are. Desktop, laptop, mobile phone? <br />

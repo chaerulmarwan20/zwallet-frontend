@@ -9,6 +9,8 @@ export default function Navbar() {
   const UrlImage = process.env.image;
 
   const [user, setUser] = useState([]);
+  const [history, setHistory] = useState([]);
+  const [empty, setEmpty] = useState(false);
 
   const [notification, setNotification] = useState(false);
 
@@ -39,6 +41,24 @@ export default function Navbar() {
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
         });
+      });
+  }, []);
+
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    axios
+      .get(`${Url}/transactions/${id}?order=DESC`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data.data;
+        setHistory(data);
+        setEmpty(false);
+      })
+      .catch((err) => {
+        setEmpty(true);
       });
   }, []);
 
@@ -92,72 +112,39 @@ export default function Navbar() {
           <div className="row">
             <div className="col">
               <div className="notification p-4">
-                <h3>Today</h3>
-                <div className="history p-3 mt-4">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <Image
-                        src="/images/arrow-up-green.png"
-                        width={28}
-                        height={28}
-                        alt="Arrow Up"
-                      />
+                {/* <h3>Today</h3> */}
+                {history.map((item, index) => {
+                  return (
+                    <div className="history p-3 mt-4">
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <Image
+                            src={`${
+                              item.type === "Receive"
+                                ? "/images/arrow-up-green.png"
+                                : "/images/arrow-up-red.png"
+                            }`}
+                            width={28}
+                            height={28}
+                            alt="Arrow Up"
+                          />
+                        </div>
+                        <div className="detail d-flex flex-column ml-2">
+                          <span className="info">
+                            {item.type === "Receive"
+                              ? "Transfered from "
+                              : "Transfered to "}
+                            {`${item.fullName.substring(0, 10)}...`}
+                          </span>
+                          <span className="price mt-1">Rp{item.amount}</span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="detail d-flex flex-column ml-2">
-                      <span className="info">Transfered from Joshua Lee</span>
-                      <span className="price mt-1">Rp220.000</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="history p-3 mt-3">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <Image
-                        src="/images/arrow-up-red.png"
-                        width={28}
-                        height={28}
-                        alt="Arrow Up"
-                      />
-                    </div>
-                    <div className="detail d-flex flex-column ml-2">
-                      <span className="info">Netflix subscription</span>
-                      <span className="price mt-1">Rp149.000</span>
-                    </div>
-                  </div>
-                </div>
-                <h3 className="mt-4">This Week</h3>
-                <div className="history p-3 mt-4">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <Image
-                        src="/images/arrow-up-red.png"
-                        width={28}
-                        height={28}
-                        alt="Arrow Up"
-                      />
-                    </div>
-                    <div className="detail d-flex flex-column ml-2">
-                      <span className="info">Transfer to Jessica Lee</span>
-                      <span className="price mt-1">Rp100.000</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="history p-3 mt-3">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <Image
-                        src="/images/arrow-up-green.png"
-                        width={28}
-                        height={28}
-                        alt="Arrow Up"
-                      />
-                    </div>
-                    <div className="detail d-flex flex-column ml-2">
-                      <span className="info">Top up from BNI E-Banking</span>
-                      <span className="price mt-1">Rp300.000</span>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
+                {empty === true && (
+                  <p className="text-center mt-3">You have no transactions</p>
+                )}
               </div>
             </div>
           </div>

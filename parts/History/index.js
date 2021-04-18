@@ -28,6 +28,9 @@ export default function index() {
   };
 
   const handleClickLimit = (params) => {
+    if (page > 1) {
+      setPage(1);
+    }
     setLimit(params);
   };
 

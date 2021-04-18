@@ -58,12 +58,15 @@ export default function index() {
             <p className="mt-2">{user.phoneNumber}</p>
           </div>
           <div className="d-flex flex-column">
-            <Link href="/profile/phone/add">
-              <a className="mb-2">Add</a>
-            </Link>
-            <Link href="/profile/phone/manage">
-              <a className="mb-3">Manage</a>
-            </Link>
+            {user.phoneNumber !== "none" ? (
+              <Link href="/profile/phone/manage">
+                <a className="mb-3">Manage</a>
+              </Link>
+            ) : (
+              <Link href="/profile/phone/add">
+                <a className="mb-3">Add</a>
+              </Link>
+            )}
           </div>
         </div>
       </div>

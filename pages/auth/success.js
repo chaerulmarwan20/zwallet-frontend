@@ -14,6 +14,10 @@ export default function success() {
     router.push("/auth/login");
   };
 
+  const handleClick = () => {
+    router.push("/");
+  };
+
   return (
     <>
       <Head>
@@ -28,7 +32,9 @@ export default function success() {
                 <Auth />
               </Col>
               <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
-                <h1 className="zwallet d-lg-none">Zwallet</h1>
+                <h1 className="zwallet d-lg-none" onClick={() => handleClick()}>
+                  Zwallet
+                </h1>
                 <img
                   src="/images/success.png"
                   width="70"

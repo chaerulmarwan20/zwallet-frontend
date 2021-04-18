@@ -25,6 +25,10 @@ export default function index(props) {
     six: "",
   });
 
+  const handleClick = () => {
+    router.push("/");
+  };
+
   const handleFormChange = (event) => {
     const dataNew = { ...data };
     dataNew[event.target.name] = event.target.value;
@@ -71,7 +75,9 @@ export default function index(props) {
                 Secure Your Account, Your Wallet, <br /> and Your Data With 6
                 Digits PIN <br /> That You Created Yourself.
               </h1>
-              <h1 className="zwallet d-lg-none">Zwallet</h1>
+              <h1 className="zwallet d-lg-none" onClick={() => handleClick()}>
+                Zwallet
+              </h1>
               <p className="mt-3 d-none d-lg-block">
                 Create 6 digits pin to secure all your money and your data in
                 <br />

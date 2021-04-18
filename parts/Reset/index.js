@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Auth from "../../components/module/Auth";
@@ -11,9 +12,15 @@ import Button from "../../components/module/Button";
 export default function index() {
   const Url = process.env.api;
 
+  const router = useRouter();
+
   const [data, setData] = useState({
     email: "",
   });
+
+  const handleClick = () => {
+    router.push("/");
+  };
 
   const handleFormChange = (event) => {
     const dataNew = { ...data };
@@ -62,7 +69,9 @@ export default function index() {
                 Your <br />
                 Password In a Minutes.
               </h1>
-              <h1 className="zwallet d-lg-none">Zwallet</h1>
+              <h1 className="zwallet d-lg-none" onClick={() => handleClick()}>
+                Zwallet
+              </h1>
               <p className="mt-3 d-none d-lg-block">
                 To reset your password, you must type your e-mail and we <br />
                 will send a link to your email and you will be directed to the

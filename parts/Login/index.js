@@ -30,6 +30,10 @@ export default function index() {
     }
   };
 
+  const handleClick = () => {
+    router.push("/");
+  };
+
   const handleFormChange = (event) => {
     const dataNew = { ...data };
     dataNew[event.target.name] = event.target.value;
@@ -86,7 +90,9 @@ export default function index() {
                 Platforms <br />
                 With 30.000+ Users
               </h1>
-              <h1 className="zwallet d-lg-none">Zwallet</h1>
+              <h1 className="zwallet d-lg-none" onClick={() => handleClick()}>
+                Zwallet
+              </h1>
               <h1 className="mt-5 d-lg-none">Login</h1>
               <p className="mt-3 d-none d-lg-block">
                 Transfering money is eassier than ever, you can access <br />

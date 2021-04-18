@@ -56,6 +56,12 @@ section.login .aside h1.zwallet {
   font-size: 26px;
   line-height: 35px;
   color: #6379f4;
+  transition: 0.5 ease;
+  cursor: pointer;
+}
+
+section.login .aside h1.zwallet:hover {
+  opacity: 0.6;
 }
 
 section.login .aside p {
