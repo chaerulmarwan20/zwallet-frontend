@@ -19,7 +19,7 @@ export default function index() {
     password: "",
     firstName: "firstName",
     lastName: "lastName",
-    phoneNumber: "000000000000",
+    phoneNumber: "none",
   });
 
   const handleFormChange = (event) => {

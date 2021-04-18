@@ -42,7 +42,7 @@ section.history .transaction {
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 25px;
-  min-height: 500px;
+  min-height: 550px;
 }
 
 section.history .transaction h1 {
@@ -57,6 +57,13 @@ section.history .transaction p.time {
   font-size: 16px;
   line-height: 27px;
   color: #7a7886;
+}
+
+section.history .transaction p.empty {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
 }
 
 section.history .transaction .users img.user {
@@ -92,21 +99,20 @@ section.history .transaction .users div.price p.left {
 }
 
 section.history .transaction .btn-order {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
-  box-sizing: border-box;
 }
 
 section.history .transaction .btn-order.active {
-  border: solid 2px #6379f4;
+  background-color: #6379f4;
 }
 
 section.history .transaction .btn-filter {
-  width: 150px;
-  height: 60px;
+  width: 200px;
+  height: 50px;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
@@ -134,4 +140,51 @@ section.history .transaction .dropdown-item:active,
 section.history .transaction .dropdown-item:hover {
   background-color: #6379f4;
   color: #ffffff;
+}
+
+section.history .transaction ul.pagination-custom {
+  list-style: none;
+  display: flex;
+  transform: translateX(-22px);
+}
+
+section.history .transaction ul.pagination-custom li button {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: 0.5px solid #dedede;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 34px;
+  letter-spacing: 0.75px;
+  color: #4e4b66;
+  text-decoration: none;
+  transition: 0.5s ease;
+}
+
+section.history .transaction ul.pagination-custom li button:hover {
+  background-color: #6379f4;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border: 0.5px solid transparent;
+  color: #fff;
+}
+
+section.history .transaction ul.pagination-custom li button.page-active {
+  background-color: #6379f4;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border: 0.5px solid transparent;
+  color: #fff;
+}
+
+section.history .transaction ul.pagination-custom li button.page-active:hover {
+  background-color: #ffffff;
+  border: 0.5px solid #dedede;
+  color: #4e4b66;
+  box-shadow: inherit;
 }

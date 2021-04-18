@@ -1,17 +1,69 @@
-import { React, useState } from "react";
-import Image from "next/image";
+import { React, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import axios from "axios";
+import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
-export default function index() {
+export default function index(props) {
+  const Url = process.env.api;
+  const UrlImage = process.env.image;
+
   const router = useRouter();
+
+  const [details, setDetails] = useState([]);
+  const [showFailed, setShowFailed] = useState(false);
 
   const handleClickHome = () => {
     router.push("/dashboard");
   };
 
-  const [showFailed, setShowFailed] = useState(false);
+  const setDate = (params) => {
+    const date = new Date(params);
+    const month = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    return `${
+      month[date.getMonth()]
+    } ${date.getDate()}, ${date.getFullYear()} - ${date.getHours()}.${date.getMinutes()}`;
+  };
+
+  useEffect(() => {
+    if (props.id !== undefined) {
+      axios
+        .get(`${Url}/transactions/details/${props.id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          const data = res.data.data[0];
+          setDetails(data);
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error!",
+            text: err.response.data.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        });
+    }
+  }, [props.id]);
 
   return (
     <Col className="col-md-9">
@@ -42,28 +94,38 @@ export default function index() {
         )}
         <div className="details py-3 pl-3 mt-5">
           <span>Amount</span>
-          <p className="mt-2">Rp100.000</p>
+          <p className="mt-2">Rp{details.amount}</p>
         </div>
         <div className="details py-3 pl-3 mt-3">
           <span>Balance Left</span>
-          <p className="mt-2">Rp20.000</p>
+          <p className="mt-2">Rp{details.balanceLeft}</p>
         </div>
         <div className="details py-3 pl-3 mt-3">
           <span>Date & Time</span>
-          <p className="mt-2">May 11, 2020 - 12.20</p>
+          {details.date !== undefined && (
+            <p className="mt-2">{setDate(details.date)}</p>
+          )}
         </div>
         <div className="details py-3 pl-3 mt-3">
           <span>Notes</span>
-          <p className="mt-2">For buying some socks</p>
+          <p className="mt-2">{details.notes}</p>
         </div>
         <h1 className="mt-4">Transfer To</h1>
         <div className="users d-flex align-items-center py-2 pl-3 mt-4">
           <div className="image">
-            <Image src="/images/suhi.png" width={70} height={70} alt="User" />
+            {details.image !== undefined && (
+              <img
+                src={`${UrlImage}${details.image}`}
+                width={70}
+                height={70}
+                alt="User"
+                className="user"
+              />
+            )}
           </div>
           <div className="profile d-flex flex-column ml-3">
-            <span className="name">Samuel Suhi</span>
-            <span className="number mt-1">+62 813-8492-9994</span>
+            <span className="name">{details.fullName}</span>
+            <span className="number mt-1">{details.phoneNumber}</span>
           </div>
         </div>
         <div className="d-flex justify-content-end button-container">

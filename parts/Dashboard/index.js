@@ -14,6 +14,7 @@ export default function index() {
 
   const [user, setUser] = useState([]);
   const [history, setHistory] = useState([]);
+  const [empty, setEmpty] = useState(false);
 
   const router = useRouter();
 
@@ -58,15 +59,10 @@ export default function index() {
       .then((res) => {
         const data = res.data.data;
         setHistory(data);
+        setEmpty(false);
       })
       .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.response.data.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
+        setEmpty(true);
       });
   }, []);
 
@@ -181,6 +177,9 @@ export default function index() {
                 </div>
               );
             })}
+            {empty === true && (
+              <p className="empty text-center mt-3">You have no transactions</p>
+            )}
           </div>
         </Col>
       </Row>

@@ -44,6 +44,10 @@ section.status .transfer {
   border-radius: 25px;
 }
 
+section.status .transfer img.user {
+  border-radius: 10px;
+}
+
 section.status .transfer h1 {
   font-weight: 700;
   font-size: 18px;

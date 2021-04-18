@@ -58,6 +58,10 @@ section.confirmation .transfer .users {
   border-radius: 10px;
 }
 
+section.confirmation .transfer .users img.user {
+  border-radius: 10px;
+}
+
 section.confirmation .transfer .users .profile span.name {
   font-weight: 700;
   font-size: 18px;
