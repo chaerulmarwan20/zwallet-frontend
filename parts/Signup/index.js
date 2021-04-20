@@ -22,7 +22,7 @@ export default function index() {
     password: "",
     firstName: "firstName",
     lastName: "lastName",
-    phoneNumber: "none",
+    phoneNumber: "000000000000",
   });
 
   const handleFormChange = (event) => {
