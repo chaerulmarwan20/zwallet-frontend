@@ -1,12 +1,16 @@
 import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Rupiah from "../../helpers/rupiah";
 
 export default function Navbar() {
   const Url = process.env.api;
   const UrlImage = process.env.image;
+
+  const router = useRouter();
 
   const [user, setUser] = useState([]);
   const [history, setHistory] = useState([]);
@@ -34,13 +38,17 @@ export default function Navbar() {
         setUser(data);
       })
       .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.response.data.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
+        if (err.response.data.message === "Invalid signature") {
+          router.push("/");
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: err.response.data.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        }
       });
   }, []);
 
@@ -66,7 +74,7 @@ export default function Navbar() {
     <>
       <nav className="navbar navbar-expand-md navbar-light fixed-top custom">
         <div className="container">
-          <Link href="/">
+          <Link href="/dashboard">
             <a className="navbar-brand">Zwallet</a>
           </Link>
           <button
@@ -122,6 +130,8 @@ export default function Navbar() {
                             src={`${
                               item.type === "Receive"
                                 ? "/images/arrow-up-green.png"
+                                : item.type === "Top Up"
+                                ? "/images/arrow-up-green.png"
                                 : "/images/arrow-up-red.png"
                             }`}
                             width={28}
@@ -133,10 +143,16 @@ export default function Navbar() {
                           <span className="info">
                             {item.type === "Receive"
                               ? "Transfered from "
-                              : "Transfered to "}
-                            {`${item.fullName.substring(0, 10)}...`}
+                              : item.type === "Top Up"
+                              ? "Top Up from "
+                              : "Transfer to "}
+                            {item.fullName.length > 10
+                              ? `${item.fullName.substring(0, 10)}...`
+                              : item.fullName}
                           </span>
-                          <span className="price mt-1">Rp{item.amount}</span>
+                          <span className="price mt-1">
+                            {Rupiah(Number(item.amount))}
+                          </span>
                         </div>
                       </div>
                     </div>

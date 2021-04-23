@@ -18,8 +18,8 @@ export default function Users({ container: Container, row: Row, col: Col }) {
             </p>
           </Col>
         </Row>
-        <Row className="mt-5">
-          <Col className="col-md-4">
+        <Row className="mt-5 justify-content-center">
+          <Col className="col-lg-6 col-xl-4 mt-5 mt-lg-0">
             <div className="testimony pb-4 pt-5 px-3 text-center">
               <Image
                 src="/images/users1.png"
@@ -34,7 +34,7 @@ export default function Users({ container: Container, row: Row, col: Col }) {
               </p>
             </div>
           </Col>
-          <Col className="col-md-4">
+          <Col className="col-lg-6 col-xl-4 mt-5 mt-lg-0">
             <div className="testimony pb-4 pt-5 px-3 text-center">
               <Image
                 src="/images/users2.png"
@@ -50,7 +50,7 @@ export default function Users({ container: Container, row: Row, col: Col }) {
               </p>
             </div>
           </Col>
-          <Col className="col-md-4">
+          <Col className="col-lg-6 col-xl-4 mt-5 mt-xl-0">
             <div className="testimony pb-4 pt-5 px-3 text-center">
               <Image
                 src="/images/users3.png"

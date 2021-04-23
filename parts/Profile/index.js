@@ -7,7 +7,7 @@ import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
-export default function index() {
+export default function index({ image, name, phone }) {
   const Url = process.env.api;
   const UrlImage = process.env.image;
 
@@ -15,6 +15,7 @@ export default function index() {
 
   const router = useRouter();
 
+  const [status, setStatus] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [user, setUser] = useState([]);
   const [data, setData] = useState({
@@ -24,7 +25,7 @@ export default function index() {
     phoneNumber: "",
   });
   const [dataImage, setDataImage] = useState({
-    image: {},
+    image: image,
   });
 
   const handleClickPersonal = () => {
@@ -48,6 +49,7 @@ export default function index() {
   const handleChangeImage = (event) => {
     const imgFiles = event.target.files[0];
     setImgUrl(URL.createObjectURL(event.target.files[0]));
+    setStatus(true);
     setDataImage({
       image: imgFiles,
     });
@@ -61,7 +63,9 @@ export default function index() {
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
     formData.append("phoneNumber", data.phoneNumber);
-    formData.append("image", dataImage.image);
+    if (status) {
+      formData.append("image", dataImage.image);
+    }
     axios
       .put(`${Url}/users/${id}`, formData, {
         headers: {
@@ -76,6 +80,12 @@ export default function index() {
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.reload();
+          } else {
+            router.reload();
+          }
         });
       })
       .catch((err) => {
@@ -145,13 +155,15 @@ export default function index() {
         });
       })
       .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.response.data.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
+        if (err.response.data.message !== "Invalid signature") {
+          Swal.fire({
+            title: "Error!",
+            text: err.response.data.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        }
       });
   };
 
@@ -165,15 +177,13 @@ export default function index() {
         <div className="details p-5">
           <div className="d-flex flex-column justify-content-center align-items-center">
             <div>
-              {user.image !== undefined && (
-                <img
-                  src={`${UrlImage}${user.image}`}
-                  width={80}
-                  height={80}
-                  alt="Profile"
-                  className="user"
-                />
-              )}
+              <img
+                src={`${UrlImage}${image}`}
+                width={80}
+                height={80}
+                alt="Profile"
+                className="user"
+              />
             </div>
             <div
               className="edit mt-2"
@@ -188,8 +198,8 @@ export default function index() {
               />
               <span className="ml-2">Edit</span>
             </div>
-            <h1 className="mt-2">{user.fullName}</h1>
-            <p className="mt-1">{user.phoneNumber}</p>
+            <h1 className="mt-2">{name}</h1>
+            <p className="mt-1">{phone}</p>
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center mt-4">
             <div

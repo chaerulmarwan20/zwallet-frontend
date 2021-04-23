@@ -18,6 +18,15 @@ export default function success() {
     router.push("/");
   };
 
+  let token;
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+
+  if (token) {
+    router.push("/dashboard");
+  }
+
   return (
     <>
       <Head>

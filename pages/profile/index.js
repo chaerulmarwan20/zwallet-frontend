@@ -2,20 +2,15 @@ import React from "react";
 import Router from "next/router";
 import axios from "axios";
 import Layout from "../../components/base/Layout";
-import Main from "../../parts/PersonalInformation";
+import Main from "../../parts/Profile";
 
-export default function Info({ user }) {
+export default function Profile({ user }) {
   return (
     <>
-      <Layout
-        title="Personal Information"
-        className="personal"
-        active="profile"
-      >
+      <Layout title="Profile" className="profile" active="profile">
         <Main
-          firstName={user.firstName}
-          lastName={user.lastName}
-          email={user.email}
+          image={user.image}
+          name={user.fullName}
           phone={user.phoneNumber}
         ></Main>
       </Layout>
@@ -23,7 +18,7 @@ export default function Info({ user }) {
   );
 }
 
-Info.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   try {
     let cookie = "";
     if (ctx.req) {
@@ -39,7 +34,7 @@ Info.getInitialProps = async (ctx) => {
       }
     );
     const data = res.data.data[0];
-    return { user: data };
+    return { props: { user: data } };
   } catch (error) {
     if (ctx.req) {
       ctx.res.writeHead(301, { Location: "http://localhost:3000/auth/login" });
@@ -48,6 +43,6 @@ Info.getInitialProps = async (ctx) => {
     if (!ctx.req) {
       Router.push("/auth/login");
     }
-    return { user: [] };
+    return { props: { user: [] } };
   }
 };

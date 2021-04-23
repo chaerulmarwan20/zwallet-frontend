@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+import { React, useState, useRef } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import PinInput from "react-pin-input";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
@@ -11,28 +12,29 @@ export default function index() {
 
   const [showSuccess, setShowSuccess] = useState(false);
   const [data, setData] = useState({
-    one: "",
-    two: "",
-    three: "",
-    four: "",
-    five: "",
-    six: "",
+    value: "",
   });
+  const [status, setStatus] = useState(false);
 
-  const handleFormChange = (event) => {
-    const dataNew = { ...data };
-    dataNew[event.target.name] = event.target.value;
-    setData(dataNew);
+  const handleFormChange = (value) => {
+    setData({ value });
   };
+
+  const handleComplete = () => {
+    setStatus(true);
+  };
+
+  let onClear = useRef(null);
 
   const handleCheck = (event) => {
     const id = localStorage.getItem("id");
     event.preventDefault();
-    const number = `${data.one}${data.two}${data.three}${data.four}${data.five}${data.six}`;
+    const pin = data.value;
+    onClear.clear();
     axios
       .post(
         `${Url}/users/pin/check/${id}`,
-        { pin: number },
+        { pin: pin },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -41,13 +43,9 @@ export default function index() {
       )
       .then((res) => {
         setData({
-          one: "",
-          two: "",
-          three: "",
-          four: "",
-          five: "",
-          six: "",
+          value: "",
         });
+        setStatus(false);
         setShowSuccess(true);
         Swal.fire({
           title: "Success!",
@@ -58,6 +56,10 @@ export default function index() {
         });
       })
       .catch((err) => {
+        setData({
+          value: "",
+        });
+        setStatus(false);
         Swal.fire({
           title: "Error!",
           text: err.response.data.message,
@@ -71,11 +73,12 @@ export default function index() {
   const handleSubmit = (event) => {
     const id = localStorage.getItem("id");
     event.preventDefault();
-    const number = `${data.one}${data.two}${data.three}${data.four}${data.five}${data.six}`;
+    const pin = data.value;
+    onClear.clear();
     axios
       .put(
         `${Url}/users/pin/${id}`,
-        { pin: number },
+        { pin: pin },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -84,13 +87,9 @@ export default function index() {
       )
       .then((res) => {
         setData({
-          one: "",
-          two: "",
-          three: "",
-          four: "",
-          five: "",
-          six: "",
+          value: "",
         });
+        setStatus(false);
         setShowSuccess(false);
         Swal.fire({
           title: "Success!",
@@ -101,6 +100,10 @@ export default function index() {
         });
       })
       .catch((err) => {
+        setData({
+          value: "",
+        });
+        setStatus(false);
         Swal.fire({
           title: "Error!",
           text: err.response.data.message,
@@ -128,80 +131,41 @@ export default function index() {
         )}
         <form>
           <Row>
-            <Col className="col-md-2">
-              <Input
-                type="text"
-                name="one"
-                className={`pin ${data.one !== "" ? "active" : ""}`}
-                value={data.one}
+            <Col className="col-md-12 pr-0 pl-3">
+              <PinInput
+                length={6}
+                focus
+                secret
+                type="numeric"
                 onChange={handleFormChange}
-                isMax
-              />
-            </Col>
-            <Col className="col-md-2">
-              <Input
-                type="text"
-                name="two"
-                className={`pin ${data.two !== "" ? "active" : ""}`}
-                value={data.two}
-                onChange={handleFormChange}
-                isMax
-              />
-            </Col>
-            <Col className="col-md-2">
-              <Input
-                type="text"
-                name="three"
-                className={`pin ${data.three !== "" ? "active" : ""}`}
-                value={data.three}
-                onChange={handleFormChange}
-                isMax
-              />
-            </Col>
-            <Col className="col-md-2">
-              <Input
-                type="text"
-                name="four"
-                className={`pin ${data.four !== "" ? "active" : ""}`}
-                value={data.four}
-                onChange={handleFormChange}
-                isMax
-              />
-            </Col>
-            <Col className="col-md-2">
-              <Input
-                type="text"
-                name="five"
-                className={`pin ${data.five !== "" ? "active" : ""}`}
-                value={data.five}
-                onChange={handleFormChange}
-                isMax
-              />
-            </Col>
-            <Col className="col-md-2">
-              <Input
-                type="text"
-                name="six"
-                className={`pin ${data.six !== "" ? "active" : ""}`}
-                value={data.six}
-                onChange={handleFormChange}
-                isMax
+                ref={(p) => (onClear = p)}
+                inputStyle={{
+                  fontWeight: 700,
+                  fontSize: "30px",
+                  lineHeight: "41px",
+                  textAlign: "center",
+                  paddingBottom: "0px",
+                  width: "53px",
+                  height: "65px",
+                  borderRadius: "10px",
+                  backgroundColor: "#ffffff",
+                  border: status
+                    ? "1.5px solid #6379f4"
+                    : "1px solid rgba(169, 169, 169, 0.6)",
+                  boxSizing: "border-box",
+                  boxShadow: "0px 10px 75px rgba(147, 147, 147, 0.1)",
+                  color: "#3a3d42",
+                  marginRight: "20px",
+                }}
+                inputFocusStyle={{ border: "1.5px solid #6379f4" }}
+                onComplete={() => handleComplete()}
               />
             </Col>
           </Row>
           {showSuccess === false && (
             <Button
               type="button"
-              className={`btn btn-continue mt-5 ${
-                data.one !== "" &&
-                data.two !== "" &&
-                data.three !== "" &&
-                data.four !== "" &&
-                data.five !== "" &&
-                data.six !== ""
-                  ? "active"
-                  : ""
-              }`}
+              className={`btn btn-continue mt-5 ${status ? "active" : ""}`}
               onClick={handleCheck}
             >
               Continue
@@ -210,16 +174,7 @@ export default function index() {
           {showSuccess === true && (
             <Button
               type="button"
-              className={`btn btn-pin mt-5 ${
-                data.one !== "" &&
-                data.two !== "" &&
-                data.three !== "" &&
-                data.four !== "" &&
-                data.five !== "" &&
-                data.six !== ""
-                  ? "active"
-                  : ""
-              }`}
+              className={`btn btn-pin mt-5 ${status ? "active" : ""}`}
               onClick={handleSubmit}
             >
               Change PIN

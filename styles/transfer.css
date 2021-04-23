@@ -124,6 +124,13 @@ section.search .search-receiver p {
   color: #7a7886;
 }
 
+section.search .search-receiver p.empty {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
 section.search .search-receiver input.form-control.amount {
   border: inherit;
   font-weight: 700;

@@ -1,11 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import Col from "./Col";
 
 export default function Sidebar(props) {
+  const Url = process.env.api;
+
   const router = useRouter();
 
   let id;
@@ -26,19 +29,33 @@ export default function Sidebar(props) {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.clear();
-        Swal.fire({
-          title: "Logout!",
-          text: "Successfull.",
-          icon: "success",
-          confirmButtonColor: "#6379F4",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push("/");
-          } else {
-            router.push("/");
-          }
-        });
+        axios
+          .get(`${Url}/users/auth/logout`)
+          .then((res) => {
+            localStorage.clear();
+            Swal.fire({
+              title: "Logout!",
+              text: res.data.message,
+              icon: "success",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                router.push("/");
+              } else {
+                router.push("/");
+              }
+            });
+          })
+          .catch((err) => {
+            Swal.fire({
+              title: "Error!",
+              text: err.response.data.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
           title: "Logout!",
@@ -141,7 +158,7 @@ export default function Sidebar(props) {
               alt="Profile"
             />
             {id !== undefined && (
-              <Link href={`/profile/${id}`}>
+              <Link href="/profile">
                 <a
                   className={`ml-4 ${
                     props.active === "profile" ? "active" : ""

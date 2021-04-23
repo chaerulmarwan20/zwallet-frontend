@@ -1,7 +1,8 @@
-import { React, useState } from "react";
+import { React, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import PinInput from "react-pin-input";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -17,41 +18,42 @@ export default function index(props) {
   const email = props.email;
 
   const [data, setData] = useState({
-    one: "",
-    two: "",
-    three: "",
-    four: "",
-    five: "",
-    six: "",
+    value: "",
   });
+  const [status, setStatus] = useState(false);
+
+  const handleFormChange = (value) => {
+    setData({ value });
+  };
+
+  const handleComplete = () => {
+    setStatus(true);
+  };
+
+  let onClear = useRef(null);
 
   const handleClick = () => {
     router.push("/");
   };
 
-  const handleFormChange = (event) => {
-    const dataNew = { ...data };
-    dataNew[event.target.name] = event.target.value;
-    setData(dataNew);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    const number = `${data.one}${data.two}${data.three}${data.four}${data.five}${data.six}`;
+    const pin = data.value;
+    onClear.clear();
     axios
-      .post(`${Url}/users/pin/${email}`, { pin: number })
+      .post(`${Url}/users/pin/${email}`, { pin: pin })
       .then((res) => {
         setData({
-          one: "",
-          two: "",
-          three: "",
-          four: "",
-          five: "",
-          six: "",
+          value: "",
         });
+        setStatus(false);
         router.push("/auth/success");
       })
       .catch((err) => {
+        setData({
+          value: "",
+        });
+        setStatus(false);
         Swal.fire({
           title: "Error!",
           text: err.response.data.message,
@@ -91,64 +93,64 @@ export default function index(props) {
               </p>
               <form className="mt-5">
                 <Row>
-                  <Col className="col-2 col-md-2">
-                    <Input
-                      type="text"
-                      name="one"
-                      className={`${data.one !== "" ? "active" : ""}`}
-                      value={data.one}
+                  <Col className="col d-none d-md-block">
+                    <PinInput
+                      length={6}
+                      focus
+                      secret
+                      type="numeric"
                       onChange={handleFormChange}
-                      isMax
+                      ref={(p) => (onClear = p)}
+                      inputStyle={{
+                        fontWeight: 700,
+                        fontSize: "30px",
+                        lineHeight: "41px",
+                        textAlign: "center",
+                        paddingBottom: "0px",
+                        width: "53px",
+                        height: "65px",
+                        borderRadius: "10px",
+                        backgroundColor: "#ffffff",
+                        border: status
+                          ? "1.5px solid #6379f4"
+                          : "1px solid rgba(169, 169, 169, 0.6)",
+                        boxSizing: "border-box",
+                        boxShadow: "0px 10px 75px rgba(147, 147, 147, 0.1)",
+                        color: "#3a3d42",
+                        marginRight: "19px",
+                      }}
+                      inputFocusStyle={{ border: "1.5px solid #6379f4" }}
+                      onComplete={() => handleComplete()}
                     />
                   </Col>
-                  <Col className="col-2 col-md-2">
-                    <Input
-                      type="text"
-                      name="two"
-                      className={`${data.two !== "" ? "active" : ""}`}
-                      value={data.two}
+                  <Col className="col d-md-none">
+                    <PinInput
+                      length={6}
+                      focus
+                      secret
+                      type="numeric"
                       onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-2 col-md-2">
-                    <Input
-                      type="text"
-                      name="three"
-                      className={`${data.three !== "" ? "active" : ""}`}
-                      value={data.three}
-                      onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-2 col-md-2">
-                    <Input
-                      type="text"
-                      name="four"
-                      className={`${data.four !== "" ? "active" : ""}`}
-                      value={data.four}
-                      onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-2 col-md-2">
-                    <Input
-                      type="text"
-                      name="five"
-                      className={`${data.five !== "" ? "active" : ""}`}
-                      value={data.five}
-                      onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-2 col-md-2">
-                    <Input
-                      type="text"
-                      name="six"
-                      className={`${data.six !== "" ? "active" : ""}`}
-                      value={data.six}
-                      onChange={handleFormChange}
-                      isMax
+                      ref={(p) => (onClear = p)}
+                      inputStyle={{
+                        fontWeight: 700,
+                        fontSize: "30px",
+                        lineHeight: "41px",
+                        textAlign: "center",
+                        paddingBottom: "0px",
+                        width: "47px",
+                        height: "58px",
+                        borderRadius: "10px",
+                        backgroundColor: "#ffffff",
+                        border: status
+                          ? "1.5px solid #6379f4"
+                          : "1px solid rgba(169, 169, 169, 0.6)",
+                        boxSizing: "border-box",
+                        boxShadow: "0px 10px 75px rgba(147, 147, 147, 0.1)",
+                        color: "#3a3d42",
+                        marginRight: "5px",
+                      }}
+                      inputFocusStyle={{ border: "1.5px solid #6379f4" }}
+                      onComplete={() => handleComplete()}
                     />
                   </Col>
                 </Row>
@@ -156,16 +158,7 @@ export default function index(props) {
               <div className="d-flex justify-content-center">
                 <Button
                   type="button"
-                  className={`btn btn-confirm ${
-                    data.one !== "" &&
-                    data.two !== "" &&
-                    data.three !== "" &&
-                    data.four !== "" &&
-                    data.five !== "" &&
-                    data.six !== ""
-                      ? "active"
-                      : ""
-                  }`}
+                  className={`btn btn-confirm ${status ? "active" : ""}`}
                   onClick={handleSubmit}
                 >
                   Confirm

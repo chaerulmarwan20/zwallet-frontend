@@ -86,11 +86,22 @@ section.dashboard .history {
   border-radius: 25px;
 }
 
+section.dashboard .charts {
+  min-height: 300px;
+}
+
 section.dashboard .charts p {
   font-weight: 700;
   font-size: 14px;
   line-height: 19px;
+}
+
+section.dashboard .charts p.income {
   color: #1ec15f;
+}
+
+section.dashboard .charts p.expense {
+  color: #ff5b37;
 }
 
 section.dashboard .charts .income span,

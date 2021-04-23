@@ -3,10 +3,10 @@ import Image from "next/image";
 
 export default function Features({ container: Container, row: Row, col: Col }) {
   return (
-    <section className="features py-4">
+    <section className="features pt-0 pt-xl-4 pb-5 pb-xl-4">
       <Container>
         <Row>
-          <Col className="col-md-6">
+          <Col className="col-md-5 d-none d-xl-block">
             <Image
               src="/images/phone2.png"
               alt="Phone2"
@@ -14,8 +14,8 @@ export default function Features({ container: Container, row: Row, col: Col }) {
               height={856}
             />
           </Col>
-          <Col className="col-md-6">
-            <h1>
+          <Col className="col-12 col-xl-7">
+            <h1 className="text-center text-xl-left">
               All The <span>Great</span>
               <br />
               Zwallet Features.

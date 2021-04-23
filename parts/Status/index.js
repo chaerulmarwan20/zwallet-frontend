@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Rupiah from "../../helpers/rupiah";
+import Date from "../../helpers/date";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
@@ -19,28 +21,6 @@ export default function index(props) {
     router.push("/dashboard");
   };
 
-  const setDate = (params) => {
-    const date = new Date(params);
-    const month = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    return `${
-      month[date.getMonth()]
-    } ${date.getDate()}, ${date.getFullYear()} - ${date.getHours()}.${date.getMinutes()}`;
-  };
-
   useEffect(() => {
     if (props.id !== undefined) {
       axios
@@ -54,13 +34,15 @@ export default function index(props) {
           setDetails(data);
         })
         .catch((err) => {
-          Swal.fire({
-            title: "Error!",
-            text: err.response.data.message,
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
+          if (err.response.data.message !== "Invalid signature") {
+            Swal.fire({
+              title: "Error!",
+              text: err.response.data.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          }
         });
     }
   }, [props.id]);
@@ -94,16 +76,16 @@ export default function index(props) {
         )}
         <div className="details py-3 pl-3 mt-5">
           <span>Amount</span>
-          <p className="mt-2">Rp{details.amount}</p>
+          <p className="mt-2">{Rupiah(Number(details.amount))}</p>
         </div>
         <div className="details py-3 pl-3 mt-3">
           <span>Balance Left</span>
-          <p className="mt-2">Rp{details.balanceLeft}</p>
+          <p className="mt-2">{Rupiah(Number(details.balanceLeft))}</p>
         </div>
         <div className="details py-3 pl-3 mt-3">
           <span>Date & Time</span>
           {details.date !== undefined && (
-            <p className="mt-2">{setDate(details.date)}</p>
+            <p className="mt-2">{Date(details.date)}</p>
           )}
         </div>
         <div className="details py-3 pl-3 mt-3">

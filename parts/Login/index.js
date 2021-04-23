@@ -43,7 +43,9 @@ export default function index() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(`${Url}/users/auth/login`, data)
+      .post(`${Url}/users/auth/login`, data, {
+        withCredentials: true,
+      })
       .then((res) => {
         setData({
           email: "",

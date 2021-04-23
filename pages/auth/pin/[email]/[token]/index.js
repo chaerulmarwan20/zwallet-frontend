@@ -10,6 +10,17 @@ export default function index() {
 
   const { query } = useRouter();
 
+  const router = useRouter();
+
+  let token;
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+
+  if (token) {
+    router.push("/dashboard");
+  }
+
   useEffect(() => {
     if (query.email !== undefined && query.token !== undefined) {
       axios

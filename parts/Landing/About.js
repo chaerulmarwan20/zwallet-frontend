@@ -20,8 +20,8 @@ export default function About({ container: Container, row: Row, col: Col }) {
             </p>
           </Col>
         </Row>
-        <Row className="mt-5">
-          <Col className="col-md-4">
+        <Row className="mt-0 mt-md-5 justify-content-center">
+          <Col className="col-lg-6 col-xl-4">
             <div className="apps text-center mt-4 py-4">
               <Image src="/images/call.png" alt="call" width={80} height={80} />
               <h2 className="mt-3">24/7 Support</h2>
@@ -32,7 +32,7 @@ export default function About({ container: Container, row: Row, col: Col }) {
               </p>
             </div>
           </Col>
-          <Col className="col-md-4">
+          <Col className="col-lg-6 col-xl-4">
             <div className="apps text-center mt-4 py-4">
               <Image
                 src="/images/privacy.png"
@@ -47,7 +47,7 @@ export default function About({ container: Container, row: Row, col: Col }) {
               </p>
             </div>
           </Col>
-          <Col className="col-md-4">
+          <Col className="col-lg-6 col-xl-4">
             <div className="apps text-center mt-4 py-4">
               <Image
                 src="/images/download.png"

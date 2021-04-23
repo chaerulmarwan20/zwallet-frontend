@@ -1,10 +1,12 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import PinInput from "react-pin-input";
+import Rupiah from "../../helpers/rupiah";
+import Date from "../../helpers/date";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
-import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index(props) {
@@ -15,28 +17,29 @@ export default function index(props) {
 
   const [details, setDetails] = useState([]);
   const [data, setData] = useState({
-    one: "",
-    two: "",
-    three: "",
-    four: "",
-    five: "",
-    six: "",
+    value: "",
   });
+  const [status, setStatus] = useState(false);
 
-  const handleFormChange = (event) => {
-    const dataNew = { ...data };
-    dataNew[event.target.name] = event.target.value;
-    setData(dataNew);
+  const handleFormChange = (value) => {
+    setData({ value });
   };
+
+  const handleComplete = () => {
+    setStatus(true);
+  };
+
+  let onClear = useRef(null);
 
   const handleSubmit = (event) => {
     const id = localStorage.getItem("id");
     event.preventDefault();
-    const number = `${data.one}${data.two}${data.three}${data.four}${data.five}${data.six}`;
+    const pin = data.value;
+    onClear.clear();
     axios
       .post(
         `${Url}/users/pin/check/${id}`,
-        { pin: number },
+        { pin: pin },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -44,14 +47,6 @@ export default function index(props) {
         }
       )
       .then((res) => {
-        setData({
-          one: "",
-          two: "",
-          three: "",
-          four: "",
-          five: "",
-          six: "",
-        });
         axios
           .post(
             `${Url}/transactions/`,
@@ -71,6 +66,10 @@ export default function index(props) {
             router.push(`/transfer/status/${details.id}`);
           })
           .catch((err) => {
+            setData({
+              value: "",
+            });
+            setStatus(false);
             Swal.fire({
               title: "Error!",
               text: err.response.data.message,
@@ -81,6 +80,10 @@ export default function index(props) {
           });
       })
       .catch((err) => {
+        setData({
+          value: "",
+        });
+        setStatus(false);
         Swal.fire({
           title: "Error!",
           text: err.response.data.message,
@@ -89,28 +92,6 @@ export default function index(props) {
           confirmButtonColor: "#6379F4",
         });
       });
-  };
-
-  const setDate = (params) => {
-    const date = new Date(params);
-    const month = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    return `${
-      month[date.getMonth()]
-    } ${date.getDate()}, ${date.getFullYear()} - ${date.getHours()}.${date.getMinutes()}`;
   };
 
   useEffect(() => {
@@ -126,13 +107,15 @@ export default function index(props) {
           setDetails(data);
         })
         .catch((err) => {
-          Swal.fire({
-            title: "Error!",
-            text: err.response.data.message,
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
+          if (err.response.data.message !== "Invalid signature") {
+            Swal.fire({
+              title: "Error!",
+              text: err.response.data.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          }
         });
     }
   }, [props.id]);
@@ -162,16 +145,16 @@ export default function index(props) {
           <h1 className="mt-4">Details</h1>
           <div className="details py-3 pl-3 mt-3">
             <span>Amount</span>
-            <p className="mt-2">Rp{details.amount}</p>
+            <p className="mt-2">{Rupiah(Number(details.amount))}</p>
           </div>
           <div className="details py-3 pl-3 mt-3">
             <span>Balance Left</span>
-            <p className="mt-2">Rp{details.balanceLeft}</p>
+            <p className="mt-2">{Rupiah(Number(details.balanceLeft))}</p>
           </div>
           <div className="details py-3 pl-3 mt-3">
             <span>Date & Time</span>
             {details.date !== undefined && (
-              <p className="mt-2">{setDate(details.date)}</p>
+              <p className="mt-2">{Date(details.date)}</p>
             )}
           </div>
           <div className="details py-3 pl-3 mt-3">
@@ -208,64 +191,34 @@ export default function index(props) {
               </p>
               <form className="mt-5">
                 <Row>
-                  <Col className="col-md-2">
-                    <Input
-                      type="text"
-                      name="one"
-                      className={`pin ${data.one !== "" ? "active" : ""}`}
-                      value={data.one}
+                  <Col className="col">
+                    <PinInput
+                      length={6}
+                      focus
+                      secret
+                      type="numeric"
                       onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-md-2">
-                    <Input
-                      type="text"
-                      name="two"
-                      className={`pin ${data.two !== "" ? "active" : ""}`}
-                      value={data.two}
-                      onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-md-2">
-                    <Input
-                      type="text"
-                      name="three"
-                      className={`pin ${data.three !== "" ? "active" : ""}`}
-                      value={data.three}
-                      onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-md-2">
-                    <Input
-                      type="text"
-                      name="four"
-                      className={`pin ${data.four !== "" ? "active" : ""}`}
-                      value={data.four}
-                      onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-md-2">
-                    <Input
-                      type="text"
-                      name="five"
-                      className={`pin ${data.five !== "" ? "active" : ""}`}
-                      value={data.five}
-                      onChange={handleFormChange}
-                      isMax
-                    />
-                  </Col>
-                  <Col className="col-md-2">
-                    <Input
-                      type="text"
-                      name="six"
-                      className={`pin ${data.six !== "" ? "active" : ""}`}
-                      value={data.six}
-                      onChange={handleFormChange}
-                      isMax
+                      ref={(p) => (onClear = p)}
+                      inputStyle={{
+                        fontWeight: 700,
+                        fontSize: "30px",
+                        lineHeight: "41px",
+                        textAlign: "center",
+                        paddingBottom: "0px",
+                        width: "53px",
+                        height: "65px",
+                        borderRadius: "10px",
+                        backgroundColor: "#ffffff",
+                        border: status
+                          ? "1.5px solid #6379f4"
+                          : "1px solid rgba(169, 169, 169, 0.6)",
+                        boxSizing: "border-box",
+                        boxShadow: "0px 10px 75px rgba(147, 147, 147, 0.1)",
+                        color: "#3a3d42",
+                        marginRight: "17px",
+                      }}
+                      inputFocusStyle={{ border: "1.5px solid #6379f4" }}
+                      onComplete={() => handleComplete()}
                     />
                   </Col>
                 </Row>
@@ -274,16 +227,7 @@ export default function index(props) {
             <div className="modal-footer">
               <Button
                 type="button"
-                className={`btn btn-continue ${
-                  data.one !== "" &&
-                  data.two !== "" &&
-                  data.three !== "" &&
-                  data.four !== "" &&
-                  data.five !== "" &&
-                  data.six !== ""
-                    ? "active"
-                    : ""
-                }`}
+                className={`btn btn-continue ${status ? "active" : ""}`}
                 onClick={handleSubmit}
                 isDismiss
               >

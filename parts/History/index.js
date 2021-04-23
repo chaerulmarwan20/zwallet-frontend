@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios";
-import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
+import Rupiah from "../../helpers/rupiah";
 
 export default function index() {
   const Url = process.env.api;
@@ -96,8 +96,10 @@ export default function index() {
                   } mt-3`}
                 >
                   {item.type === "Transfer"
-                    ? `-Rp${item.amount}`
-                    : `+Rp${item.amount}`}
+                    ? `-${Rupiah(Number(item.amount))}`
+                    : item.type === "Receive"
+                    ? `+${Rupiah(Number(item.amount))}`
+                    : `+${Rupiah(Number(item.amount))}`}
                 </p>
               </div>
             </div>
@@ -197,12 +199,6 @@ export default function index() {
                     onClick={() => handleClickSort("id")}
                   >
                     Id
-                  </p>
-                  <p
-                    className="dropdown-item"
-                    onClick={() => handleClickSort("date")}
-                  >
-                    Date
                   </p>
                   <p
                     className="dropdown-item"

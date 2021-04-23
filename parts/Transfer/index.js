@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
+import Rupiah from "../../helpers/rupiah";
 
 export default function index() {
   const Url = process.env.api;
@@ -13,8 +14,8 @@ export default function index() {
   const router = useRouter();
 
   const [query, setQuery] = useState("");
-  const [result, setResult] = useState(false);
   const [user, setUser] = useState([]);
+  const [empty, setEmpty] = useState(false);
   const [userCredit, setUserCredit] = useState([]);
   const [showResult, setShowResult] = useState(false);
   const [receiver, setReceiver] = useState({
@@ -32,34 +33,21 @@ export default function index() {
   const handleFormChange = (event) => {
     setQuery(event.target.value);
     axios
-      .get(`${Url}/users/?keyword=${event.target.value}`, {
+      .get(`${Url}/users/?keyword=${event.target.value}&perPage=3`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then((res) => {
         if (event.target.value === "") {
-          setResult(false);
-        } else {
-          setResult(true);
+          getUser();
+          setEmpty(false);
         }
         setUser(res.data.data);
+        setEmpty(false);
       })
       .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.response.data.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        }).then((result) => {
-          setResult(false);
-          if (result.isConfirmed) {
-            setQuery("");
-          } else {
-            setQuery("");
-          }
-        });
+        setEmpty(true);
       });
   };
 
@@ -141,6 +129,23 @@ export default function index() {
     }
   };
 
+  const getUser = () => {
+    axios
+      .get(`${Url}/users?perPage=3`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data.data;
+        setEmpty(false);
+        setUser(data);
+      })
+      .catch((err) => {
+        setEmpty(true);
+      });
+  };
+
   useEffect(() => {
     axios
       .get(`${Url}/users/find-one`, {
@@ -153,14 +158,20 @@ export default function index() {
         setUserCredit(data);
       })
       .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.response.data.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
+        if (err.response.data.message !== "Invalid signature") {
+          Swal.fire({
+            title: "Error!",
+            text: err.response.data.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        }
       });
+  }, []);
+
+  useEffect(() => {
+    getUser();
   }, []);
 
   return (
@@ -187,7 +198,7 @@ export default function index() {
                 />
               </div>
             </form>
-            {result === true &&
+            {empty === false &&
               user.map((item, index) => {
                 return (
                   <div
@@ -218,6 +229,9 @@ export default function index() {
                   </div>
                 );
               })}
+            {empty === true && (
+              <p className="empty text-center mt-5">Receiver not found</p>
+            )}
           </>
         )}
 
@@ -255,7 +269,7 @@ export default function index() {
               </div>
             </form>
             <p className="credit text-center mt-4">
-              Rp{userCredit.credit} Available
+              {Rupiah(Number(userCredit.credit))} Available
             </p>
             <div className="d-flex justify-content-center">
               <form className="mt-5">

@@ -6,19 +6,19 @@ export default function Partners({ container: Container, row: Row, col: Col }) {
     <section className="partners">
       <Container>
         <Row>
-          <Col className="col-md-6">
-            <h1>
+          <Col className="col-12 col-xl-6">
+            <h1 className="text-center text-xl-left">
               100+ <span>Trusted</span>
               <br />
               Partners.
             </h1>
-            <p className="mt-4">
+            <p className="mt-4 text-center text-xl-left">
               We have reached global level and have 100+
               <br />
               brand partners around the globe.
             </p>
           </Col>
-          <Col className="col-md-6">
+          <Col className="col-12 col-xl-6 d-flex flex-wrap justify-content-center">
             <Image
               src="/images/airbnb.png"
               alt="AirBnb"
