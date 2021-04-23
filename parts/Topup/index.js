@@ -1,5 +1,5 @@
-import { React, useState, useEffect } from "react";
-import axios from "axios";
+import { React, useState } from "react";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
@@ -32,20 +32,11 @@ export default function index({ payment }) {
       setIdPayment(null);
       setAmount(null);
       const id = localStorage.getItem("id");
-      const token = localStorage.getItem("token");
-      axios
-        .put(
-          `${Url}/transactions/top-up/${id}`,
-          {
-            idPayment: idPayment,
-            amount: amount,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+      axiosApiInstance
+        .put(`${Url}/transactions/top-up/${id}`, {
+          idPayment: idPayment,
+          amount: amount,
+        })
         .then((res) => {
           Swal.fire({
             title: "Success!",

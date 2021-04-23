@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Rupiah from "../../helpers/rupiah";
 
@@ -27,20 +27,14 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    axios
-      .get(`${Url}/users/find-one`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/users/find-one`)
       .then((res) => {
         const data = res.data.data[0];
         setUser(data);
       })
       .catch((err) => {
-        if (err.response.data.message === "Invalid signature") {
-          router.push("/");
-        } else {
+        if (err.response.data.message !== "Invalid signature") {
           Swal.fire({
             title: "Error!",
             text: err.response.data.message,
@@ -54,12 +48,8 @@ export default function Navbar() {
 
   useEffect(() => {
     const id = localStorage.getItem("id");
-    axios
-      .get(`${Url}/transactions/${id}?order=DESC`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/transactions/${id}?order=DESC`)
       .then((res) => {
         const data = res.data.data;
         setHistory(data);
@@ -159,7 +149,9 @@ export default function Navbar() {
                   );
                 })}
                 {empty === true && (
-                  <p className="text-center mt-3">You have no transactions</p>
+                  <p className="text-center mt-3">
+                    You don't have any notifications.
+                  </p>
                 )}
               </div>
             </div>

@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
@@ -26,12 +26,8 @@ export default function index() {
   const handleSubmit = (event) => {
     const id = localStorage.getItem("id");
     event.preventDefault();
-    axios
-      .put(`${Url}/users/change-password/${id}`, data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .put(`${Url}/users/change-password/${id}`, data)
       .then((res) => {
         setData({
           currentPassword: "",

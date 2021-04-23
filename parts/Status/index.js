@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Rupiah from "../../helpers/rupiah";
 import Date from "../../helpers/date";
@@ -23,12 +23,8 @@ export default function index(props) {
 
   useEffect(() => {
     if (props.id !== undefined) {
-      axios
-        .get(`${Url}/transactions/details/${props.id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
+      axiosApiInstance
+        .get(`${Url}/transactions/details/${props.id}`)
         .then((res) => {
           const data = res.data.data[0];
           setDetails(data);

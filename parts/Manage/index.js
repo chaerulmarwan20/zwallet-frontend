@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 
@@ -9,12 +9,8 @@ export default function index() {
   const [user, setUser] = useState([]);
 
   const getData = () => {
-    axios
-      .get(`${Url}/users/find-one`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/users/find-one`)
       .then((res) => {
         const data = res.data.data[0];
         setUser(data);
@@ -46,12 +42,8 @@ export default function index() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`${Url}/users/phoneNumber/${id}`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          })
+        axiosApiInstance
+          .delete(`${Url}/users/phoneNumber/${id}`)
           .then((res) => {
             Swal.fire({
               title: "Deleted!",

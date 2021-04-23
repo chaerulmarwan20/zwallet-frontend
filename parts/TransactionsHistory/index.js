@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import axiosApiInstance from "../../helpers/axios";
 import Rupiah from "../../helpers/rupiah";
@@ -84,7 +85,7 @@ export default function index() {
                   <span className="type mt-1">{item.type}</span>
                 </div>
               </div>
-              <div className="price">
+              <div className="price d-flex flex-column align-items-center">
                 <p
                   className={`${
                     item.type === "Transfer" ? "left" : "transfer"
@@ -96,6 +97,9 @@ export default function index() {
                     ? `+${Rupiah(Number(item.amount))}`
                     : `+${Rupiah(Number(item.amount))}`}
                 </p>
+                <Link href={`/dashboard/transactions/${item.id}`}>
+                  <a>Details</a>
+                </Link>
               </div>
             </div>
           );

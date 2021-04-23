@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
@@ -21,12 +21,8 @@ export default function index() {
   const handleSubmit = (event) => {
     const id = localStorage.getItem("id");
     event.preventDefault();
-    axios
-      .post(`${Url}/users/phoneNumber/${id}`, data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .post(`${Url}/users/phoneNumber/${id}`, data)
       .then((res) => {
         setData({
           phoneNumber: "",

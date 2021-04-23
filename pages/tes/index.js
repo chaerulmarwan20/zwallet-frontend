@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Router from "next/router";
 import axios from "axios";
+import Swal from "sweetalert2";
+import NumberFormat from "react-number-format";
 
 export default function Tes({ payments }) {
   // const UrlImage = process.env.image;
+
+  const [amount, setAmount] = useState("");
+
+  const handleChange = (event) => {
+    setAmount(event.target.value);
+  };
+
+  const handleClick = () => {
+    const data = amount.slice(2);
+    let number = 0;
+    Array.from(data).forEach((item) => {
+      if (item !== ",") {
+        number += item;
+      }
+    });
+    const result = number.slice(1);
+    console.log(result);
+    console.log(typeof Number(result));
+  };
 
   return (
     <>
@@ -51,6 +72,15 @@ export default function Tes({ payments }) {
           </div>
         </div>
       </nav> */}
+      <NumberFormat
+        thousandSeparator={true}
+        prefix={"Rp"}
+        placeholder="00.0"
+        onChange={handleChange}
+      />
+      <button type="button" onClick={() => handleClick()}>
+        Process
+      </button>
       {payments.map((item) => {
         return <h1 key={item.id}>{item.name}</h1>;
       })}

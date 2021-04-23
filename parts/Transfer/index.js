@@ -1,7 +1,8 @@
 import { React, useState, useEffect } from "react";
+import NumberFormat from "react-number-format";
 import { useRouter } from "next/router";
-import axios from "axios";
 import Swal from "sweetalert2";
+import axiosApiInstance from "../../helpers/axios";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
@@ -24,20 +25,16 @@ export default function index() {
     number: "",
   });
   const [data, setData] = useState({
-    amount: "",
     balanceLeft: "",
     notes: "",
   });
+  const [amount, setAmount] = useState("");
   const [idUser, setIdUser] = useState(null);
 
   const handleFormChange = (event) => {
     setQuery(event.target.value);
-    axios
-      .get(`${Url}/users/?keyword=${event.target.value}&perPage=3`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/users/?keyword=${event.target.value}&perPage=3`)
       .then((res) => {
         if (event.target.value === "") {
           getUser();
@@ -49,6 +46,10 @@ export default function index() {
       .catch((err) => {
         setEmpty(true);
       });
+  };
+
+  const handleFormChangeAmount = (event) => {
+    setAmount(event.target.value);
   };
 
   const handleFormChangeTransfer = (event) => {
@@ -69,7 +70,15 @@ export default function index() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (data.amount > userCredit.credit) {
+    const slice = amount.slice(2);
+    let number = 0;
+    Array.from(slice).forEach((item) => {
+      if (item !== ",") {
+        number += item;
+      }
+    });
+    const result = number.slice(1);
+    if (Number(result) > userCredit.credit) {
       Swal.fire({
         title: "Error!",
         text: "Your balance is not enough",
@@ -79,27 +88,19 @@ export default function index() {
       });
     } else {
       const id = localStorage.getItem("id");
-      axios
-        .post(
-          `${Url}/transactions/details`,
-          {
-            idUser: id,
-            idReceiver: idUser,
-            amount: data.amount,
-            balanceLeft: userCredit.credit - data.amount,
-            notes: data.notes,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
+      axiosApiInstance
+        .post(`${Url}/transactions/details`, {
+          idUser: id,
+          idReceiver: idUser,
+          amount: Number(result),
+          balanceLeft: userCredit.credit - Number(result),
+          notes: data.notes,
+        })
         .then((res) => {
           const id = res.data.data[0].id;
           setShowResult(false);
+          setAmount("");
           setData({
-            amount: "",
             notes: "",
           });
           setIdUser(null);
@@ -130,12 +131,8 @@ export default function index() {
   };
 
   const getUser = () => {
-    axios
-      .get(`${Url}/users?perPage=3`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/users?perPage=3`)
       .then((res) => {
         const data = res.data.data;
         setEmpty(false);
@@ -147,12 +144,8 @@ export default function index() {
   };
 
   useEffect(() => {
-    axios
-      .get(`${Url}/users/find-one`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/users/find-one`)
       .then((res) => {
         const data = res.data.data[0];
         setUserCredit(data);
@@ -259,12 +252,15 @@ export default function index() {
             </p>
             <form className="mt-5">
               <div className="form-group">
-                <Input
-                  type="text"
-                  className={`amount ${data.amount !== "" ? "active" : ""}`}
+                <NumberFormat
                   name="amount"
-                  placeholder="0.00"
-                  onChange={handleFormChangeTransfer}
+                  thousandSeparator={true}
+                  prefix={"Rp"}
+                  placeholder="00.0"
+                  onChange={handleFormChangeAmount}
+                  className={`form-control amount ${
+                    amount !== "" ? "active" : ""
+                  }`}
                 />
               </div>
             </form>

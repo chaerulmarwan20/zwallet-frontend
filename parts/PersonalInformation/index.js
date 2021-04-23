@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import Link from "next/link";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 
@@ -10,12 +10,8 @@ export default function index({ firstName, lastName, email, phone }) {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${Url}/users/find-one`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/users/find-one`)
       .then((res) => {
         const data = res.data.data[0];
         setUser(data);

@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
@@ -66,12 +66,8 @@ export default function index({ image, name, phone }) {
     if (status) {
       formData.append("image", dataImage.image);
     }
-    axios
-      .put(`${Url}/users/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .put(`${Url}/users/${id}`, formData)
       .then((res) => {
         getData();
         Swal.fire({
@@ -137,12 +133,8 @@ export default function index({ image, name, phone }) {
   };
 
   const getData = () => {
-    axios
-      .get(`${Url}/users/find-one`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/users/find-one`)
       .then((res) => {
         const data = res.data.data[0];
         setUser(data);

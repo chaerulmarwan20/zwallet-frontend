@@ -2,19 +2,9 @@ import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { BarChart, Bar, Cell, ResponsiveContainer } from "recharts";
 import Rupiah from "../../helpers/rupiah";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
@@ -86,12 +76,8 @@ export default function index() {
   };
 
   useEffect(() => {
-    axios
-      .get(`${Url}/users/find-one`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/users/find-one`)
       .then((res) => {
         const data = res.data.data[0];
         setUser(data);
@@ -111,12 +97,8 @@ export default function index() {
 
   useEffect(() => {
     const id = localStorage.getItem("id");
-    axios
-      .get(`${Url}/transactions/${id}?order=DESC`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/transactions/${id}?order=DESC`)
       .then((res) => {
         const data = res.data.data;
         setHistory(data);
@@ -129,12 +111,8 @@ export default function index() {
 
   useEffect(() => {
     const id = localStorage.getItem("id");
-    axios
-      .get(`${Url}/transactions/income/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/transactions/income/${id}`)
       .then((res) => {
         const data = res.data.data[0];
         setIncome(data);
@@ -154,12 +132,8 @@ export default function index() {
 
   useEffect(() => {
     const id = localStorage.getItem("id");
-    axios
-      .get(`${Url}/transactions/expense/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    axiosApiInstance
+      .get(`${Url}/transactions/expense/${id}`)
       .then((res) => {
         const data = res.data.data[0];
         setExpense(data);
@@ -278,7 +252,7 @@ export default function index() {
           <div className="history p-4">
             <div className="d-flex justify-content-between">
               <h2>Transaction History</h2>
-              <Link href="/dashboard/history">
+              <Link href="/dashboard/transactions">
                 <a className="mt-1">See all</a>
               </Link>
             </div>
@@ -323,7 +297,9 @@ export default function index() {
               );
             })}
             {empty === true && (
-              <p className="empty text-center mt-3">You have no transactions</p>
+              <p className="empty text-center mt-3">
+                You don't have any transactions.
+              </p>
             )}
           </div>
         </Col>

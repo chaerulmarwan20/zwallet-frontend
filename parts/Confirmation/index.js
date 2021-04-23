@@ -1,6 +1,6 @@
 import { React, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import PinInput from "react-pin-input";
 import Rupiah from "../../helpers/rupiah";
@@ -36,32 +36,16 @@ export default function index(props) {
     event.preventDefault();
     const pin = data.value;
     onClear.clear();
-    axios
-      .post(
-        `${Url}/users/pin/check/${id}`,
-        { pin: pin },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
+    axiosApiInstance
+      .post(`${Url}/users/pin/check/${id}`, { pin: pin })
       .then((res) => {
-        axios
-          .post(
-            `${Url}/transactions/`,
-            {
-              idUser: details.idUser,
-              idReceiver: details.idReceiver,
-              amount: details.amount,
-              notes: details.notes,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          )
+        axiosApiInstance
+          .post(`${Url}/transactions/`, {
+            idUser: details.idUser,
+            idReceiver: details.idReceiver,
+            amount: details.amount,
+            notes: details.notes,
+          })
           .then((res) => {
             router.push(`/transfer/status/${details.id}`);
           })
@@ -96,12 +80,8 @@ export default function index(props) {
 
   useEffect(() => {
     if (props.id !== undefined) {
-      axios
-        .get(`${Url}/transactions/details/${props.id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
+      axiosApiInstance
+        .get(`${Url}/transactions/details/${props.id}`)
         .then((res) => {
           const data = res.data.data[0];
           setDetails(data);

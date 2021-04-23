@@ -14,9 +14,8 @@ export default function Topup({ payments }) {
 }
 
 export const getStaticProps = async (ctx) => {
-  const result = await axios.get(
-    "http://localhost:8080/api/v1/transactions/payments?perPage=8"
-  );
+  const Url = process.env.api;
+  const result = await axios.get(`${Url}/transactions/payments?perPage=8`);
   const data = result.data.data;
   return {
     props: {

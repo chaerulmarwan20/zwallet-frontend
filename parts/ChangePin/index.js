@@ -1,10 +1,9 @@
 import { React, useState, useRef } from "react";
-import axios from "axios";
+import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import PinInput from "react-pin-input";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
-import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
@@ -31,16 +30,8 @@ export default function index() {
     event.preventDefault();
     const pin = data.value;
     onClear.clear();
-    axios
-      .post(
-        `${Url}/users/pin/check/${id}`,
-        { pin: pin },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
+    axiosApiInstance
+      .post(`${Url}/users/pin/check/${id}`, { pin: pin })
       .then((res) => {
         setData({
           value: "",
@@ -75,16 +66,8 @@ export default function index() {
     event.preventDefault();
     const pin = data.value;
     onClear.clear();
-    axios
-      .put(
-        `${Url}/users/pin/${id}`,
-        { pin: pin },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
+    axiosApiInstance
+      .put(`${Url}/users/pin/${id}`, { pin: pin })
       .then((res) => {
         setData({
           value: "",
