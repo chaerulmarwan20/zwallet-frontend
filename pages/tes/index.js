@@ -1,31 +1,39 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import Router from "next/router";
-import axios from "axios";
-import Swal from "sweetalert2";
-import NumberFormat from "react-number-format";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setData, getData } from "../../actions";
 
-export default function Tes({ payments }) {
+export default function Tes() {
   // const UrlImage = process.env.image;
 
-  const [amount, setAmount] = useState("");
+  // const [amount, setAmount] = useState("");
 
-  const handleChange = (event) => {
-    setAmount(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setAmount(event.target.value);
+  // };
+
+  // const handleClick = () => {
+  //   const data = amount.slice(2);
+  //   let number = 0;
+  //   Array.from(data).forEach((item) => {
+  //     if (item !== ",") {
+  //       number += item;
+  //     }
+  //   });
+  //   const result = number.slice(1);
+  //   console.log(result);
+  //   console.log(typeof Number(result));
+  // };
+
+  const dispatch = useDispatch();
+
+  const { dataUser } = useSelector((state) => state.user);
 
   const handleClick = () => {
-    const data = amount.slice(2);
-    let number = 0;
-    Array.from(data).forEach((item) => {
-      if (item !== ",") {
-        number += item;
-      }
-    });
-    const result = number.slice(1);
-    console.log(result);
-    console.log(typeof Number(result));
+    dispatch(setData());
+  };
+
+  const handleClickGet = () => {
+    dispatch(getData());
   };
 
   return (
@@ -72,7 +80,7 @@ export default function Tes({ payments }) {
           </div>
         </div>
       </nav> */}
-      <NumberFormat
+      {/* <NumberFormat
         thousandSeparator={true}
         prefix={"Rp"}
         placeholder="00.0"
@@ -80,10 +88,24 @@ export default function Tes({ payments }) {
       />
       <button type="button" onClick={() => handleClick()}>
         Process
-      </button>
-      {payments.map((item) => {
+      </button> */}
+      {/* {payments.map((item) => {
         return <h1 key={item.id}>{item.name}</h1>;
-      })}
+      })} */}
+      {dataUser !== undefined &&
+        dataUser.map((item, index) => {
+          return (
+            <h1 key={index}>
+              {item.nama} {item.umur}
+            </h1>
+          );
+        })}
+      <button type="button" onClick={() => handleClick()}>
+        Set Redux
+      </button>
+      <button type="button" onClick={() => handleClickGet()}>
+        Get Redux
+      </button>
     </>
   );
 }
@@ -146,14 +168,14 @@ export default function Tes({ payments }) {
 //   }
 // };
 
-export const getStaticProps = async (ctx) => {
-  const result = await axios.get(
-    "http://localhost:8080/api/v1/transactions/payments"
-  );
-  const data = result.data.data;
-  return {
-    props: {
-      payments: data,
-    },
-  };
-};
+// export const getStaticProps = async (ctx) => {
+//   const result = await axios.get(
+//     "http://localhost:8080/api/v1/transactions/payments"
+//   );
+//   const data = result.data.data;
+//   return {
+//     props: {
+//       payments: data,
+//     },
+//   };
+// };

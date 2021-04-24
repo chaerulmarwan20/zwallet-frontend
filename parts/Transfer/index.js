@@ -1,7 +1,9 @@
 import { React, useState, useEffect } from "react";
-import NumberFormat from "react-number-format";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import NumberFormat from "react-number-format";
 import Swal from "sweetalert2";
+import { findUser, getUser, searchUser } from "../../actions";
 import axiosApiInstance from "../../helpers/axios";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
@@ -14,8 +16,11 @@ export default function index() {
 
   const router = useRouter();
 
+  const dispatch = useDispatch();
+
+  const { userTarget } = useSelector((state) => state.user);
+
   const [query, setQuery] = useState("");
-  const [user, setUser] = useState([]);
   const [empty, setEmpty] = useState(false);
   const [userCredit, setUserCredit] = useState([]);
   const [showResult, setShowResult] = useState(false);
@@ -33,14 +38,18 @@ export default function index() {
 
   const handleFormChange = (event) => {
     setQuery(event.target.value);
-    axiosApiInstance
-      .get(`${Url}/users/?keyword=${event.target.value}&perPage=3`)
+    dispatch(searchUser(event.target.value))
       .then((res) => {
         if (event.target.value === "") {
-          getUser();
+          dispatch(getUser())
+            .then((res) => {
+              setEmpty(false);
+            })
+            .catch((err) => {
+              setEmpty(true);
+            });
           setEmpty(false);
         }
-        setUser(res.data.data);
         setEmpty(false);
       })
       .catch((err) => {
@@ -130,31 +139,16 @@ export default function index() {
     }
   };
 
-  const getUser = () => {
-    axiosApiInstance
-      .get(`${Url}/users?perPage=3`)
-      .then((res) => {
-        const data = res.data.data;
-        setEmpty(false);
-        setUser(data);
-      })
-      .catch((err) => {
-        setEmpty(true);
-      });
-  };
-
   useEffect(() => {
-    axiosApiInstance
-      .get(`${Url}/users/find-one`)
+    dispatch(findUser())
       .then((res) => {
-        const data = res.data.data[0];
-        setUserCredit(data);
+        setUserCredit(res);
       })
       .catch((err) => {
-        if (err.response.data.message !== "Invalid signature") {
+        if (err.message !== "Invalid signature") {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -164,7 +158,13 @@ export default function index() {
   }, []);
 
   useEffect(() => {
-    getUser();
+    dispatch(getUser())
+      .then((res) => {
+        setEmpty(false);
+      })
+      .catch((err) => {
+        setEmpty(true);
+      });
   }, []);
 
   return (
@@ -192,7 +192,7 @@ export default function index() {
               </div>
             </form>
             {empty === false &&
-              user.map((item, index) => {
+              userTarget.map((item, index) => {
                 return (
                   <div
                     className="users d-flex align-items-center py-2 pl-3 mt-4"

@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { Provider } from "react-redux";
+import { useStore } from "../store";
 import { GoogleFonts } from "next-google-fonts";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/globals.css";
@@ -22,6 +24,8 @@ import "../styles/change-pin.css";
 import "../styles/phone.css";
 
 function MyApp({ Component, pageProps }) {
+  const store = useStore(pageProps.initialReduxState);
+
   return (
     <>
       <GoogleFonts href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" />
@@ -37,7 +41,9 @@ function MyApp({ Component, pageProps }) {
           crossorigin="anonymous"
         ></script>
       </Head>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 }

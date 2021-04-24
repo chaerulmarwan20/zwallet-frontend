@@ -1,25 +1,23 @@
-import { React, useState, useEffect } from "react";
-import axiosApiInstance from "../../helpers/axios";
+import { React, useEffect } from "react";
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { findUser, deletePhoneNumber } from "../../actions";
 import Col from "../../components/module/Col";
 
 export default function index() {
-  const Url = process.env.api;
+  const dispatch = useDispatch();
 
-  const [user, setUser] = useState([]);
+  const { user } = useSelector((state) => state.user);
 
   const getData = () => {
-    axiosApiInstance
-      .get(`${Url}/users/find-one`)
-      .then((res) => {
-        const data = res.data.data[0];
-        setUser(data);
-      })
+    dispatch(findUser())
+      .then((res) => {})
       .catch((err) => {
-        if (err.response.data.message !== "Invalid signature") {
+        if (err.message !== "Invalid signature") {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -29,7 +27,6 @@ export default function index() {
   };
 
   const handleClickTrash = () => {
-    const id = localStorage.getItem("id");
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -42,8 +39,7 @@ export default function index() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosApiInstance
-          .delete(`${Url}/users/phoneNumber/${id}`)
+        dispatch(deletePhoneNumber())
           .then((res) => {
             Swal.fire({
               title: "Deleted!",
@@ -51,12 +47,12 @@ export default function index() {
               icon: "success",
               confirmButtonColor: "#6379F4",
             });
-            getData();
+            dispatch(findUser());
           })
           .catch((err) => {
             Swal.fire({
               title: "Error!",
-              text: err.response.data.message,
+              text: err.message,
               icon: "error",
               confirmButtonText: "Ok",
               confirmButtonColor: "#6379F4",
@@ -88,17 +84,25 @@ export default function index() {
         <div className="details pt-3 pl-3 pr-4 mt-4 d-flex justify-content-between align-items-center">
           <div>
             <span>Primary</span>
-            <p className="mt-2">{user.phoneNumber}</p>
+            <p className="mt-2">
+              {user.phoneNumber === "000000000000" ? "none" : user.phoneNumber}
+            </p>
           </div>
           <div>
-            <img
-              src="/images/trash.png"
-              width={28}
-              height={28}
-              alt="Trash"
-              className="trash"
-              onClick={() => handleClickTrash()}
-            />
+            {user.phoneNumber === "000000000000" ? (
+              <Link href="/profile/phone/add">
+                <a className="mb-3">Add</a>
+              </Link>
+            ) : (
+              <img
+                src="/images/trash.png"
+                width={28}
+                height={28}
+                alt="Trash"
+                className="trash"
+                onClick={() => handleClickTrash()}
+              />
+            )}
           </div>
         </div>
       </div>

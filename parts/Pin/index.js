@@ -1,19 +1,19 @@
 import { React, useState, useRef } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
-import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
 import PinInput from "react-pin-input";
+import Swal from "sweetalert2";
+import { creatPin } from "../../actions";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
-import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index(props) {
-  const Url = process.env.api;
-
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const email = props.email;
 
@@ -40,8 +40,7 @@ export default function index(props) {
     event.preventDefault();
     const pin = data.value;
     onClear.clear();
-    axios
-      .post(`${Url}/users/pin/${email}`, { pin: pin })
+    dispatch(creatPin(email, pin))
       .then((res) => {
         setData({
           value: "",
@@ -56,7 +55,7 @@ export default function index(props) {
         setStatus(false);
         Swal.fire({
           title: "Error!",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",

@@ -1,23 +1,27 @@
 import { React, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axiosApiInstance from "../../helpers/axios";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { findUser, updateUser } from "../../actions";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index({ image, name, phone }) {
-  const Url = process.env.api;
   const UrlImage = process.env.image;
+
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.user);
 
   const imageRef = useRef(null);
 
   const router = useRouter();
 
   const [status, setStatus] = useState(false);
+  const [showNew, setShowNew] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
-  const [user, setUser] = useState([]);
   const [data, setData] = useState({
     username: "",
     firstName: "",
@@ -57,7 +61,6 @@ export default function index({ image, name, phone }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const id = localStorage.getItem("id");
     const formData = new FormData();
     formData.append("username", data.username);
     formData.append("firstName", data.firstName);
@@ -66,28 +69,21 @@ export default function index({ image, name, phone }) {
     if (status) {
       formData.append("image", dataImage.image);
     }
-    axiosApiInstance
-      .put(`${Url}/users/${id}`, formData)
+    dispatch(updateUser(formData))
       .then((res) => {
-        getData();
+        dispatch(findUser());
         Swal.fire({
           title: "Success!",
-          text: res.data.message,
+          text: res,
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.reload();
-          } else {
-            router.reload();
-          }
         });
       })
       .catch((err) => {
         Swal.fire({
           title: "Error!",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -133,24 +129,21 @@ export default function index({ image, name, phone }) {
   };
 
   const getData = () => {
-    axiosApiInstance
-      .get(`${Url}/users/find-one`)
+    dispatch(findUser())
       .then((res) => {
-        const data = res.data.data[0];
-        setUser(data);
-        setImgUrl(`${UrlImage}${data.image}`);
+        setImgUrl(`${UrlImage}${res.image}`);
         setData({
-          username: data.username,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          phoneNumber: data.phoneNumber,
+          username: res.username,
+          firstName: res.firstName,
+          lastName: res.lastName,
+          phoneNumber: res.phoneNumber,
         });
       })
       .catch((err) => {
-        if (err.response.data.message !== "Invalid signature") {
+        if (err.message !== "Invalid signature") {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -163,6 +156,10 @@ export default function index({ image, name, phone }) {
     getData();
   }, []);
 
+  useEffect(() => {
+    setShowNew(true);
+  }, [user]);
+
   return (
     <>
       <Col className="col-md-9">
@@ -170,7 +167,7 @@ export default function index({ image, name, phone }) {
           <div className="d-flex flex-column justify-content-center align-items-center">
             <div>
               <img
-                src={`${UrlImage}${image}`}
+                src={`${UrlImage}${showNew ? user.image : image}`}
                 width={80}
                 height={80}
                 alt="Profile"
@@ -190,8 +187,24 @@ export default function index({ image, name, phone }) {
               />
               <span className="ml-2">Edit</span>
             </div>
-            <h1 className="mt-2">{name}</h1>
-            <p className="mt-1">{phone}</p>
+            <h1 className="mt-2">
+              {showNew
+                ? user.fullName === "firstName lastName"
+                  ? "your full name"
+                  : user.fullName
+                : name === "firstName lastName"
+                ? "your full name"
+                : name}
+            </h1>
+            <p className="mt-1">
+              {showNew
+                ? user.phoneNumber === "000000000000"
+                  ? "your phone number"
+                  : user.phoneNumber
+                : phone === "000000000000"
+                ? "your phone number"
+                : phone}
+            </p>
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center mt-4">
             <div
@@ -306,7 +319,7 @@ export default function index({ image, name, phone }) {
                 <div className="form-group person">
                   <img
                     src={`/images/${
-                      data.firstName !== ""
+                      data.firstName !== "" && data.firstName !== "firstName"
                         ? "person-blue.png"
                         : "person-grey.png"
                     }`}
@@ -319,15 +332,19 @@ export default function index({ image, name, phone }) {
                     type="text"
                     name="firstName"
                     placeholder="Enter your first name"
-                    className={`${data.firstName !== "" ? "active" : ""}`}
-                    value={data.firstName}
+                    className={`${
+                      data.firstName !== "" && data.firstName !== "firstName"
+                        ? "active"
+                        : ""
+                    }`}
+                    value={data.firstName === "firstName" ? "" : data.firstName}
                     onChange={handleFormChange}
                   />
                 </div>
                 <div className="form-group person">
                   <img
                     src={`/images/${
-                      data.lastName !== ""
+                      data.lastName !== "" && data.lastName !== "lastName"
                         ? "person-blue.png"
                         : "person-grey.png"
                     }`}
@@ -340,15 +357,20 @@ export default function index({ image, name, phone }) {
                     type="text"
                     name="lastName"
                     placeholder="Enter your last name"
-                    className={`${data.lastName !== "" ? "active" : ""}`}
-                    value={data.lastName}
+                    className={`${
+                      data.lastName !== "" && data.lastName !== "lastName"
+                        ? "active"
+                        : ""
+                    }`}
+                    value={data.lastName === "lastName" ? "" : data.lastName}
                     onChange={handleFormChange}
                   />
                 </div>
                 <div className="form-group phone">
                   <img
                     src={`/images/${
-                      data.phoneNumber !== ""
+                      data.phoneNumber !== "" &&
+                      data.phoneNumber !== "000000000000"
                         ? "phone-2-blue.png"
                         : "phone-2-grey.png"
                     }`}
@@ -361,8 +383,17 @@ export default function index({ image, name, phone }) {
                     type="text"
                     name="phoneNumber"
                     placeholder="Enter your phone number"
-                    className={`${data.phoneNumber !== "" ? "active" : ""}`}
-                    value={data.phoneNumber}
+                    className={`${
+                      data.phoneNumber !== "" &&
+                      data.phoneNumber !== "000000000000"
+                        ? "active"
+                        : ""
+                    }`}
+                    value={
+                      data.phoneNumber === "000000000000"
+                        ? ""
+                        : data.phoneNumber
+                    }
                     onChange={handleFormChange}
                   />
                 </div>

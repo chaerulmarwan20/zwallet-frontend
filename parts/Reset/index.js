@@ -1,7 +1,8 @@
 import { React, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { forgot } from "../../actions";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -10,9 +11,11 @@ import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
-  const Url = process.env.api;
-
   const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const { loading } = useSelector((state) => state.user);
 
   const [data, setData] = useState({
     email: "",
@@ -30,15 +33,14 @@ export default function index() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`${Url}/users/auth/forgot-password`, { email: data.email })
+    dispatch(forgot(data.email))
       .then((res) => {
         setData({
           email: "",
         });
         Swal.fire({
           title: "Success!",
-          text: res.data.message,
+          text: res,
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -47,7 +49,7 @@ export default function index() {
       .catch((err) => {
         Swal.fire({
           title: "Error!",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -111,7 +113,7 @@ export default function index() {
                 }`}
                 onClick={handleSubmit}
               >
-                Confirm
+                {!loading ? "Confirm" : "Please wait..."}
               </Button>
             </Col>
           </Row>

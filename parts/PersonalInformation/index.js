@@ -1,34 +1,8 @@
-import { React, useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import axiosApiInstance from "../../helpers/axios";
-import Swal from "sweetalert2";
 import Col from "../../components/module/Col";
 
 export default function index({ firstName, lastName, email, phone }) {
-  const Url = process.env.api;
-
-  const [user, setUser] = useState([]);
-
-  useEffect(() => {
-    axiosApiInstance
-      .get(`${Url}/users/find-one`)
-      .then((res) => {
-        const data = res.data.data[0];
-        setUser(data);
-      })
-      .catch((err) => {
-        if (err.response.data.message !== "Invalid signature") {
-          Swal.fire({
-            title: "Error!",
-            text: err.response.data.message,
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
-        }
-      });
-  }, []);
-
   return (
     <Col className="col-md-9">
       <div className="information p-5">
@@ -40,11 +14,15 @@ export default function index({ firstName, lastName, email, phone }) {
         </p>
         <div className="details py-3 pl-3 mt-4">
           <span>First Name</span>
-          <p className="mt-2">{firstName}</p>
+          <p className="mt-2">
+            {firstName === "firstName" ? "your first name" : firstName}
+          </p>
         </div>
         <div className="details py-3 pl-3 mt-3">
           <span>Last Name</span>
-          <p className="mt-2">{lastName}</p>
+          <p className="mt-2">
+            {lastName === "lastName" ? "your last name" : lastName}
+          </p>
         </div>
         <div className="details py-3 pl-3 mt-3">
           <span>Verified E-mail</span>
@@ -53,10 +31,12 @@ export default function index({ firstName, lastName, email, phone }) {
         <div className="details pt-3 pl-3 pr-3 mt-3 d-flex justify-content-between align-items-center">
           <div>
             <span>Phone Number</span>
-            <p className="mt-2">{phone}</p>
+            <p className="mt-2">
+              {phone === "000000000000" ? "your phone number" : phone}
+            </p>
           </div>
           <div className="d-flex flex-column">
-            {phone !== "none" ? (
+            {phone !== "000000000000" ? (
               <Link href="/profile/phone/manage">
                 <a className="mb-3">Manage</a>
               </Link>

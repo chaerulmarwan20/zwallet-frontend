@@ -2,9 +2,11 @@ import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axiosApiInstance from "../../helpers/axios";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { BarChart, Bar, Cell, ResponsiveContainer } from "recharts";
+import { findUser } from "../../actions";
+import axiosApiInstance from "../../helpers/axios";
 import Rupiah from "../../helpers/rupiah";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
@@ -13,6 +15,10 @@ import Button from "../../components/module/Button";
 export default function index() {
   const Url = process.env.api;
   const UrlImage = process.env.image;
+
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.user);
 
   const data = [
     {
@@ -59,7 +65,6 @@ export default function index() {
     },
   ];
 
-  const [user, setUser] = useState([]);
   const [history, setHistory] = useState([]);
   const [empty, setEmpty] = useState(false);
   const [income, setIncome] = useState([]);
@@ -76,17 +81,13 @@ export default function index() {
   };
 
   useEffect(() => {
-    axiosApiInstance
-      .get(`${Url}/users/find-one`)
-      .then((res) => {
-        const data = res.data.data[0];
-        setUser(data);
-      })
+    dispatch(findUser())
+      .then((res) => {})
       .catch((err) => {
-        if (err.response.data.message !== "Invalid signature") {
+        if (err.message !== "Invalid signature") {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",

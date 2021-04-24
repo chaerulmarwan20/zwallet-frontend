@@ -1,12 +1,13 @@
 import { React, useState } from "react";
-import axiosApiInstance from "../../helpers/axios";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { addPhoneNumber, findUser } from "../../actions";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
-  const Url = process.env.api;
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     phoneNumber: "",
@@ -19,26 +20,25 @@ export default function index() {
   };
 
   const handleSubmit = (event) => {
-    const id = localStorage.getItem("id");
     event.preventDefault();
-    axiosApiInstance
-      .post(`${Url}/users/phoneNumber/${id}`, data)
+    dispatch(addPhoneNumber(data))
       .then((res) => {
         setData({
           phoneNumber: "",
         });
         Swal.fire({
           title: "Success!",
-          text: res.data.message,
+          text: res,
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
         });
+        dispatch(findUser());
       })
       .catch((err) => {
         Swal.fire({
           title: "Error!",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",

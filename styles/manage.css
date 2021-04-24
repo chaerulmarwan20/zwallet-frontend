@@ -84,3 +84,16 @@ section.manage .information .details img.trash {
   transform: translateY(-5px);
   cursor: pointer;
 }
+
+section.manage .information .details a {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #6379f4;
+  transition: 0.5s ease;
+}
+
+section.manage .information .details a:hover {
+  text-decoration: none;
+  opacity: 0.6;
+}

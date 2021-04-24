@@ -1,16 +1,17 @@
 import { React, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { verify } from "../../../../../actions";
 import Main from "../../../../../parts/Pin";
 
 export default function index() {
-  const Url = process.env.api;
-
   const { query } = useRouter();
 
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   let token;
   if (typeof window !== "undefined") {
@@ -23,14 +24,11 @@ export default function index() {
 
   useEffect(() => {
     if (query.email !== undefined && query.token !== undefined) {
-      axios
-        .get(
-          `${Url}/users/auth/verify/?email=${query.email}&token=${query.token}`
-        )
+      dispatch(verify(query.email, query.token))
         .then((res) => {
           Swal.fire({
             title: "Success!",
-            text: res.data.message,
+            text: res,
             icon: "success",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -39,7 +37,7 @@ export default function index() {
         .catch((err) => {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",

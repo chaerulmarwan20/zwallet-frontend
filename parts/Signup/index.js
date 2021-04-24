@@ -1,8 +1,9 @@
 import { React, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { signUp } from "../../actions";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -11,9 +12,11 @@ import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index() {
-  const Url = process.env.api;
-
   const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const { loading } = useSelector((state) => state.user);
 
   const [type, setType] = useState("password");
   const [data, setData] = useState({
@@ -45,8 +48,7 @@ export default function index() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`${Url}/users/`, data)
+    dispatch(signUp(data))
       .then((res) => {
         setData({
           username: "",
@@ -58,7 +60,7 @@ export default function index() {
         });
         Swal.fire({
           title: "Success!",
-          text: res.data.message,
+          text: res,
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -67,7 +69,7 @@ export default function index() {
       .catch((err) => {
         Swal.fire({
           title: "Error!",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -181,7 +183,7 @@ export default function index() {
                 }`}
                 onClick={handleSubmit}
               >
-                Sign Up
+                {!loading ? "Sign Up" : "Please wait..."}
               </Button>
               <p className="text-center mt-5 account">
                 Already have an account? Let’s{" "}

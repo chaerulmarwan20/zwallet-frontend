@@ -167,7 +167,7 @@ section.confirmation .modal-content .modal-body input.form-control.pin {
 section.confirmation
   .modal-content
   .modal-body
-  input.form-control.pin::-webkit-input-placeholder {
+  input.form-control.pin::placeholder {
   font-weight: 700;
   font-size: 30px;
   line-height: 41px;

@@ -1,7 +1,8 @@
 import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { findUser } from "../../actions";
 import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
 import Rupiah from "../../helpers/rupiah";
@@ -10,9 +11,10 @@ export default function Navbar() {
   const Url = process.env.api;
   const UrlImage = process.env.image;
 
-  const router = useRouter();
+  const dispatch = useDispatch();
 
-  const [user, setUser] = useState([]);
+  const { user } = useSelector((state) => state.user);
+
   const [history, setHistory] = useState([]);
   const [empty, setEmpty] = useState(false);
 
@@ -27,17 +29,13 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    axiosApiInstance
-      .get(`${Url}/users/find-one`)
-      .then((res) => {
-        const data = res.data.data[0];
-        setUser(data);
-      })
+    dispatch(findUser())
+      .then((res) => {})
       .catch((err) => {
-        if (err.response.data.message !== "Invalid signature") {
+        if (err.message !== "Invalid signature") {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -91,8 +89,16 @@ export default function Navbar() {
               )}
             </div>
             <div className="profile mx-4 d-flex flex-column">
-              <span className="name">{user.fullName}</span>
-              <span className="number">{user.phoneNumber}</span>
+              <span className="name">
+                {user.fullName === "firstName lastName"
+                  ? "your full name"
+                  : user.fullName}
+              </span>
+              <span className="number">
+                {user.phoneNumber === "000000000000"
+                  ? "your phone number"
+                  : user.phoneNumber}
+              </span>
             </div>
             <Image
               src="/images/bell.png"

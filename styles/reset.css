@@ -118,7 +118,7 @@ section.reset .aside input.form-control {
   padding-bottom: 11px;
 }
 
-section.reset .aside input.form-control::-webkit-input-placeholder {
+section.reset .aside input.form-control::placeholder {
   font-weight: 400;
   font-size: 16px;
   line-height: 23px;

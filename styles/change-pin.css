@@ -83,7 +83,7 @@ section.change-pin .details input.form-control.pin {
   padding-bottom: 0px;
 }
 
-section.change-pin .details input.form-control.pin::-webkit-input-placeholder {
+section.change-pin .details input.form-control.pin::placeholder {
   font-weight: 700;
   font-size: 30px;
   line-height: 41px;

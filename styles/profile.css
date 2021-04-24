@@ -177,10 +177,7 @@ section.profile .modal-content .modal-body input.form-control {
   padding-bottom: 11px;
 }
 
-section.profile
-  .modal-content
-  .modal-body
-  input.form-control::-webkit-input-placeholder {
+section.profile .modal-content .modal-body input.form-control::placeholder {
   font-weight: 400;
   font-size: 16px;
   line-height: 23px;

@@ -87,7 +87,7 @@ section.pin .aside input.form-control {
   padding-bottom: 0px;
 }
 
-section.pin .aside input.form-control::-webkit-input-placeholder {
+section.pin .aside input.form-control::placeholder {
   font-weight: 700;
   font-size: 30px;
   line-height: 41px;
@@ -182,7 +182,7 @@ section.pin .aside button.btn-login-now:hover {
     line-height: 33px;
   }
 
-  section.pin .aside input.form-control::-webkit-input-placeholder {
+  section.pin .aside input.form-control::placeholder {
     font-size: 24px;
     line-height: 33px;
   }

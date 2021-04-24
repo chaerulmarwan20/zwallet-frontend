@@ -73,10 +73,7 @@ section.search .search-receiver .receiver input.form-control {
   padding-left: 60px;
 }
 
-section.search
-  .search-receiver
-  .receiver
-  input.form-control::-webkit-input-placeholder {
+section.search .search-receiver .receiver input.form-control::placeholder {
   font-weight: 400;
   font-size: 16px;
   line-height: 23px;
@@ -140,9 +137,7 @@ section.search .search-receiver input.form-control.amount {
   text-align: center;
 }
 
-section.search
-  .search-receiver
-  input.form-control.amount::-webkit-input-placeholder {
+section.search .search-receiver input.form-control.amount::placeholder {
   color: #b5bdcc;
   text-align: center;
 }
@@ -176,10 +171,7 @@ section.search .search-receiver .pencil input.form-control.notes.active {
   border-bottom: 1.5px solid #6379f4;
 }
 
-section.search
-  .search-receiver
-  .pencil
-  input.form-control.notes::-webkit-input-placeholder {
+section.search .search-receiver .pencil input.form-control.notes::placeholder {
   font-weight: 400;
   line-height: 23px;
   color: rgba(169, 169, 169, 0.8);

@@ -1,13 +1,17 @@
 import { React, useState, useRef } from "react";
-import axiosApiInstance from "../../helpers/axios";
-import Swal from "sweetalert2";
 import PinInput from "react-pin-input";
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+import { checkPin, updatePin } from "../../actions";
+import axiosApiInstance from "../../helpers/axios";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
 export default function index() {
   const Url = process.env.api;
+
+  const dispatch = useDispatch();
 
   const [showSuccess, setShowSuccess] = useState(false);
   const [data, setData] = useState({
@@ -26,12 +30,10 @@ export default function index() {
   let onClear = useRef(null);
 
   const handleCheck = (event) => {
-    const id = localStorage.getItem("id");
     event.preventDefault();
     const pin = data.value;
     onClear.clear();
-    axiosApiInstance
-      .post(`${Url}/users/pin/check/${id}`, { pin: pin })
+    dispatch(checkPin(pin))
       .then((res) => {
         setData({
           value: "",
@@ -40,7 +42,7 @@ export default function index() {
         setShowSuccess(true);
         Swal.fire({
           title: "Success!",
-          text: res.data.message,
+          text: res,
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -53,7 +55,7 @@ export default function index() {
         setStatus(false);
         Swal.fire({
           title: "Error!",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -62,12 +64,10 @@ export default function index() {
   };
 
   const handleSubmit = (event) => {
-    const id = localStorage.getItem("id");
     event.preventDefault();
     const pin = data.value;
     onClear.clear();
-    axiosApiInstance
-      .put(`${Url}/users/pin/${id}`, { pin: pin })
+    dispatch(updatePin(pin))
       .then((res) => {
         setData({
           value: "",
@@ -76,7 +76,7 @@ export default function index() {
         setShowSuccess(false);
         Swal.fire({
           title: "Success!",
-          text: res.data.message,
+          text: res,
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -89,7 +89,7 @@ export default function index() {
         setStatus(false);
         Swal.fire({
           title: "Error!",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",

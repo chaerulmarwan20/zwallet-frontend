@@ -1,7 +1,8 @@
 import { React, useState } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+import { reset } from "../../actions";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -10,12 +11,12 @@ import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
 export default function index(props) {
-  const Url = process.env.api;
-
   const email = props.email;
   const token = props.token;
 
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const [type, setType] = useState("password");
   const [typeConfirm, setTypeConfirm] = useState("password");
@@ -36,11 +37,7 @@ export default function index(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .put(
-        `${Url}/users/auth/reset-password/?email=${email}&token=${token}`,
-        data
-      )
+    dispatch(reset(email, token, data))
       .then((res) => {
         setData({
           password: "",
@@ -48,7 +45,7 @@ export default function index(props) {
         });
         Swal.fire({
           title: "Success!",
-          text: res.data.message,
+          text: res,
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
@@ -63,7 +60,7 @@ export default function index(props) {
       .catch((err) => {
         Swal.fire({
           title: "Error!",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
