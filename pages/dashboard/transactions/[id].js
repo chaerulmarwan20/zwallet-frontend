@@ -2,7 +2,6 @@ import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import axios from "axios";
-import Swal from "sweetalert2";
 import Rupiah from "../../../helpers/rupiah";
 import Date from "../../../helpers/date";
 import Layout from "../../../components/base/Layout";
@@ -125,31 +124,6 @@ export default function index({ details }) {
                 <span className="number mt-1">{details.phoneNumber}</span>
               )}
             </div>
-          </div>
-          <div className="d-flex justify-content-end button-container">
-            <Button
-              type="button"
-              className="btn btn-share d-flex justify-content-center align-items-center mr-3"
-            >
-              <Image
-                src="/images/share.png"
-                width={24}
-                height={24}
-                alt="Share"
-              />
-            </Button>
-            <Button
-              type="button"
-              className="btn btn-download d-flex justify-content-center align-items-center mr-3"
-            >
-              <Image
-                src="/images/download-2.png"
-                width={22}
-                height={22}
-                alt="Download"
-              />
-              <span className="ml-2">Download PDF</span>
-            </Button>
           </div>
         </div>
       </Col>

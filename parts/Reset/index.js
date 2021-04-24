@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { forgot } from "../../actions";
+import { forgot } from "../../configs/redux/actions/user";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";

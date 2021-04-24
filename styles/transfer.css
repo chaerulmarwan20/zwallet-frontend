@@ -73,10 +73,19 @@ section.search .search-receiver .receiver input.form-control {
   padding-left: 60px;
 }
 
-section.search .search-receiver .receiver input.form-control::placeholder {
+section.search
+  .search-receiver
+  .receiver
+  input.form-control::-webkit-input-placeholder {
   font-weight: 400;
   font-size: 16px;
   line-height: 23px;
+  color: rgba(58, 61, 66, 0.4);
+}
+
+section.search .search-receiver .receiver input.form-control::-moz-placeholder {
+  font-weight: 400;
+  font-size: 16px;
   color: rgba(58, 61, 66, 0.4);
 }
 

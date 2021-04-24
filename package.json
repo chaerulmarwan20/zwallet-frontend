@@ -18,6 +18,7 @@
     "react-pin-input": "^1.0.1",
     "react-redux": "^7.2.3",
     "react-reveal": "^1.2.2",
+    "react-to-print": "^2.12.4",
     "recharts": "^2.0.9",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",

@@ -1,5 +1,3 @@
-import { combineReducers } from "redux";
-
 const initialState = {
   user: {},
   userTarget: [],
@@ -73,8 +71,4 @@ const userReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-const reducers = {
-  user: userReducer,
-};
-
-export default combineReducers(reducers);
+export default userReducer;

@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { findUser, deletePhoneNumber } from "../../actions";
+import { findUser, deletePhoneNumber } from "../../configs/redux/actions/user";
 import Col from "../../components/module/Col";
 
 export default function index() {

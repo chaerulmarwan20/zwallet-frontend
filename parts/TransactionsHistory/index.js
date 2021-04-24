@@ -1,16 +1,19 @@
 import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import axiosApiInstance from "../../helpers/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getHistory } from "../../configs/redux/actions/transaction";
 import Rupiah from "../../helpers/rupiah";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
 export default function index() {
-  const Url = process.env.api;
   const UrlImage = process.env.image;
 
-  const [history, setHistory] = useState([]);
+  const dispatch = useDispatch();
+
+  const { history } = useSelector((state) => state.transaction);
+
   const [order, setOrder] = useState("ASC");
   const [sort, setSort] = useState("id");
   const [page, setPage] = useState(1);
@@ -40,17 +43,11 @@ export default function index() {
   };
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
-    axiosApiInstance
-      .get(
-        `${Url}/transactions/${id}?order=${order}&sortBy=${sort}&page=${page}&perPage=${limit}`
-      )
-      .then((res) => {
-        const data = res.data.data;
-        setCurrentPage(res.data.currentPage);
-        setTotalPage(res.data.totalPage);
-        setPaginate(res.data.totalPage < 6 ? res.data.totalPage : 5);
-        setHistory(data);
+    dispatch(getHistory(order, sort, page, limit))
+      .then(({ currentPage, totalPage }) => {
+        setCurrentPage(currentPage);
+        setTotalPage(totalPage);
+        setPaginate(totalPage < 6 ? totalPage : 5);
         setEmpty(false);
       })
       .catch((err) => {

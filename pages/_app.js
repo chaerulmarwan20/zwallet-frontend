@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Provider } from "react-redux";
-import { useStore } from "../store";
+import { useStore } from "../configs/redux/store";
 import { GoogleFonts } from "next-google-fonts";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/globals.css";

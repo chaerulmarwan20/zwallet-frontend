@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { findUser, updateUser } from "../../actions";
+import { findUser, updateUser } from "../../configs/redux/actions/user";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";

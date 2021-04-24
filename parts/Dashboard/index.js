@@ -5,20 +5,26 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { BarChart, Bar, Cell, ResponsiveContainer } from "recharts";
-import { findUser } from "../../actions";
-import axiosApiInstance from "../../helpers/axios";
+import { findUser } from "../../configs/redux/actions/user";
+import {
+  getTransaction,
+  getIncome,
+  getExpense,
+} from "../../configs/redux/actions/transaction";
 import Rupiah from "../../helpers/rupiah";
 import Row from "../../components/module/Row";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
 export default function index() {
-  const Url = process.env.api;
   const UrlImage = process.env.image;
 
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
+  const { transaction, income, expense } = useSelector(
+    (state) => state.transaction
+  );
 
   const data = [
     {
@@ -65,10 +71,7 @@ export default function index() {
     },
   ];
 
-  const [history, setHistory] = useState([]);
   const [empty, setEmpty] = useState(false);
-  const [income, setIncome] = useState([]);
-  const [expense, setExpense] = useState([]);
 
   const router = useRouter();
 
@@ -97,12 +100,8 @@ export default function index() {
   }, []);
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
-    axiosApiInstance
-      .get(`${Url}/transactions/${id}?order=DESC`)
+    dispatch(getTransaction())
       .then((res) => {
-        const data = res.data.data;
-        setHistory(data);
         setEmpty(false);
       })
       .catch((err) => {
@@ -111,18 +110,13 @@ export default function index() {
   }, []);
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
-    axiosApiInstance
-      .get(`${Url}/transactions/income/${id}`)
-      .then((res) => {
-        const data = res.data.data[0];
-        setIncome(data);
-      })
+    dispatch(getIncome())
+      .then((res) => {})
       .catch((err) => {
-        if (err.response.data.message !== "Invalid signature") {
+        if (err.message !== "Invalid signature") {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -132,18 +126,13 @@ export default function index() {
   }, []);
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
-    axiosApiInstance
-      .get(`${Url}/transactions/expense/${id}`)
-      .then((res) => {
-        const data = res.data.data[0];
-        setExpense(data);
-      })
+    dispatch(getExpense())
+      .then((res) => {})
       .catch((err) => {
-        if (err.response.data.message !== "Invalid signature") {
+        if (err.message !== "Invalid signature") {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -218,18 +207,18 @@ export default function index() {
                 <p className="mt-2">{Rupiah(Number(expense.expense))}</p>
               </div>
             </div>
-            {history[0] !== undefined && (
+            {transaction[0] !== undefined && (
               <p
                 className={`text-center mt-4 ${
-                  history[0].type === "Transfer" ? "expense" : "income"
+                  transaction[0].type === "Transfer" ? "expense" : "income"
                 }`}
               >
                 {" "}
-                {history[0].type === "Transfer"
-                  ? `-${Rupiah(Number(history[0].amount))}`
-                  : history[0].type === "Receive"
-                  ? `+${Rupiah(Number(history[0].amount))}`
-                  : `+${Rupiah(Number(history[0].amount))}`}
+                {transaction[0].type === "Transfer"
+                  ? `-${Rupiah(Number(transaction[0].amount))}`
+                  : transaction[0].type === "Receive"
+                  ? `+${Rupiah(Number(transaction[0].amount))}`
+                  : `+${Rupiah(Number(transaction[0].amount))}`}
               </p>
             )}
             <div className="mt-3">
@@ -257,7 +246,7 @@ export default function index() {
                 <a className="mt-1">See all</a>
               </Link>
             </div>
-            {history.map((item, index) => {
+            {transaction.map((item, index) => {
               return (
                 <div
                   className="transaction d-flex justify-content-between align-items-center mt-4"

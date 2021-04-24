@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import PinInput from "react-pin-input";
 import Swal from "sweetalert2";
-import { creatPin } from "../../actions";
+import { creatPin } from "../../configs/redux/actions/user";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";

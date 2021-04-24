@@ -3,7 +3,12 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import Swal from "sweetalert2";
-import { findUser, getUser, searchUser } from "../../actions";
+import {
+  findUser,
+  getUser,
+  searchUser,
+} from "../../configs/redux/actions/user";
+import { createDetail } from "../../configs/redux/actions/transaction";
 import axiosApiInstance from "../../helpers/axios";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
@@ -97,16 +102,16 @@ export default function index() {
       });
     } else {
       const id = localStorage.getItem("id");
-      axiosApiInstance
-        .post(`${Url}/transactions/details`, {
-          idUser: id,
-          idReceiver: idUser,
-          amount: Number(result),
-          balanceLeft: userCredit.credit - Number(result),
-          notes: data.notes,
-        })
-        .then((res) => {
-          const id = res.data.data[0].id;
+      dispatch(
+        createDetail(
+          id,
+          idUser,
+          Number(result),
+          userCredit.credit - Number(result),
+          data.notes
+        )
+      )
+        .then(({ id, message }) => {
           setShowResult(false);
           setAmount("");
           setData({
@@ -115,7 +120,7 @@ export default function index() {
           setIdUser(null);
           Swal.fire({
             title: "Success!",
-            text: res.data.message,
+            text: message,
             icon: "success",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -130,7 +135,7 @@ export default function index() {
         .catch((err) => {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",

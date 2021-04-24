@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosApiInstance from "./helpers/axios";
+import axiosApiInstance from "../../../helpers/axios";
 
 const signUpRequest = () => {
   return { type: "SIGN_UP_REQUEST" };

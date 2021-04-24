@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { updatePassword } from "../../actions";
+import { updatePassword } from "../../configs/redux/actions/user";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";

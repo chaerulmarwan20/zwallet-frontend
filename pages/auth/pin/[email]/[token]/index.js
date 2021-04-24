@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { verify } from "../../../../../actions";
+import { verify } from "../../../../../configs/redux/actions/user";
 import Main from "../../../../../parts/Pin";
 
 export default function index() {

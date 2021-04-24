@@ -1,12 +1,13 @@
 import { React, useState } from "react";
-import axiosApiInstance from "../../helpers/axios";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { topUp } from "../../configs/redux/actions/transaction";
+import Rupiah from "../../helpers/rupiah";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
-import Rupiah from "../../helpers/rupiah";
 
 export default function index({ payment }) {
-  const Url = process.env.api;
+  const dispatch = useDispatch();
 
   const [idPayment, setIdPayment] = useState(null);
   const [amount, setAmount] = useState(null);
@@ -31,16 +32,11 @@ export default function index({ payment }) {
     } else {
       setIdPayment(null);
       setAmount(null);
-      const id = localStorage.getItem("id");
-      axiosApiInstance
-        .put(`${Url}/transactions/top-up/${id}`, {
-          idPayment: idPayment,
-          amount: amount,
-        })
+      dispatch(topUp(idPayment, amount))
         .then((res) => {
           Swal.fire({
             title: "Success!",
-            text: res.data.message,
+            text: res,
             icon: "success",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
@@ -49,7 +45,7 @@ export default function index({ payment }) {
         .catch((err) => {
           Swal.fire({
             title: "Error!",
-            text: err.response.data.message,
+            text: err.message,
             icon: "error",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",

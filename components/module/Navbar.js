@@ -2,20 +2,19 @@ import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { findUser } from "../../actions";
-import axiosApiInstance from "../../helpers/axios";
 import Swal from "sweetalert2";
+import { findUser } from "../../configs/redux/actions/user";
+import { getTransaction } from "../../configs/redux/actions/transaction";
 import Rupiah from "../../helpers/rupiah";
 
 export default function Navbar() {
-  const Url = process.env.api;
   const UrlImage = process.env.image;
 
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
+  const { transaction } = useSelector((state) => state.transaction);
 
-  const [history, setHistory] = useState([]);
   const [empty, setEmpty] = useState(false);
 
   const [notification, setNotification] = useState(false);
@@ -45,12 +44,8 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
-    axiosApiInstance
-      .get(`${Url}/transactions/${id}?order=DESC`)
+    dispatch(getTransaction())
       .then((res) => {
-        const data = res.data.data;
-        setHistory(data);
         setEmpty(false);
       })
       .catch((err) => {
@@ -117,7 +112,7 @@ export default function Navbar() {
             <div className="col">
               <div className="notification p-4">
                 {/* <h3>Today</h3> */}
-                {history.map((item, index) => {
+                {transaction.map((item, index) => {
                   return (
                     <div className="history p-3 mt-4">
                       <div className="d-flex align-items-center">

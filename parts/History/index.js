@@ -1,15 +1,18 @@
 import { React, useState, useEffect } from "react";
 import Image from "next/image";
-import axiosApiInstance from "../../helpers/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getHistory } from "../../configs/redux/actions/transaction";
 import Rupiah from "../../helpers/rupiah";
 import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
 export default function index() {
-  const Url = process.env.api;
   const UrlImage = process.env.image;
 
-  const [history, setHistory] = useState([]);
+  const dispatch = useDispatch();
+
+  const { history } = useSelector((state) => state.transaction);
+
   const [order, setOrder] = useState("ASC");
   const [sort, setSort] = useState("id");
   const [page, setPage] = useState(1);
@@ -39,17 +42,11 @@ export default function index() {
   };
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
-    axiosApiInstance
-      .get(
-        `${Url}/transactions/${id}?order=${order}&sortBy=${sort}&page=${page}&perPage=${limit}`
-      )
-      .then((res) => {
-        const data = res.data.data;
-        setCurrentPage(res.data.currentPage);
-        setTotalPage(res.data.totalPage);
-        setPaginate(res.data.totalPage < 6 ? res.data.totalPage : 5);
-        setHistory(data);
+    dispatch(getHistory(order, sort, page, limit))
+      .then(({ currentPage, totalPage }) => {
+        setCurrentPage(currentPage);
+        setTotalPage(totalPage);
+        setPaginate(totalPage < 6 ? totalPage : 5);
         setEmpty(false);
       })
       .catch((err) => {
@@ -63,7 +60,9 @@ export default function index() {
         <h1>Transaction History</h1>
         {/* <p className="time mt-3">This Week</p> */}
         {empty === true && (
-          <p className="empty text-center mt-5">You have no transactions</p>
+          <p className="empty text-center mt-5">
+            You don't have any transactions.
+          </p>
         )}
         {history.map((item, index) => {
           return (
