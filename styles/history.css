@@ -124,36 +124,17 @@ section.history .transaction .btn-order.active {
   background-color: #6379f4;
 }
 
-section.history .transaction .btn-filter {
+section.history .transaction select.custom-select {
   width: 200px;
   height: 50px;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 25px;
-  color: #6379f4;
-}
-
-section.history .transaction .dropdown-menu {
-  background-color: #ffffff;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-}
-
-section.history .transaction .dropdown-item {
-  font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 25px;
   color: #6379f4;
   cursor: pointer;
-}
-
-section.history .transaction .dropdown-item:active,
-section.history .transaction .dropdown-item:hover {
-  background-color: #6379f4;
-  color: #ffffff;
 }
 
 section.history .transaction ul.pagination-custom {

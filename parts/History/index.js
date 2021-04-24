@@ -22,19 +22,19 @@ export default function index() {
   const [empty, setEmpty] = useState(false);
   const [paginate, setPaginate] = useState(1);
 
-  const handleClickSort = (params) => {
-    setSort(params);
+  const handleChangeSort = (event) => {
+    setSort(event.target.value);
   };
 
   const handleClickOrder = (params) => {
     setOrder(params);
   };
 
-  const handleClickLimit = (params) => {
+  const handleChangeLimit = (event) => {
     if (page > 1) {
       setPage(1);
     }
-    setLimit(params);
+    setLimit(event.target.value);
   };
 
   const handleClickPaginate = (params) => {
@@ -176,76 +176,20 @@ export default function index() {
                   alt="Order"
                 />
               </Button>
-              <div className="dropdown mr-3">
-                <button
-                  className="btn btn-filter dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Sort by {sort}
-                </button>
-                <div className="dropdown-menu">
-                  <p
-                    className="dropdown-item"
-                    onClick={() => handleClickSort("id")}
-                  >
-                    Id
-                  </p>
-                  <p
-                    className="dropdown-item"
-                    onClick={() => handleClickSort("fullName")}
-                  >
-                    Full Name
-                  </p>
-                  <p
-                    className="dropdown-item"
-                    onClick={() => handleClickSort("amount")}
-                  >
-                    Amount
-                  </p>
-                  <p
-                    className="dropdown-item"
-                    onClick={() => handleClickSort("type")}
-                  >
-                    Type
-                  </p>
-                </div>
-              </div>
-              <div className="dropdown">
-                <button
-                  className="btn btn-filter dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Limit {limit}
-                </button>
-                <div className="dropdown-menu">
-                  <p
-                    className="dropdown-item"
-                    onClick={() => handleClickLimit(5)}
-                  >
-                    5
-                  </p>
-                  <p
-                    className="dropdown-item"
-                    onClick={() => handleClickLimit(10)}
-                  >
-                    10
-                  </p>
-                  <p
-                    className="dropdown-item"
-                    onClick={() => handleClickLimit(15)}
-                  >
-                    15
-                  </p>
-                </div>
-              </div>
+              <select
+                className="custom-select mr-3"
+                onChange={handleChangeSort}
+              >
+                <option value="id">Sort by Id</option>
+                <option value="fullName">Sort by Name</option>
+                <option value="amount">Sort by Amount</option>
+                <option value="type">Sort by Type</option>
+              </select>
+              <select className="custom-select" onChange={handleChangeLimit}>
+                <option value="5">Limit 5</option>
+                <option value="10">Limit 10</option>
+                <option value="15">Limit 15</option>
+              </select>
             </div>
           </>
         )}
