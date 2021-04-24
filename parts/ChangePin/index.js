@@ -8,8 +8,6 @@ import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
 export default function index() {
-  const Url = process.env.api;
-
   const dispatch = useDispatch();
 
   const [showSuccess, setShowSuccess] = useState(false);
@@ -27,11 +25,13 @@ export default function index() {
   };
 
   let onClear = useRef(null);
+  let onClean = useRef(null);
 
   const handleCheck = (event) => {
     event.preventDefault();
-    const pin = data.value;
     onClear.clear();
+    onClean.clear();
+    const pin = data.value;
     dispatch(checkPin(pin))
       .then((res) => {
         setData({
@@ -64,8 +64,9 @@ export default function index() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const pin = data.value;
     onClear.clear();
+    onClean.clear();
+    const pin = data.value;
     dispatch(updatePin(pin))
       .then((res) => {
         setData({
@@ -97,7 +98,7 @@ export default function index() {
   };
 
   return (
-    <Col className="col-md-9">
+    <Col className="col-lg-8 col-xl-9">
       <div className="details p-5">
         <h1>Change PIN</h1>
         {showSuccess === false && (
@@ -113,7 +114,7 @@ export default function index() {
         )}
         <form>
           <Row>
-            <Col className="col-md-12 pr-0 pl-3">
+            <Col className="col d-none d-md-block pr-0 pl-3">
               <PinInput
                 length={6}
                 focus
@@ -137,7 +138,37 @@ export default function index() {
                   boxSizing: "border-box",
                   boxShadow: "0px 10px 75px rgba(147, 147, 147, 0.1)",
                   color: "#3a3d42",
-                  marginRight: "20px",
+                  marginRight: "17px",
+                }}
+                inputFocusStyle={{ border: "1.5px solid #6379f4" }}
+                onComplete={() => handleComplete()}
+              />
+            </Col>
+            <Col className="col d-md-none">
+              <PinInput
+                length={6}
+                focus
+                secret
+                type="numeric"
+                onChange={handleFormChange}
+                ref={(p) => (onClean = p)}
+                inputStyle={{
+                  fontWeight: 700,
+                  fontSize: "20px",
+                  lineHeight: "31px",
+                  textAlign: "center",
+                  paddingBottom: "0px",
+                  width: "35px",
+                  height: "45px",
+                  borderRadius: "10px",
+                  backgroundColor: "#ffffff",
+                  border: status
+                    ? "1.5px solid #6379f4"
+                    : "1px solid rgba(169, 169, 169, 0.6)",
+                  boxSizing: "border-box",
+                  boxShadow: "0px 10px 75px rgba(147, 147, 147, 0.1)",
+                  color: "#3a3d42",
+                  marginRight: "4px",
                 }}
                 inputFocusStyle={{ border: "1.5px solid #6379f4" }}
                 onComplete={() => handleComplete()}

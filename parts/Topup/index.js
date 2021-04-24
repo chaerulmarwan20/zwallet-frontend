@@ -55,7 +55,7 @@ export default function index({ payment }) {
   };
 
   return (
-    <Col className="col-md-9">
+    <Col className="col-lg-8 col-xl-9">
       <div className="step-top-up p-5">
         <h1>Top Up</h1>
         <div
@@ -125,7 +125,7 @@ export default function index({ payment }) {
             className="btn btn-process"
             onClick={() => handleClickProcess()}
           >
-            Process
+            Top Up Now
           </Button>
         </div>
       </div>

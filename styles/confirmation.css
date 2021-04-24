@@ -52,10 +52,10 @@ section.confirmation .transfer h1 {
 }
 
 section.confirmation .transfer .users {
-  height: 110px;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  overflow-x: auto;
 }
 
 section.confirmation .transfer .users img.user {
@@ -77,10 +77,10 @@ section.confirmation .transfer .users .profile span.number {
 }
 
 section.confirmation .transfer .details {
-  height: 92px;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  overflow-x: auto;
 }
 
 section.confirmation .transfer .details span {
@@ -180,4 +180,11 @@ section.confirmation .modal-content .modal-body input.form-control.pin.active {
 
 section.confirmation .modal-content .modal-footer {
   border: 0;
+}
+
+@media screen and (max-width: 767px) {
+  section.confirmation .modal-content .modal-footer .btn-continue {
+    width: 150px;
+    height: 55px;
+  }
 }

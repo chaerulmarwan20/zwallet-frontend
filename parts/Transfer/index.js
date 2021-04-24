@@ -173,7 +173,7 @@ export default function index() {
   }, []);
 
   return (
-    <Col className="col-md-9">
+    <Col className="col-lg-8 col-xl-9">
       <div className="search-receiver p-5">
         {showResult === false && (
           <>

@@ -13,7 +13,7 @@ export default function Layout(props) {
         <title>Zwallet | {props.title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Navbar active={props.active} />
       <section className={props.className}>
         <Container>
           <Row>

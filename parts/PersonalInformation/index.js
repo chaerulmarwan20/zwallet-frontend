@@ -4,7 +4,7 @@ import Col from "../../components/module/Col";
 
 export default function index({ firstName, lastName, email, phone }) {
   return (
-    <Col className="col-md-9">
+    <Col className="col-lg-8 col-xl-9">
       <div className="information p-5">
         <h1>Personal Information</h1>
         <p className="mt-3">
@@ -12,19 +12,19 @@ export default function index({ firstName, lastName, email, phone }) {
           you want to make changes on <br /> your information, contact our
           support.
         </p>
-        <div className="details py-3 pl-3 mt-4">
+        <div className="details pt-3 pb-1 pl-3 mt-4">
           <span>First Name</span>
           <p className="mt-2">
             {firstName === "firstName" ? "your first name" : firstName}
           </p>
         </div>
-        <div className="details py-3 pl-3 mt-3">
+        <div className="details pt-3 pb-1 pl-3 mt-3">
           <span>Last Name</span>
           <p className="mt-2">
             {lastName === "lastName" ? "your last name" : lastName}
           </p>
         </div>
-        <div className="details py-3 pl-3 mt-3">
+        <div className="details pt-3 pb-1 pl-3 mt-3">
           <span>Verified E-mail</span>
           <p className="mt-2">{email}</p>
         </div>

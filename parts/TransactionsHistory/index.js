@@ -56,7 +56,7 @@ export default function index() {
   }, [order, sort, page, limit]);
 
   return (
-    <Col className="col-md-9">
+    <Col className="col-lg-8 col-xl-9">
       <div className="transaction p-5">
         <h1>Transaction History</h1>
         {/* <p className="time mt-3">This Week</p> */}
@@ -141,57 +141,64 @@ export default function index() {
                 })}
               </ul>
             </div>
-            <div className="d-flex justify-content-center mt-3">
-              <Button
-                type="button"
-                className={`btn btn-order mr-3 d-flex justify-content-center align-items-center ${
-                  order === "ASC" ? "active" : ""
-                }`}
-                onClick={() => handleClickOrder("ASC")}
-              >
-                <Image
-                  src={`${
-                    order === "ASC"
-                      ? "/images/arrow-left-white-2.png"
-                      : "/images/arrow-left-red.png"
+            <div className="d-flex flex-column flex-md-row justify-content-md-center align-items-center mt-3">
+              <div className="btn-container d-flex">
+                <Button
+                  type="button"
+                  className={`btn btn-order mr-3 d-flex justify-content-center align-items-center ${
+                    order === "ASC" ? "active" : ""
                   }`}
-                  width={30}
-                  height={30}
-                  alt="Order"
-                />
-              </Button>
-              <Button
-                type="button"
-                className={`btn btn-order mr-3 d-flex justify-content-center align-items-center ${
-                  order === "DESC" ? "active" : ""
-                }`}
-                onClick={() => handleClickOrder("DESC")}
-              >
-                <Image
-                  src={`${
-                    order === "DESC"
-                      ? "/images/arrow-left-white.png"
-                      : "/images/arrow-left-green.png"
+                  onClick={() => handleClickOrder("ASC")}
+                >
+                  <Image
+                    src={`${
+                      order === "ASC"
+                        ? "/images/arrow-left-white-2.png"
+                        : "/images/arrow-left-red.png"
+                    }`}
+                    width={30}
+                    height={30}
+                    alt="Order"
+                  />
+                </Button>
+                <Button
+                  type="button"
+                  className={`btn btn-order mr-3 d-flex justify-content-center align-items-center ${
+                    order === "DESC" ? "active" : ""
                   }`}
-                  width={30}
-                  height={30}
-                  alt="Order"
-                />
-              </Button>
-              <select
-                className="custom-select mr-3"
-                onChange={handleChangeSort}
-              >
-                <option value="id">Sort by Id</option>
-                <option value="fullName">Sort by Name</option>
-                <option value="amount">Sort by Amount</option>
-                <option value="type">Sort by Type</option>
-              </select>
-              <select className="custom-select" onChange={handleChangeLimit}>
-                <option value="5">Limit 5</option>
-                <option value="10">Limit 10</option>
-                <option value="15">Limit 15</option>
-              </select>
+                  onClick={() => handleClickOrder("DESC")}
+                >
+                  <Image
+                    src={`${
+                      order === "DESC"
+                        ? "/images/arrow-left-white.png"
+                        : "/images/arrow-left-green.png"
+                    }`}
+                    width={30}
+                    height={30}
+                    alt="Order"
+                  />
+                </Button>
+              </div>
+              <div className="select-container d-flex flex-column flex-md-row mt-3 mt-md-0">
+                <select
+                  className="custom-select mr-3"
+                  onChange={handleChangeSort}
+                >
+                  <option value="id">Sort by Id</option>
+                  <option value="fullName">Sort by Name</option>
+                  <option value="amount">Sort by Amount</option>
+                  <option value="type">Sort by Type</option>
+                </select>
+                <select
+                  className="custom-select mt-3 mt-md-0"
+                  onChange={handleChangeLimit}
+                >
+                  <option value="5">Limit 5</option>
+                  <option value="10">Limit 10</option>
+                  <option value="15">Limit 15</option>
+                </select>
+              </div>
             </div>
           </>
         )}

@@ -20,7 +20,7 @@ export default function index({ details }) {
   if (router.isFallback) {
     return (
       <Layout title="History" className="status" active="dashboard">
-        <Col className="col-md-9">
+        <Col className="col-lg-8 col-xl-9">
           <div className="transfer d-flex flex-column justify-content-between p-5">
             <div className="failed d-flex flex-column justify-content-around align-items-center">
               <h1 className="transfer-status mt-5">Please wait...</h1>
@@ -36,7 +36,7 @@ export default function index({ details }) {
 
   return details === null ? (
     <Layout title="History" className="status" active="dashboard">
-      <Col className="col-md-9">
+      <Col className="col-lg-8 col-xl-9">
         <div className="transfer d-flex flex-column justify-content-between p-5">
           <div className="failed text-center">
             <Image
@@ -66,7 +66,7 @@ export default function index({ details }) {
     </Layout>
   ) : (
     <Layout title="History" className="status" active="dashboard">
-      <Col className="col-md-9">
+      <Col className="col-lg-8 col-xl-9">
         <div className="transfer p-5">
           <div className="success text-center">
             <Image
@@ -78,23 +78,23 @@ export default function index({ details }) {
             <h1 className="transfer-status mt-3">{`${details.type} Success`}</h1>
           </div>
           {details.type === "Top Up" && (
-            <div className="details py-3 pl-3 mt-5">
+            <div className="details pt-3 pb-1 pl-3 mt-5">
               <span>Payment Method</span>
               <p className="mt-2">{details.fullName}</p>
             </div>
           )}
-          <div className="details py-3 pl-3 mt-3">
+          <div className="details pt-3 pb-1 pl-3 mt-3">
             <span>Amount</span>
             <p className="mt-2">{Rupiah(Number(details.amount))}</p>
           </div>
-          <div className="details py-3 pl-3 mt-3">
+          <div className="details pt-3 pb-1 pl-3 mt-3">
             <span>Date & Time</span>
             {details.date !== undefined && (
               <p className="mt-2">{Date(details.date)}</p>
             )}
           </div>
           {details.type !== "Top Up" && (
-            <div className="details py-3 pl-3 mt-3">
+            <div className="details pt-3 pb-1 pl-3 mt-3">
               <span>Notes</span>
               <p className="mt-2">{details.notes}</p>
             </div>
@@ -106,7 +106,7 @@ export default function index({ details }) {
               ? "Transfer To"
               : `Transfered From`
           }`}</h1>
-          <div className="users d-flex align-items-center py-2 pl-3 mt-4">
+          <div className="users d-flex align-items-center py-3 pl-3 mt-4">
             <div className="image">
               {details.image !== undefined && (
                 <img
@@ -118,7 +118,7 @@ export default function index({ details }) {
                 />
               )}
             </div>
-            <div className="profile d-flex flex-column ml-3">
+            <div className="profile d-flex flex-column ml-3 pr-1">
               <span className="name">{details.fullName}</span>
               {details.type !== "Top Up" && (
                 <span className="number mt-1">{details.phoneNumber}</span>

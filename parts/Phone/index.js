@@ -47,14 +47,14 @@ export default function index() {
   };
 
   return (
-    <Col className="col-md-9">
+    <Col className="col-lg-8 col-xl-9">
       <div className="details p-5">
         <h1>Add Phone Number</h1>
         <p className="mt-3">
           Add at least one phone number for the transfer <br /> ID so you can
           start transfering your money to <br /> another user.
         </p>
-        <form className="mt-5">
+        <form className="mt-5 d-flex flex-column align-items-center">
           <div className="form-group phone">
             <img
               src={`${

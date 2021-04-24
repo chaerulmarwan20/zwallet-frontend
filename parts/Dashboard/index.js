@@ -142,17 +142,21 @@ export default function index() {
   }, []);
 
   return (
-    <Col className="col-md-9">
-      <div className="balance p-4 d-flex justify-content-between">
+    <Col className="col-lg-8 col-xl-9">
+      <div className="balance p-4 d-flex flex-column flex-md-row justify-content-md-between">
         <div className="info">
           <p>Balance</p>
           <h1>{Rupiah(Number(user.credit))}</h1>
-          <span>{user.phoneNumber}</span>
+          <span>
+            {user.phoneNumber === "000000000000"
+              ? "your phone number"
+              : user.phoneNumber}
+          </span>
         </div>
-        <div className="button-container">
+        <div className="button-container mt-3 mt-md-0 d-flex d-md-block">
           <Button
             type="button"
-            className="btn btn-balance d-flex justify-content-center align-items-center"
+            className="btn btn-balance d-flex justify-content-center align-items-center mr-3 mr-md-0"
             onClick={() => handleClickTransfer()}
           >
             <Image
@@ -165,7 +169,7 @@ export default function index() {
           </Button>
           <Button
             type="button"
-            className="btn btn-balance d-flex justify-content-center align-items-center mt-3"
+            className="btn btn-balance d-flex justify-content-center align-items-center mt-0 mt-md-3"
             onClick={() => handleClickTopUp()}
           >
             <Image
@@ -178,8 +182,8 @@ export default function index() {
           </Button>
         </div>
       </div>
-      <Row className="mt-3">
-        <Col className="col-md-7">
+      <Row className="mt-4 mt-xl-3">
+        <Col className="col-12 col-xl-7">
           <div className="charts p-4">
             <div className="d-flex justify-content-between">
               <div className="income">
@@ -238,7 +242,7 @@ export default function index() {
             </div>
           </div>
         </Col>
-        <Col className="col-md-5">
+        <Col className="col-12 col-xl-5 mt-4 mt-xl-0">
           <div className="history p-4">
             <div className="d-flex justify-content-between">
               <h2>Transaction History</h2>

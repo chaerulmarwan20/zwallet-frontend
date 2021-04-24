@@ -77,7 +77,7 @@ export default function index() {
   };
 
   return (
-    <Col className="col-md-9">
+    <Col className="col-lg-8 col-xl-9">
       <div className="details p-5">
         <h1>Change Password</h1>
         <p className="mt-3">

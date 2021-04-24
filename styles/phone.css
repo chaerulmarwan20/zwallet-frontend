@@ -59,17 +59,6 @@ section.phone .details p {
   color: #7a7886;
 }
 
-section.phone .details form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-section.phone .details .form-group {
-  width: 431px;
-}
-
 section.phone .details .phone {
   position: relative;
 }
@@ -147,4 +136,20 @@ section.phone .details button.btn-phone.active:hover {
   border: 2px solid #6379f4;
   color: #6379f4;
   background-color: #ffffff;
+}
+
+@media screen and (max-width: 767px) {
+  section.phone .details {
+    height: 450px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  section.phone .details .phone input.form-control {
+    width: 300px;
+  }
+
+  section.phone .details button.btn-phone {
+    width: 300px;
+  }
 }

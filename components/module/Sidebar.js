@@ -1,14 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import Col from "./Col";
 
 export default function Sidebar(props) {
-  const Url = process.env.api;
-
   const router = useRouter();
 
   let id;
@@ -29,36 +26,22 @@ export default function Sidebar(props) {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .get(`${Url}/users/auth/logout`)
-          .then((res) => {
-            localStorage.clear();
-            Swal.fire({
-              title: "Logout!",
-              text: res.data.message,
-              icon: "success",
-              confirmButtonText: "Ok",
-              confirmButtonColor: "#6379F4",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                router.push("/");
-              } else {
-                router.push("/");
-              }
-            });
-          })
-          .catch((err) => {
-            Swal.fire({
-              title: "Error!",
-              text: err.response.data.message,
-              icon: "error",
-              confirmButtonText: "Ok",
-              confirmButtonColor: "#6379F4",
-            });
-          });
+        localStorage.clear();
+        Swal.fire({
+          title: "Logout",
+          text: "Successfull.",
+          icon: "success",
+          confirmButtonColor: "#6379F4",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/");
+          } else {
+            router.push("/");
+          }
+        });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
-          title: "Logout!",
+          title: "Logout",
           text: "Cancelled :)",
           icon: "info",
           confirmButtonColor: "#6379F4",
@@ -68,7 +51,7 @@ export default function Sidebar(props) {
   };
 
   return (
-    <Col className="col-md-3">
+    <Col className="col-lg-4 col-xl-3 d-none d-lg-block">
       <div className="sidebar d-flex flex-column justify-content-between p-5">
         <div className="main-menu d-flex flex-column justify-content-between">
           <div

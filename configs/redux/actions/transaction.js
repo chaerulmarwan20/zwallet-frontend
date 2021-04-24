@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosApiInstance from "../../../helpers/axios";
 
 export const getTransaction = () => (dispatch) => {

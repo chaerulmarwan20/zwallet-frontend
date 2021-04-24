@@ -54,7 +54,7 @@ export default function index(props) {
   }, [props.id]);
 
   return (
-    <Col className="col-md-9">
+    <Col className="col-lg-8 col-xl-9">
       <div className="transfer p-5">
         {showFailed === true && (
           <div className="failed text-center">
@@ -81,7 +81,7 @@ export default function index(props) {
           fullName={detail.fullName}
           phoneNumber={detail.phoneNumber}
         />
-        <div className="d-flex justify-content-end button-container">
+        <div className="d-flex flex-column flex-md-row align-items-center justify-content-md-end button-container">
           <Button
             type="button"
             className="btn btn-share d-flex justify-content-center align-items-center mr-3"
@@ -93,7 +93,7 @@ export default function index(props) {
             trigger={() => (
               <Button
                 type="button"
-                className="btn btn-download d-flex justify-content-center align-items-center mr-3"
+                className="btn btn-download d-flex justify-content-center align-items-center mr-0 mr-md-3 mt-3 mt-md-0"
               >
                 <Image
                   src="/images/download-2.png"
@@ -108,13 +108,13 @@ export default function index(props) {
           />
           <Button
             type="button"
-            className="btn btn-back"
+            className="btn btn-back mt-3 mt-md-0"
             onClick={() => handleClickHome()}
           >
             Back to Home
           </Button>
           {showFailed === true && (
-            <Button type="button" className="btn btn-try">
+            <Button type="button" className="btn btn-try mt-3 mt-md-0">
               Try Again
             </Button>
           )}

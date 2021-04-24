@@ -204,3 +204,13 @@ section.profile .modal-content .modal-body .phone img.phone-img {
 section.profile .modal-content .modal-footer {
   border: 0;
 }
+
+@media screen and (max-width: 575px) {
+  section.profile .option {
+    width: 300px;
+  }
+
+  section.profile .modal-content .modal-body input.form-control {
+    width: 300px;
+  }
+}

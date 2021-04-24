@@ -106,7 +106,7 @@ export default function index({ image, name, phone }) {
       if (result.isConfirmed) {
         localStorage.clear();
         Swal.fire({
-          title: "Logout!",
+          title: "Logout",
           text: "Successfull.",
           icon: "success",
           confirmButtonColor: "#6379F4",
@@ -119,7 +119,7 @@ export default function index({ image, name, phone }) {
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
-          title: "Logout!",
+          title: "Logout",
           text: "Cancelled :)",
           icon: "info",
           confirmButtonColor: "#6379F4",
@@ -162,7 +162,7 @@ export default function index({ image, name, phone }) {
 
   return (
     <>
-      <Col className="col-md-9">
+      <Col className="col-lg-8 col-xl-9">
         <div className="details p-5">
           <div className="d-flex flex-column justify-content-center align-items-center">
             <div>

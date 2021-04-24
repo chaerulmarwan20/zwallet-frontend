@@ -38,11 +38,13 @@ export default function index(props) {
   };
 
   let onClear = useRef(null);
+  let onClean = useRef(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const pin = data.value;
     onClear.clear();
+    onClean.clear();
     dispatch(checkPin(pin))
       .then((res) => {
         dispatch(
@@ -105,10 +107,10 @@ export default function index(props) {
 
   return (
     <>
-      <Col className="col-md-9">
+      <Col className="col-lg-8 col-xl-9">
         <div className="transfer p-5">
           <h1>Transfer To</h1>
-          <div className="users d-flex align-items-center py-2 pl-3 mt-4">
+          <div className="users d-flex align-items-center py-3 pl-3 mt-4">
             <div className="image">
               {detail.image !== undefined && (
                 <img
@@ -120,27 +122,27 @@ export default function index(props) {
                 />
               )}
             </div>
-            <div className="profile d-flex flex-column ml-3">
+            <div className="profile d-flex flex-column ml-3 pr-1">
               <span className="name">{detail.fullName}</span>
               <span className="number mt-1">{detail.phoneNumber}</span>
             </div>
           </div>
           <h1 className="mt-4">Details</h1>
-          <div className="details py-3 pl-3 mt-3">
+          <div className="details pt-3 pb-1 pl-3 mt-3">
             <span>Amount</span>
             <p className="mt-2">{Rupiah(Number(detail.amount))}</p>
           </div>
-          <div className="details py-3 pl-3 mt-3">
+          <div className="details pt-3 pb-1 pl-3 mt-3">
             <span>Balance Left</span>
             <p className="mt-2">{Rupiah(Number(detail.balanceLeft))}</p>
           </div>
-          <div className="details py-3 pl-3 mt-3">
+          <div className="details pt-3 pb-1 pl-3 mt-3">
             <span>Date & Time</span>
             {detail.date !== undefined && (
               <p className="mt-2">{Date(detail.date)}</p>
             )}
           </div>
-          <div className="details py-3 pl-3 mt-3">
+          <div className="details pt-3 pb-1 pl-3 mt-3">
             <span>Notes</span>
             <p className="mt-2">{detail.notes}</p>
           </div>
@@ -174,7 +176,7 @@ export default function index(props) {
               </p>
               <form className="mt-5">
                 <Row>
-                  <Col className="col">
+                  <Col className="col d-none d-md-block">
                     <PinInput
                       length={6}
                       focus
@@ -204,10 +206,40 @@ export default function index(props) {
                       onComplete={() => handleComplete()}
                     />
                   </Col>
+                  <Col className="col d-md-none">
+                    <PinInput
+                      length={6}
+                      focus
+                      secret
+                      type="numeric"
+                      onChange={handleFormChange}
+                      ref={(p) => (onClean = p)}
+                      inputStyle={{
+                        fontWeight: 700,
+                        fontSize: "20px",
+                        lineHeight: "31px",
+                        textAlign: "center",
+                        paddingBottom: "0px",
+                        width: "40px",
+                        height: "50px",
+                        borderRadius: "10px",
+                        backgroundColor: "#ffffff",
+                        border: status
+                          ? "1.5px solid #6379f4"
+                          : "1px solid rgba(169, 169, 169, 0.6)",
+                        boxSizing: "border-box",
+                        boxShadow: "0px 10px 75px rgba(147, 147, 147, 0.1)",
+                        color: "#3a3d42",
+                        marginRight: "6px",
+                      }}
+                      inputFocusStyle={{ border: "1.5px solid #6379f4" }}
+                      onComplete={() => handleComplete()}
+                    />
+                  </Col>
                 </Row>
               </form>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer d-flex justify-content-start justify-content-md-end">
               <Button
                 type="button"
                 className={`btn btn-continue ${status ? "active" : ""}`}

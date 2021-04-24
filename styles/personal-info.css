@@ -59,10 +59,10 @@ section.personal .information p {
 }
 
 section.personal .information .details {
-  height: 92px;
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  overflow-x: auto;
 }
 
 section.personal .information .details span {
@@ -90,4 +90,11 @@ section.personal .information .details a {
 section.personal .information .details a:hover {
   text-decoration: none;
   opacity: 0.6;
+}
+
+@media screen and (max-width: 575px) {
+  section.personal .information .details p {
+    font-size: 20px;
+    line-height: 28px;
+  }
 }

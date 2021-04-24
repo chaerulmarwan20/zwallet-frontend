@@ -89,6 +89,7 @@ section.history .transaction .users div.price p.transfer {
   font-size: 16px;
   line-height: 22px;
   color: #1ec15f;
+  white-space: nowrap;
 }
 
 section.history .transaction .users div.price p.left {
@@ -96,6 +97,7 @@ section.history .transaction .users div.price p.left {
   font-size: 16px;
   line-height: 22px;
   color: #ff5b37;
+  white-space: nowrap;
 }
 
 section.history .transaction .users a {
@@ -135,6 +137,13 @@ section.history .transaction select.custom-select {
   line-height: 25px;
   color: #6379f4;
   cursor: pointer;
+}
+
+section.history .transaction select.custom-select option {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 25px;
+  color: #6379f4;
 }
 
 section.history .transaction ul.pagination-custom {

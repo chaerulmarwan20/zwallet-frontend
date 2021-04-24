@@ -7,7 +7,7 @@ import { findUser } from "../../configs/redux/actions/user";
 import { getTransaction } from "../../configs/redux/actions/transaction";
 import Rupiah from "../../helpers/rupiah";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const UrlImage = process.env.image;
 
   const dispatch = useDispatch();
@@ -25,6 +25,43 @@ export default function Navbar() {
     } else {
       setNotification(false);
     }
+  };
+
+  const handleClickLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be removed from this page!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, logout!",
+      confirmButtonColor: "#FF5B37",
+      cancelButtonText: "No, cancel!",
+      cancelButtonColor: "#1EC15F",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        Swal.fire({
+          title: "Logout",
+          text: "Successfull.",
+          icon: "success",
+          confirmButtonColor: "#6379F4",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/");
+          } else {
+            router.push("/");
+          }
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Logout",
+          text: "Cancelled :)",
+          icon: "info",
+          confirmButtonColor: "#6379F4",
+        });
+      }
+    });
   };
 
   useEffect(() => {
@@ -55,7 +92,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-light fixed-top custom">
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top custom py-4">
         <div className="container">
           <Link href="/dashboard">
             <a className="navbar-brand">Zwallet</a>
@@ -72,7 +109,50 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav ml-auto">
+            <div className="navbar-nav custom d-lg-none mt-2 d-flex">
+              <Link href="/dashboard">
+                <a
+                  className={`nav-link ${
+                    props.active === "dashboard" ? "active" : ""
+                  }`}
+                >
+                  Dashboard <span className="sr-only">(current)</span>
+                </a>
+              </Link>
+              <Link href="/transfer">
+                <a
+                  className={`nav-link ${
+                    props.active === "transfer" ? "active" : ""
+                  }`}
+                >
+                  Transfer
+                </a>
+              </Link>
+              <Link href="/topup">
+                <a
+                  className={`nav-link ${
+                    props.active === "topup" ? "active" : ""
+                  }`}
+                >
+                  Top Up
+                </a>
+              </Link>
+              <Link href="/profile">
+                <a
+                  className={`nav-link ${
+                    props.active === "profile" ? "active" : ""
+                  }`}
+                >
+                  Profile
+                </a>
+              </Link>
+              <Link href="#">
+                <a className="nav-link" onClick={() => handleClickLogout()}>
+                  Log Out
+                </a>
+              </Link>
+            </div>
+            <div className="navbar-nav ml-auto d-none d-lg-block">
               {user.image !== undefined && (
                 <img
                   src={`${UrlImage}${user.image}`}
@@ -83,7 +163,7 @@ export default function Navbar() {
                 />
               )}
             </div>
-            <div className="profile mx-4 d-flex flex-column">
+            <div className="profile mx-4 d-none d-lg-flex flex-column">
               <span className="name">
                 {user.fullName === "firstName lastName"
                   ? "your full name"
@@ -100,7 +180,7 @@ export default function Navbar() {
               width={24}
               height={24}
               alt="Bell"
-              className="bell"
+              className="bell d-none d-lg-block"
               onClick={() => showNotification()}
             />
           </div>

@@ -87,7 +87,7 @@ section.dashboard .history {
 }
 
 section.dashboard .charts {
-  min-height: 300px;
+  min-height: 100%;
 }
 
 section.dashboard .charts p {

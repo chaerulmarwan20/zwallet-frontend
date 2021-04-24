@@ -215,3 +215,9 @@ section.search .search-receiver .btn-continue:hover {
   border: 2px solid #6379f4;
   color: #6379f4;
 }
+
+@media screen and (max-width: 575px) {
+  section.search .search-receiver .pencil input.form-control.notes {
+    width: 300px;
+  }
+}
