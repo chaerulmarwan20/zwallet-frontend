@@ -131,10 +131,6 @@ section.change-pin .details button.btn-pin.active:hover {
 }
 
 @media screen and (max-width: 767px) {
-  section.change-pin .details {
-    height: 400px;
-  }
-
   section.change-pin .details form {
     margin-top: 50px;
   }

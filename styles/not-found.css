@@ -1,0 +1,51 @@
+section.not-found {
+  margin-top: 150px;
+}
+
+section.not-found .ops {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+}
+
+section.not-found .ops h1 {
+  font-weight: 700;
+  font-size: 35px;
+  color: #3a3d42;
+}
+
+section.not-found .ops h2 {
+  font-weight: 600;
+  font-size: 30px;
+  color: #3a3d42;
+}
+
+section.not-found .ops p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  color: #3a3d42;
+}
+
+section.not-found .ops .btn-back {
+  width: 180px;
+  height: 57px;
+  border-radius: 12px;
+  background-color: #6379f4;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+section.not-found .ops .btn-back:hover {
+  background-color: #ffffff;
+  border: 2px solid #6379f4;
+  color: #6379f4;
+}

@@ -103,13 +103,14 @@ export default function index() {
         <h1>Change PIN</h1>
         {showSuccess === false && (
           <p className="mt-3">
-            Enter your current 6 digits Zwallet PIN below to <br /> continue to
-            the next steps.
+            Enter your current 6 digits Zwallet PIN below to
+            <br className="d-none d-md-block" /> continue to the next steps.
           </p>
         )}
         {showSuccess === true && (
           <p>
-            Type your new 6 digits security PIN to use in <br /> Zwallet.
+            Type your new 6 digits security PIN to use in
+            <br className="d-none d-md-block" /> Zwallet.
           </p>
         )}
         <form>

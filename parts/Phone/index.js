@@ -51,8 +51,9 @@ export default function index() {
       <div className="details p-5">
         <h1>Add Phone Number</h1>
         <p className="mt-3">
-          Add at least one phone number for the transfer <br /> ID so you can
-          start transfering your money to <br /> another user.
+          Add at least one phone number for the transfer
+          <br className="d-none d-md-block" /> ID so you can start transfering
+          your money to <br className="d-none d-md-block" /> another user.
         </p>
         <form className="mt-5 d-flex flex-column align-items-center">
           <div className="form-group phone">

@@ -94,7 +94,7 @@ export default function index({ image, name, phone }) {
   const handleClickLogout = () => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You will be removed from this page!",
+      text: "You will exit from this page!",
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Yes, logout!",
@@ -107,7 +107,7 @@ export default function index({ image, name, phone }) {
         localStorage.clear();
         Swal.fire({
           title: "Logout",
-          text: "Successfull.",
+          text: "Successfully.",
           icon: "success",
           confirmButtonColor: "#6379F4",
         }).then((result) => {

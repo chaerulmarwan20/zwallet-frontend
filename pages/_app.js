@@ -22,6 +22,7 @@ import "../styles/manage.css";
 import "../styles/change-password.css";
 import "../styles/change-pin.css";
 import "../styles/phone.css";
+import "../styles/not-found.css";
 
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);

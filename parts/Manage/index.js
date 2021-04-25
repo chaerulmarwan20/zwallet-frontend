@@ -78,8 +78,9 @@ export default function index() {
       <div className="information p-5">
         <h1>Manage Phone Number</h1>
         <p className="mt-3">
-          You can only delete the phone number and <br /> then you must add
-          another phone number.
+          You can only delete the phone number and
+          <br className="d-none d-md-block" /> then you must add another phone
+          number.
         </p>
         <div className="details pt-3 pl-3 pr-4 mt-4 d-flex justify-content-between align-items-center">
           <div>

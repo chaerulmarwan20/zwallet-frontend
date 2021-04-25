@@ -192,3 +192,34 @@ section.history .transaction ul.pagination-custom li button.page-active:hover {
   color: #4e4b66;
   box-shadow: inherit;
 }
+
+section.history .transaction .history-notification {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+section.history .transaction .detail-notification span.info {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #7a7a7a;
+}
+
+section.history .transaction .detail-notification span.price {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: #43484f;
+}
+
+@media screen and (max-width: 575px) {
+  section.history .transaction select.custom-select {
+    width: 180px;
+    font-size: 16px;
+  }
+
+  section.history .transaction select.custom-select option {
+    font-size: 16px;
+  }
+}

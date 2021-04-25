@@ -8,9 +8,10 @@ export default function index({ firstName, lastName, email, phone }) {
       <div className="information p-5">
         <h1>Personal Information</h1>
         <p className="mt-3">
-          We got your personal information from the sign <br /> up proccess. If
-          you want to make changes on <br /> your information, contact our
-          support.
+          We got your personal information from the sign
+          <br className="d-none d-md-block" /> up proccess. If you want to make
+          changes on <br className="d-none d-md-block" /> your information,
+          contact our support.
         </p>
         <div className="details pt-3 pb-1 pl-3 mt-4">
           <span>First Name</span>

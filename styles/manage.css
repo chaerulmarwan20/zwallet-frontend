@@ -97,9 +97,3 @@ section.manage .information .details a:hover {
   text-decoration: none;
   opacity: 0.6;
 }
-
-@media screen and (max-width: 767px) {
-  section.manage .information {
-    height: 350px;
-  }
-}

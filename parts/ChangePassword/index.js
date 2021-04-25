@@ -81,8 +81,8 @@ export default function index() {
       <div className="details p-5">
         <h1>Change Password</h1>
         <p className="mt-3">
-          You must enter your current password and then <br /> type your new
-          password twice.
+          You must enter your current password and then
+          <br className="d-none d-md-block" /> type your new password twice.
         </p>
         <form>
           <div className="form-group password">

@@ -138,12 +138,6 @@ section.phone .details button.btn-phone.active:hover {
   background-color: #ffffff;
 }
 
-@media screen and (max-width: 767px) {
-  section.phone .details {
-    height: 450px;
-  }
-}
-
 @media screen and (max-width: 575px) {
   section.phone .details .phone input.form-control {
     width: 300px;

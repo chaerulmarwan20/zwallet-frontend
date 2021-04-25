@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { findUser } from "../../configs/redux/actions/user";
 import { getTransaction } from "../../configs/redux/actions/transaction";
 import Rupiah from "../../helpers/rupiah";
+import Button from "./Button";
 
 export default function Navbar(props) {
   const UrlImage = process.env.image;
@@ -21,6 +22,7 @@ export default function Navbar(props) {
 
   const showNotification = () => {
     if (notification === false) {
+      window.scrollTo(0, 0);
       setNotification(true);
     } else {
       setNotification(false);
@@ -30,7 +32,7 @@ export default function Navbar(props) {
   const handleClickLogout = () => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You will be removed from this page!",
+      text: "You will exit from this page!",
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Yes, logout!",
@@ -97,17 +99,9 @@ export default function Navbar(props) {
           <Link href="/dashboard">
             <a className="navbar-brand">Zwallet</a>
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <Button className="navbar-toggler" type="button" isNavbar>
             <span className="navbar-toggler-icon"></span>
-          </button>
+          </Button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav custom d-lg-none mt-2 d-flex">
               <Link href="/dashboard">
@@ -144,6 +138,15 @@ export default function Navbar(props) {
                   }`}
                 >
                   Profile
+                </a>
+              </Link>
+              <Link href="/notification">
+                <a
+                  className={`nav-link ${
+                    props.active === "notification" ? "active" : ""
+                  }`}
+                >
+                  Notification
                 </a>
               </Link>
               <Link href="#">
@@ -194,7 +197,7 @@ export default function Navbar(props) {
                 {/* <h3>Today</h3> */}
                 {transaction.map((item, index) => {
                   return (
-                    <div className="history p-3 mt-4">
+                    <div className="history p-3 mt-4" key={index}>
                       <div className="d-flex align-items-center">
                         <div>
                           <Image

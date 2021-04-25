@@ -8,7 +8,6 @@ import {
   checkPin,
   createTransaction,
 } from "../../configs/redux/actions/transaction";
-import axiosApiInstance from "../../helpers/axios";
 import Rupiah from "../../helpers/rupiah";
 import Date from "../../helpers/date";
 import Row from "../../components/module/Row";
@@ -16,7 +15,6 @@ import Col from "../../components/module/Col";
 import Button from "../../components/module/Button";
 
 export default function index(props) {
-  const Url = process.env.api;
   const UrlImage = process.env.image;
 
   const router = useRouter();
@@ -24,6 +22,7 @@ export default function index(props) {
   const dispatch = useDispatch();
 
   const { detail } = useSelector((state) => state.transaction);
+
   const [data, setData] = useState({
     value: "",
   });
@@ -171,8 +170,9 @@ export default function index(props) {
             </div>
             <div className="modal-body">
               <p>
-                Enter your 6 digits PIN for confirmation to <br /> continue
-                transferring money.
+                Enter your 6 digits PIN for confirmation to
+                <br className="d-none d-md-block" /> continue transferring
+                money.
               </p>
               <form className="mt-5">
                 <Row>
@@ -206,7 +206,7 @@ export default function index(props) {
                       onComplete={() => handleComplete()}
                     />
                   </Col>
-                  <Col className="col d-md-none">
+                  <Col className="col d-md-none d-flex justify-content-center">
                     <PinInput
                       length={6}
                       focus
@@ -239,7 +239,7 @@ export default function index(props) {
                 </Row>
               </form>
             </div>
-            <div className="modal-footer d-flex justify-content-start justify-content-md-end">
+            <div className="modal-footer d-flex justify-content-center justify-content-md-end">
               <Button
                 type="button"
                 className={`btn btn-continue ${status ? "active" : ""}`}
