@@ -19,6 +19,8 @@ import Button from "../../components/module/Button";
 export default function index() {
   const UrlImage = process.env.image;
 
+  const router = useRouter();
+
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
@@ -26,54 +28,57 @@ export default function index() {
     (state) => state.transaction
   );
 
-  const data = [
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
-
   const [empty, setEmpty] = useState(false);
+  const [chart, setChart] = useState({
+    data: [
+      {
+        name: "Sat",
+        income: 4000,
+        expense: 2400,
+      },
+      {
+        name: "Sun",
+        income: 3000,
+        expense: 1398,
+      },
+      {
+        name: "Mon",
+        income: 2000,
+        expense: 9800,
+      },
+      {
+        name: "Tue",
+        income: 2780,
+        expense: 3908,
+      },
+      {
+        name: "Wed",
+        income: 1890,
+        expense: 4800,
+      },
+      {
+        name: "Thu",
+        income: 2390,
+        expense: 3800,
+      },
+      {
+        name: "Fri",
+        income: 3490,
+        expense: 4300,
+      },
+    ],
+    activeIndex: 0,
+  });
 
-  const router = useRouter();
+  const handleClickChart = (data, index) => {
+    setChart({
+      data: data,
+      activeIndex: index,
+    });
+  };
+
+  const { activeIndex, data } = chart;
+  const activeItem = data[activeIndex];
 
   const handleClickTransfer = () => {
     router.push("/transfer");
@@ -225,20 +230,30 @@ export default function index() {
                   : `+${Rupiah(Number(transaction[0].amount))}`}
               </p>
             )}
-            <div className="mt-3">
+            <div className="mt-5" style={{ width: "100%" }}>
+              <p>Click each rectangle to see income and expense</p>
               <ResponsiveContainer width="100%" height={100}>
                 <BarChart width={150} height={40} data={data}>
-                  <Bar dataKey="uv">
+                  <Bar dataKey="income">
                     {data.map((entry, index) => (
                       <Cell
                         cursor="pointer"
-                        fill="#8884d8"
+                        fill={index === activeIndex ? "#1ec15f" : "#6379F4"}
                         key={`cell-${index}`}
+                        onClick={() => handleClickChart(data, index)}
                       />
                     ))}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+              <div className="d-flex justify-content-between mt-3">
+                <p className="content">{`Income of "${
+                  activeItem.name
+                }": ${Rupiah(activeItem.income)}`}</p>
+                <p className="content">{`Expense of "${
+                  activeItem.name
+                }": ${Rupiah(activeItem.expense)}`}</p>
+              </div>
             </div>
           </div>
         </Col>
