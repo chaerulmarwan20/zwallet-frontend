@@ -23,7 +23,7 @@ export default function Hero({
   };
 
   return (
-    <section className="hero pt-5">
+    <section className="hero py-5">
       <Container>
         <Row className="justify-content-between align-items-center">
           <Col className="col-12 col-md-2">
