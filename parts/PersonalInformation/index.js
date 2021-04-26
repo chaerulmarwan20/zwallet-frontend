@@ -1,8 +1,35 @@
-import React from "react";
+import { React, useEffect } from "react";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { findUser } from "../../configs/redux/actions/user";
 import Col from "../../components/module/Col";
 
-export default function index({ firstName, lastName, email, phone }) {
+export default function index() {
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(findUser())
+      .then((res) => {})
+      .catch((err) => {
+        if (
+          err.message !== "Token is expired" &&
+          err.message !== "Token is not active" &&
+          err.message !== "Invalid signature"
+        ) {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        }
+      });
+  }, []);
+
   return (
     <Col className="col-lg-8 col-xl-9">
       <div className="information p-5">
@@ -16,28 +43,32 @@ export default function index({ firstName, lastName, email, phone }) {
         <div className="details pt-3 pb-1 pl-3 mt-4">
           <span>First Name</span>
           <p className="mt-2">
-            {firstName === "firstName" ? "your first name" : firstName}
+            {user.firstName === "firstName"
+              ? "your first name"
+              : user.firstName}
           </p>
         </div>
         <div className="details pt-3 pb-1 pl-3 mt-3">
           <span>Last Name</span>
           <p className="mt-2">
-            {lastName === "lastName" ? "your last name" : lastName}
+            {user.lastName === "lastName" ? "your last name" : user.lastName}
           </p>
         </div>
         <div className="details pt-3 pb-1 pl-3 mt-3">
           <span>Verified E-mail</span>
-          <p className="mt-2">{email}</p>
+          <p className="mt-2">{user.email}</p>
         </div>
         <div className="details pt-3 pl-3 pr-3 mt-3 d-flex justify-content-between align-items-center">
           <div>
             <span>Phone Number</span>
             <p className="mt-2">
-              {phone === "000000000000" ? "your phone number" : phone}
+              {user.phoneNumber === "000000000000"
+                ? "your phone number"
+                : user.phoneNumber}
             </p>
           </div>
           <div className="d-flex flex-column">
-            {phone !== "000000000000" ? (
+            {user.phoneNumber !== "000000000000" ? (
               <Link href="/profile/phone/manage">
                 <a className="mb-3">Manage</a>
               </Link>

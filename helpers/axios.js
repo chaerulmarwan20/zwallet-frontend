@@ -21,7 +21,7 @@ axiosApiInstance.interceptors.response.use(
   },
   async function (error) {
     if (error.response.status === 401) {
-      localStorage.removeItem("token");
+      localStorage.clear("token");
       Router.push("/");
       // if (error.response.data.message === "Token is expired") {
       //   localStorage.removeItem("token");

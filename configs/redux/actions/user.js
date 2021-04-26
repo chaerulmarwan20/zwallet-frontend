@@ -74,9 +74,7 @@ export const login = (data) => (dispatch) => {
   return new Promise((resolve, reject) => {
     const Url = process.env.api;
     axios
-      .post(`${Url}/users/auth/login`, data, {
-        withCredentials: true,
-      })
+      .post(`${Url}/users/auth/login`, data)
       .then((res) => {
         dispatch({ type: "LOGIN", payload: res.data.data });
         localStorage.setItem("token", res.data.data.token);

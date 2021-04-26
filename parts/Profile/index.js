@@ -8,7 +8,7 @@ import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";
 
-export default function index({ image, name, phone }) {
+export default function index() {
   const UrlImage = process.env.image;
 
   const dispatch = useDispatch();
@@ -20,7 +20,6 @@ export default function index({ image, name, phone }) {
   const router = useRouter();
 
   const [status, setStatus] = useState(false);
-  const [showNew, setShowNew] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [data, setData] = useState({
     username: "",
@@ -29,7 +28,7 @@ export default function index({ image, name, phone }) {
     phoneNumber: "",
   });
   const [dataImage, setDataImage] = useState({
-    image: image,
+    image: user.image,
   });
 
   const handleClickPersonal = () => {
@@ -140,7 +139,11 @@ export default function index({ image, name, phone }) {
         });
       })
       .catch((err) => {
-        if (err.message !== "Invalid signature") {
+        if (
+          err.message !== "Token is expired" &&
+          err.message !== "Token is not active" &&
+          err.message !== "Invalid signature"
+        ) {
           Swal.fire({
             title: "Error!",
             text: err.message,
@@ -156,23 +159,21 @@ export default function index({ image, name, phone }) {
     getData();
   }, []);
 
-  useEffect(() => {
-    setShowNew(true);
-  }, [user]);
-
   return (
     <>
       <Col className="col-lg-8 col-xl-9">
         <div className="details p-5">
           <div className="d-flex flex-column justify-content-center align-items-center">
             <div>
-              <img
-                src={`${UrlImage}${showNew ? user.image : image}`}
-                width={80}
-                height={80}
-                alt="Profile"
-                className="user"
-              />
+              {user.image !== undefined && (
+                <img
+                  src={`${UrlImage}${user.image}`}
+                  width={80}
+                  height={80}
+                  alt="Profile"
+                  className="user"
+                />
+              )}
             </div>
             <div
               className="edit mt-2"
@@ -188,22 +189,14 @@ export default function index({ image, name, phone }) {
               <span className="ml-2">Edit</span>
             </div>
             <h1 className="mt-2">
-              {showNew
-                ? user.fullName === "firstName lastName"
-                  ? "your full name"
-                  : user.fullName
-                : name === "firstName lastName"
+              {user.fullName === "firstName lastName"
                 ? "your full name"
-                : name}
+                : user.fullName}
             </h1>
             <p className="mt-1">
-              {showNew
-                ? user.phoneNumber === "000000000000"
-                  ? "your phone number"
-                  : user.phoneNumber
-                : phone === "000000000000"
+              {user.phoneNumber === "000000000000"
                 ? "your phone number"
-                : phone}
+                : user.phoneNumber}
             </p>
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center mt-4">

@@ -8,11 +8,6 @@ import Col from "./Col";
 export default function Sidebar(props) {
   const router = useRouter();
 
-  let id;
-  if (typeof window !== "undefined") {
-    id = localStorage.getItem("id");
-  }
-
   const handleClickLogout = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -140,17 +135,13 @@ export default function Sidebar(props) {
               height={28}
               alt="Profile"
             />
-            {id !== undefined && (
-              <Link href="/profile">
-                <a
-                  className={`ml-4 ${
-                    props.active === "profile" ? "active" : ""
-                  }`}
-                >
-                  Profile
-                </a>
-              </Link>
-            )}
+            <Link href="/profile">
+              <a
+                className={`ml-4 ${props.active === "profile" ? "active" : ""}`}
+              >
+                Profile
+              </a>
+            </Link>
           </div>
         </div>
         <div className="logout-menu">

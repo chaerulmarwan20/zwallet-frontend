@@ -73,7 +73,11 @@ export default function Navbar(props) {
     dispatch(findUser())
       .then((res) => {})
       .catch((err) => {
-        if (err.message !== "Invalid signature") {
+        if (
+          err.message !== "Token is expired" &&
+          err.message !== "Token is not active" &&
+          err.message !== "Invalid signature"
+        ) {
           Swal.fire({
             title: "Error!",
             text: err.message,

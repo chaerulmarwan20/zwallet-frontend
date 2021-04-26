@@ -71,10 +71,15 @@ export default function index() {
   });
 
   const handleClickChart = (data, index) => {
-    setChart({
-      data: data,
-      activeIndex: index,
+    Swal.fire({
+      icon: "info",
+      title: "This feature is coming soon",
+      confirmButtonColor: "#6379F4",
     });
+    // setChart({
+    //   data: data,
+    //   activeIndex: index,
+    // });
   };
 
   const { activeIndex, data } = chart;
@@ -92,7 +97,11 @@ export default function index() {
     dispatch(findUser())
       .then((res) => {})
       .catch((err) => {
-        if (err.message !== "Invalid signature") {
+        if (
+          err.message !== "Token is expired" &&
+          err.message !== "Token is not active" &&
+          err.message !== "Invalid signature"
+        ) {
           Swal.fire({
             title: "Error!",
             text: err.message,
@@ -118,7 +127,11 @@ export default function index() {
     dispatch(getIncome())
       .then((res) => {})
       .catch((err) => {
-        if (err.message !== "Invalid signature") {
+        if (
+          err.message !== "Token is expired" &&
+          err.message !== "Token is not active" &&
+          err.message !== "Invalid signature"
+        ) {
           Swal.fire({
             title: "Error!",
             text: err.message,
@@ -134,7 +147,11 @@ export default function index() {
     dispatch(getExpense())
       .then((res) => {})
       .catch((err) => {
-        if (err.message !== "Invalid signature") {
+        if (
+          err.message !== "Token is expired" &&
+          err.message !== "Token is not active" &&
+          err.message !== "Invalid signature"
+        ) {
           Swal.fire({
             title: "Error!",
             text: err.message,
@@ -231,7 +248,7 @@ export default function index() {
               </p>
             )}
             <div className="mt-5" style={{ width: "100%" }}>
-              <p>Click each rectangle to see income and expense</p>
+              <p>Click each rectangle to see its daily income and expense</p>
               <ResponsiveContainer width="100%" height={100}>
                 <BarChart width={150} height={40} data={data}>
                   <Bar dataKey="income">
@@ -246,14 +263,14 @@ export default function index() {
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
-              <div className="d-flex justify-content-between mt-3">
+              {/* <div className="d-flex justify-content-between mt-3">
                 <p className="content">{`Income of "${
                   activeItem.name
                 }": ${Rupiah(activeItem.income)}`}</p>
                 <p className="content">{`Expense of "${
                   activeItem.name
                 }": ${Rupiah(activeItem.expense)}`}</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </Col>
