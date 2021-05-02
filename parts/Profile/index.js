@@ -271,7 +271,7 @@ export default function index() {
               <p>Change Image: Click your image</p>
               <div className="text-center img-container d-flex justify-content-center">
                 {user.image !== undefined && (
-                  <div className="image bg-info">
+                  <div className="image">
                     <img
                       src={imgUrl}
                       width={80}
