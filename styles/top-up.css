@@ -181,6 +181,10 @@ section.top-up .modal-content .modal-body p {
   transform: translateY(-15px);
 }
 
+section.top-up .modal-content .modal-body .input-pin {
+  white-space: nowrap;
+}
+
 section.top-up .modal-content .modal-body input.form-control.pin {
   width: 53px;
   height: 65px;

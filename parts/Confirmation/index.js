@@ -180,7 +180,7 @@ export default function index(props) {
               </p>
               <form className="mt-5">
                 <Row>
-                  <Col className="col d-none d-md-block">
+                  <Col className="col d-none d-md-block input-pin">
                     <PinInput
                       length={6}
                       focus
@@ -210,7 +210,7 @@ export default function index(props) {
                       onComplete={() => handleComplete()}
                     />
                   </Col>
-                  <Col className="col d-md-none d-flex justify-content-center">
+                  <Col className="col d-md-none d-flex justify-content-center input-pin">
                     <PinInput
                       length={6}
                       focus

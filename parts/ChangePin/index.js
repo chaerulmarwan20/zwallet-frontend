@@ -115,7 +115,7 @@ export default function index() {
         )}
         <form>
           <Row>
-            <Col className="col d-none d-md-block pr-0 pl-3">
+            <Col className="col d-none d-md-block pr-0 pl-3 input-pin">
               <PinInput
                 length={6}
                 focus
@@ -145,7 +145,7 @@ export default function index() {
                 onComplete={() => handleComplete()}
               />
             </Col>
-            <Col className="col d-md-none">
+            <Col className="col d-md-none input-pin">
               <PinInput
                 length={6}
                 focus

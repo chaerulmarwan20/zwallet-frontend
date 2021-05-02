@@ -67,6 +67,10 @@ section.change-pin .details form {
   align-items: center;
 }
 
+section.change-pin .details .input-pin {
+  white-space: nowrap;
+}
+
 section.change-pin .details input.form-control.pin {
   width: 53px;
   height: 65px;

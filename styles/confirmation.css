@@ -164,6 +164,10 @@ section.confirmation .modal-content .modal-body input.form-control.pin {
   padding-bottom: 0px;
 }
 
+section.confirmation .modal-content .modal-body .input-pin {
+  white-space: nowrap;
+}
+
 section.confirmation
   .modal-content
   .modal-body
