@@ -1,34 +1,122 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1  align="center">Zwallet Website App</h1>
 
-## Getting Started
+### # ABOUT THIS PROJECT
 
-First, run the development server:
+Zwallet is a digital wallet application that simplifies your financial needs and can save a lot of time on your banking needs with just one application. Zwallet is in the field of digital banking, which is increasingly developing rapidly as technology advances. This application is able to save money, make transfers between users or top up balances.
 
-```bash
-npm run dev
-# or
-yarn dev
+### # FEATURES
+
+- Authentication
+
+- Topup
+
+- Transfer
+
+- Realtime Balance
+
+- Upload Image Profile
+
+- Reset Password
+
+- PIN Security while Transfer, and Topup
+
+- Change Password
+
+- Change Pin
+
+- Change Profile
+
+### # TOOLS
+
+-  [ExpressJS](http://expressjs.com/)
+
+-  [NextJS](https://nextjs.org/)
+
+-  [Bootstrap](https://getbootstrap.com/)
+
+-  [Redux](https://redux.js.org/)
+
+-  [MySQL](https://www.mysql.com/)
+
+### # HOW TO RUN
+
+1. Clone the repo
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+~$ git clone https://github.com/chaerulmarwan20/zwallet-frontend.git
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+2. Open the project and run on terminal or command prompt
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
 
-## Learn More
+~$ npm install
 
-To learn more about Next.js, take a look at the following resources:
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Run on your terminal or command prompt
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
 
-## Deploy on Vercel
+~$ npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### # HOW TO USE
+
+### `Landing Page`
+
+Click the sign-up button
+
+![Zwallet-Landing-Page](https://user-images.githubusercontent.com/76175402/116084118-a14fdb00-a6c7-11eb-90f5-94ea898a4021.png)
+
+### `Sign-Up`
+
+Build your account by filling in the required data. Then, verify your account via email
+
+![Zwallet-Sign-Up](https://user-images.githubusercontent.com/76175402/116085232-d01a8100-a6c8-11eb-8e1d-61ba21bbba52.png)
+
+### `Login`
+
+Login using a verified account
+
+![Zwallet-Login](https://user-images.githubusercontent.com/76175402/116084117-a0b74480-a6c7-11eb-88d3-2019533f5a94.png)
+
+### `Dashboard`
+
+Click the transfer button
+
+![Zwallet-Dashboard](https://user-images.githubusercontent.com/76175402/116084116-a01eae00-a6c7-11eb-939d-71431b7f7915.png)
+
+### `Transfer`
+
+Find the user who will be the recipient of the money you are transferring
+
+![Zwallet-Transfer](https://user-images.githubusercontent.com/76175402/116084114-9f861780-a6c7-11eb-9871-fc9832f37c51.png)
+
+### `Transfer Amount`
+
+Enter a note (optional) and the amount of money you want to transfer
+
+![Zwallet-Transfer-Amount](https://user-images.githubusercontent.com/76175402/116084113-9eed8100-a6c7-11eb-8f63-d7b9c077856d.png)
+
+### `Confirmation`
+
+Press the confirm button and enter your pin
+
+![Zwallet-Confirmation](https://user-images.githubusercontent.com/76175402/116084111-9eed8100-a6c7-11eb-8761-75e0d57466e0.png)
+
+### `Status`
+
+Congratulations, the transfer was successful
+
+![Zwallet-Status](https://user-images.githubusercontent.com/76175402/116084104-9d23bd80-a6c7-11eb-96c1-1a635fb1419f.png)
+
+### # FINISH
+
+## Link: 
+- [Backend](https://github.com/chaerulmarwan20/zwallet-backend)
+- [Visit Project](https://zwallet-banking.vercel.app/)
+
