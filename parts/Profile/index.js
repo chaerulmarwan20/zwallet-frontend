@@ -269,23 +269,25 @@ export default function index() {
             </div>
             <div className="modal-body">
               <p>Change Image: Click your image</p>
-              <div className="text-center img-container">
+              <div className="text-center img-container d-flex justify-content-center">
                 {user.image !== undefined && (
-                  <img
-                    src={imgUrl}
-                    width={80}
-                    height={80}
-                    alt="Profile"
-                    className="user"
-                  />
+                  <div className="image bg-info">
+                    <img
+                      src={imgUrl}
+                      width={80}
+                      height={80}
+                      alt="Profile"
+                      className="user"
+                    />
+                    <input
+                      type="file"
+                      name="image"
+                      className="file-input"
+                      ref={imageRef}
+                      onChange={(event) => handleChangeImage(event)}
+                    />
+                  </div>
                 )}
-                <input
-                  type="file"
-                  name="image"
-                  className="file-input"
-                  ref={imageRef}
-                  onChange={(event) => handleChangeImage(event)}
-                />
               </div>
               <form>
                 <div className="form-group person">

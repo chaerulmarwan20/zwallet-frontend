@@ -9,7 +9,6 @@ import {
   searchUser,
 } from "../../configs/redux/actions/user";
 import { createDetail } from "../../configs/redux/actions/transaction";
-import axiosApiInstance from "../../helpers/axios";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
 import Button from "../../components/module/Button";

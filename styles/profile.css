@@ -145,8 +145,10 @@ section.profile .modal-content .modal-body form {
   transform: translateY(-20px);
 }
 
-section.profile .modal-content .modal-body .img-container {
+section.profile .modal-content .modal-body .img-container .image {
   position: relative;
+  width: 80px;
+  height: 80px;
 }
 
 section.profile .modal-content .modal-body .file-input {
@@ -154,7 +156,7 @@ section.profile .modal-content .modal-body .file-input {
   width: 80px;
   height: 80px;
   opacity: 0;
-  left: 177px;
+  left: 0;
   cursor: pointer;
 }
 
