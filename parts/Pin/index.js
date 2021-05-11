@@ -71,7 +71,7 @@ export default function index(props) {
             <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
               <Auth />
             </Col>
-            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center justify-content-center d-lg-block pl-0 pl-lg-5 aside">
               <h1 className="mt-5 d-none d-lg-block">
                 Secure Your Account, Your Wallet, <br /> and Your Data With 6
                 Digits PIN <br /> That You Created Yourself.
@@ -81,9 +81,7 @@ export default function index(props) {
               </h1>
               <p className="mt-3 d-none d-lg-block">
                 Create 6 digits pin to secure all your money and your data in
-                <br />
                 Zwallet app. Keep it secret and don’t tell anyone about your
-                <br />
                 Zwallet account password and the PIN.
               </p>
               <p className="mt-3 text-center d-lg-none">
@@ -158,6 +156,7 @@ export default function index(props) {
                 <Button
                   type="button"
                   className={`btn btn-confirm ${status ? "active" : ""}`}
+                  disabled={status ? false : true}
                   onClick={handleSubmit}
                 >
                   Confirm

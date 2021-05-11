@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
@@ -8,6 +9,8 @@ import Button from "../../components/module/Button";
 
 export default function index() {
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const [data, setData] = useState({
     phoneNumber: "",
@@ -26,14 +29,16 @@ export default function index() {
         setData({
           phoneNumber: "",
         });
+        dispatch(findUser());
         Swal.fire({
           title: "Success!",
           text: res,
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
+        }).then(() => {
+          router.push("/profile");
         });
-        dispatch(findUser());
       })
       .catch((err) => {
         Swal.fire({
@@ -89,6 +94,7 @@ export default function index() {
             className={`btn btn-phone mt-5 ${
               data.phoneNumber !== "" ? "active" : ""
             }`}
+            disabled={data.phoneNumber !== "" ? false : true}
             onClick={handleSubmit}
           >
             Add Phone Number

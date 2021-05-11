@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { React, useState, useRef } from "react";
 import PinInput from "react-pin-input";
 import { useDispatch } from "react-redux";
@@ -9,6 +10,8 @@ import Button from "../../components/module/Button";
 
 export default function index() {
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const [showSuccess, setShowSuccess] = useState(false);
   const [data, setData] = useState({
@@ -80,6 +83,8 @@ export default function index() {
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
+        }).then(() => {
+          router.push("/profile");
         });
       })
       .catch((err) => {
@@ -180,6 +185,7 @@ export default function index() {
             <Button
               type="button"
               className={`btn btn-continue mt-5 ${status ? "active" : ""}`}
+              disabled={status ? false : true}
               onClick={handleCheck}
             >
               Continue
@@ -189,6 +195,7 @@ export default function index() {
             <Button
               type="button"
               className={`btn btn-pin mt-5 ${status ? "active" : ""}`}
+              disabled={status ? false : true}
               onClick={handleSubmit}
             >
               Change PIN

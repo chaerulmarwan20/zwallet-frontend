@@ -47,13 +47,23 @@ export default function index() {
         });
       })
       .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
+        if (err.message === `"email" must be a valid email`) {
+          Swal.fire({
+            title: "Error!",
+            text: "Email must be a valid email",
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        }
       });
   };
 
@@ -65,7 +75,7 @@ export default function index() {
             <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
               <Auth />
             </Col>
-            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block pl-0 pl-lg-5 aside">
               <h1 className="mt-5 d-none d-lg-block">
                 Did You Forgot Your Password? <br /> Don’t Worry, You Can Reset
                 Your <br />
@@ -75,9 +85,9 @@ export default function index() {
                 Zwallet
               </h1>
               <p className="mt-3 d-none d-lg-block">
-                To reset your password, you must type your e-mail and we <br />
+                To reset your password, you must type your e-mail and <br /> we
                 will send a link to your email and you will be directed to the
-                <br /> reset password screens.
+                reset password screens.
               </p>
               <p className="mt-3 text-center d-lg-none">
                 Enter your Zwallet e-mail so we can send <br /> you a password
@@ -111,6 +121,7 @@ export default function index() {
                 className={`btn btn-confirm mt-5 ${
                   data.email !== "" ? "active" : ""
                 }`}
+                disabled={data.email !== "" ? false : true}
                 onClick={handleSubmit}
               >
                 {!loading ? "Confirm" : "Please wait..."}

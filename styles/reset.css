@@ -99,12 +99,12 @@ section.reset .aside .confirm-password img.confirm-password-img {
 section.reset .aside .password img.eye-img,
 section.reset .aside .confirm-password img.eye-img {
   left: inherit;
-  right: 10px;
+  right: 0;
   cursor: pointer;
 }
 
 section.reset .aside input.form-control {
-  width: 433px;
+  width: 100%;
   border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
   border-top: inherit;
   border-left: inherit;
@@ -135,7 +135,7 @@ section.reset .aside input.form-control.error {
 
 section.reset .aside button.btn-confirm,
 section.reset .aside button.btn-reset {
-  width: 438px;
+  width: 100%;
   height: 57px;
   background-color: #dadada;
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { React, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import PinInput from "react-pin-input";
@@ -10,6 +11,8 @@ import Button from "../../components/module/Button";
 
 export default function index({ payment }) {
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const [idPayment, setIdPayment] = useState(null);
   const [amount, setAmount] = useState(null);
@@ -63,6 +66,8 @@ export default function index({ payment }) {
                 icon: "success",
                 confirmButtonText: "Ok",
                 confirmButtonColor: "#6379F4",
+              }).then(() => {
+                router.push("/dashboard");
               });
             })
             .catch((err) => {

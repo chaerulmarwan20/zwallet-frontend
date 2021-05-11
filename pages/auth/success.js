@@ -40,7 +40,7 @@ export default function success() {
               <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
                 <Auth />
               </Col>
-              <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+              <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block pl-0 pl-lg-5 aside">
                 <h1 className="zwallet d-lg-none" onClick={() => handleClick()}>
                   Zwallet
                 </h1>
@@ -55,10 +55,9 @@ export default function success() {
                 </h1>
                 <h1 className="mt-5 d-lg-none">PIN Successfully Created</h1>
                 <p className="mt-3 d-none d-lg-block">
-                  Your PIN was successfully created and you can now access{" "}
-                  <br />
-                  all the features in Zwallet. Login to your new account and
-                  <br /> start exploring!
+                  Your PIN was successfully created and you can now access all
+                  the features in Zwallet. Login to your new account and start
+                  exploring!
                 </p>
                 <p className="mt-3 text-center d-lg-none">
                   Your PIN was successfully created and you can <br /> now

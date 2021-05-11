@@ -1,5 +1,6 @@
 import { React, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { findUser, deletePhoneNumber } from "../../configs/redux/actions/user";
@@ -7,6 +8,8 @@ import Col from "../../components/module/Col";
 
 export default function index() {
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const { user } = useSelector((state) => state.user);
 
@@ -45,13 +48,15 @@ export default function index() {
       if (result.isConfirmed) {
         dispatch(deletePhoneNumber())
           .then((res) => {
+            dispatch(findUser());
             Swal.fire({
               title: "Deleted!",
               text: "Your phone number has been deleted.",
               icon: "success",
               confirmButtonColor: "#6379F4",
+            }).then(() => {
+              router.push("/profile");
             });
-            dispatch(findUser());
           })
           .catch((err) => {
             Swal.fire({

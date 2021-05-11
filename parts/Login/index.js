@@ -64,13 +64,23 @@ export default function index() {
         });
       })
       .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
+        if (err.message === `"email" must be a valid email`) {
+          Swal.fire({
+            title: "Error!",
+            text: "Email must be a valid email",
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        }
       });
   };
 
@@ -82,7 +92,7 @@ export default function index() {
             <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
               <Auth />
             </Col>
-            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block pl-0 pl-lg-5 aside">
               <h1 className="mt-5 d-none d-lg-block">
                 Start Accessing Banking Needs <br /> With All Devices and All
                 Platforms <br />
@@ -163,6 +173,9 @@ export default function index() {
                 className={`btn btn-login ${
                   data.email !== "" && data.password !== "" ? "active" : ""
                 } ${showError === true ? "mt-3" : "mt-5"}`}
+                disabled={
+                  data.email !== "" && data.password !== "" ? false : true
+                }
                 onClick={handleSubmit}
               >
                 Login

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
@@ -8,6 +9,8 @@ import Button from "../../components/module/Button";
 
 export default function index() {
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const [type, setType] = useState("password");
   const [typeNew, setTypeNew] = useState("password");
@@ -39,6 +42,8 @@ export default function index() {
           icon: "success",
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
+        }).then(() => {
+          router.push("/profile");
         });
       })
       .catch((err) => {
@@ -191,6 +196,13 @@ export default function index() {
                 ? "active"
                 : ""
             }`}
+            disabled={
+              data.currentPassword !== "" &&
+              data.password !== "" &&
+              data.confirmPassword !== ""
+                ? false
+                : true
+            }
             onClick={handleSubmit}
           >
             Change Password

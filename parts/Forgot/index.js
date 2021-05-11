@@ -58,13 +58,23 @@ export default function index(props) {
         });
       })
       .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
+        if (err.message === `"confirmPassword" must be [ref:password]`) {
+          Swal.fire({
+            title: "Error!",
+            text: "Password do not match",
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        }
       });
   };
 
@@ -92,7 +102,7 @@ export default function index(props) {
             <Col className="col-lg-6 col-xl-7 d-none d-lg-block main">
               <Auth />
             </Col>
-            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block aside">
+            <Col className="col-12 col-lg-6 col-xl-5 d-flex flex-column align-items-center d-lg-block pl-0 pl-lg-5 aside">
               <h1 className="mt-5 d-none d-lg-block">
                 Did You Forgot Your Password? <br /> Don’t Worry, You Can Reset
                 Your <br />
@@ -103,8 +113,8 @@ export default function index(props) {
               </h1>
               <p className="mt-3 d-none d-lg-block">
                 Now you can create a new password for your Zwallet <br />
-                account. Type your password twice so we can confirm your <br />
-                new passsword.
+                account. Type your password twice so we can confirm your new
+                passsword.
               </p>
               <p className="mt-3 text-center d-lg-none">
                 Create and confirm your new password so <br /> you can login to
@@ -177,6 +187,11 @@ export default function index(props) {
                     ? "active"
                     : ""
                 }`}
+                disabled={
+                  data.password !== "" && data.confirmPassword !== ""
+                    ? false
+                    : true
+                }
                 onClick={handleSubmit}
               >
                 Reset Password

@@ -24,7 +24,7 @@ export default function Sidebar(props) {
         localStorage.clear();
         Swal.fire({
           title: "Logout",
-          text: "Successfully.",
+          text: "Successfully",
           icon: "success",
           confirmButtonColor: "#6379F4",
         }).then((result) => {

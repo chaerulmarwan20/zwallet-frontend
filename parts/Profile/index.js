@@ -87,6 +87,11 @@ export default function index() {
           confirmButtonText: "Ok",
           confirmButtonColor: "#6379F4",
         });
+        setStatus(false);
+        setDataImage({
+          image: user.image,
+        });
+        getData();
       });
   };
 
@@ -106,7 +111,7 @@ export default function index() {
         localStorage.clear();
         Swal.fire({
           title: "Logout",
-          text: "Successfully.",
+          text: "Successfully",
           icon: "success",
           confirmButtonColor: "#6379F4",
         }).then((result) => {

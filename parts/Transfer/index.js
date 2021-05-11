@@ -83,63 +83,81 @@ export default function index() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const slice = amount.slice(2);
-    let number = 0;
-    Array.from(slice).forEach((item) => {
-      if (item !== ",") {
-        number += item;
-      }
-    });
-    const result = number.slice(1);
-    if (Number(result) > userCredit.credit) {
+    if (amount === "") {
       Swal.fire({
         title: "Error!",
-        text: "Your balance is not enough",
+        text: "Amount is a required field",
         icon: "error",
         confirmButtonText: "Ok",
         confirmButtonColor: "#6379F4",
       });
     } else {
-      const id = localStorage.getItem("id");
-      dispatch(
-        createDetail(
-          id,
-          idUser,
-          Number(result),
-          userCredit.credit - Number(result),
-          data.notes
-        )
-      )
-        .then(({ id, message }) => {
-          setShowResult(false);
-          setAmount("");
-          setData({
-            notes: "",
-          });
-          setIdUser(null);
-          Swal.fire({
-            title: "Success!",
-            text: message,
-            icon: "success",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              router.push(`/transfer/confirmation/${id}`);
-            } else {
-              router.push(`/transfer/confirmation/${id}`);
-            }
-          });
-        })
-        .catch((err) => {
-          Swal.fire({
-            title: "Error!",
-            text: err.message,
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
+      const slice = amount.slice(2);
+      let number = 0;
+      Array.from(slice).forEach((item) => {
+        if (item !== ",") {
+          number += item;
+        }
+      });
+      const result = number.slice(1);
+      if (Number(result) > userCredit.credit) {
+        Swal.fire({
+          title: "Error!",
+          text: "Your balance is not enough",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
         });
+      } else if (Number(result) < 50000) {
+        Swal.fire({
+          title: "Error!",
+          text: "Minimum amount is Rp.50.000",
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#6379F4",
+        });
+      } else {
+        const id = localStorage.getItem("id");
+        dispatch(
+          createDetail(
+            id,
+            idUser,
+            Number(result),
+            userCredit.credit - Number(result),
+            data.notes
+          )
+        )
+          .then(({ id, message }) => {
+            setShowResult(false);
+            setAmount("");
+            setData({
+              notes: "",
+            });
+            setIdUser(null);
+            Swal.fire({
+              title: "Success!",
+              text: message,
+              icon: "success",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                router.push(`/transfer/confirmation/${id}`);
+              } else {
+                router.push(`/transfer/confirmation/${id}`);
+              }
+            });
+          })
+          .catch((err) => {
+            Swal.fire({
+              title: "Error!",
+              text: err.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          });
+      }
     }
   };
 
