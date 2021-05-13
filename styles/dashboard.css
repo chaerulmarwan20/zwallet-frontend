@@ -77,6 +77,11 @@ section.dashboard .balance .button-container .btn-balance {
   font-size: 18px;
   line-height: 25px;
   color: #ffffff;
+  transition: 0.5s ease;
+}
+
+section.dashboard .balance .button-container .btn-balance:hover {
+  opacity: 0.6;
 }
 
 section.dashboard .charts,

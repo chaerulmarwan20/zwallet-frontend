@@ -94,7 +94,7 @@ section.top-up .step-top-up .btn-payment {
   text-align: center;
   color: #6379f4;
   margin: 10px;
-  transition: 0.5 ease;
+  transition: 0.5s ease;
 }
 
 section.top-up .step-top-up .btn-payment:hover {
@@ -107,6 +107,12 @@ section.top-up .step-top-up .btn-payment.active {
   background-color: #6379f4;
   color: #ffffff;
   border: 2px solid transparent;
+}
+
+section.top-up .step-top-up .btn-payment.active:hover {
+  background-color: #ffffff;
+  color: #6379f4;
+  border: 2px solid #6379f4;
 }
 
 section.top-up .step-top-up .btn-process {
@@ -123,7 +129,7 @@ section.top-up .step-top-up .btn-process {
   line-height: 25px;
   text-align: center;
   color: #ffffff;
-  transition: 0.5 ease;
+  transition: 0.5s ease;
 }
 
 section.top-up .step-top-up .btn-process:hover {
@@ -216,10 +222,38 @@ section.top-up .modal-content .modal-footer {
   border: 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
   section.top-up .modal-content .modal-footer .btn-continue {
     width: 150px;
     height: 55px;
+  }
+
+  section.top-up .step-top-up .btn-process:hover {
+    background-color: #6379f4;
+    color: #ffffff;
+    border: 2px solid transparent;
+    opacity: 0.6;
+  }
+
+  section.top-up .modal-content .modal-footer .btn-continue:hover {
+    background-color: #6379f4;
+    border: 2px solid transparent;
+    color: #ffffff;
+    opacity: 0.6;
+  }
+
+  section.top-up .step-top-up .btn-payment:hover {
+    background-color: #ffffff;
+    color: #6379f4;
+    border: 2px solid #6379f4;
+    opacity: 0.6;
+  }
+
+  section.top-up .step-top-up .btn-payment.active:hover {
+    background-color: #6379f4;
+    color: #ffffff;
+    border: 2px solid transparent;
+    opacity: 0.6;
   }
 }
 
@@ -239,6 +273,6 @@ section.top-up .modal-content .modal-footer {
     text-align: center;
     color: #6379f4;
     margin: 10px;
-    transition: 0.5 ease;
+    transition: 0.5s ease;
   }
 }

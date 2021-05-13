@@ -56,7 +56,7 @@ section.reset .aside h1.zwallet {
   font-size: 26px;
   line-height: 35px;
   color: #6379f4;
-  transition: 0.5 ease;
+  transition: 0.5s ease;
   cursor: pointer;
 }
 
@@ -192,5 +192,25 @@ section.reset .aside button.btn-reset.active:hover {
   section.reset .aside button.btn-reset,
   section.reset .aside button.btn-confirm {
     width: 343px;
+  }
+
+  section.reset .aside button.btn-confirm.active:hover,
+  section.reset .aside button.btn-reset.active:hover {
+    cursor: pointer;
+    border: 2px solid transparent;
+    color: #ffffff;
+    background-color: #6379f4;
+    opacity: 0.6;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  section.reset .aside input.form-control {
+    width: 280px;
+  }
+
+  section.reset .aside button.btn-reset,
+  section.reset .aside button.btn-confirm {
+    width: 280px;
   }
 }

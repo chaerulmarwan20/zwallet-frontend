@@ -26,7 +26,7 @@ export default function index() {
   return (
     <>
       <Head>
-        <title>Zwallet | Landing Page</title>
+        <title>Zwallet</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero container={Container} row={Row} col={Col} button={Button}></Hero>

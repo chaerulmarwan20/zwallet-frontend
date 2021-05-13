@@ -134,6 +134,17 @@ section.change-pin .details button.btn-pin.active:hover {
   background-color: #ffffff;
 }
 
+@media screen and (max-width: 991px) {
+  section.change-pin .details button.btn-continue.active:hover,
+  section.change-pin .details button.btn-pin.active:hover {
+    cursor: pointer;
+    border: 2px solid transparent;
+    color: #ffffff;
+    background-color: #6379f4;
+    opacity: 0.6;
+  }
+}
+
 @media screen and (max-width: 767px) {
   section.change-pin .details form {
     margin-top: 50px;

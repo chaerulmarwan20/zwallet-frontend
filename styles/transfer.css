@@ -216,6 +216,15 @@ section.search .search-receiver .btn-continue:hover {
   color: #6379f4;
 }
 
+@media screen and (max-width: 991px) {
+  section.search .search-receiver .btn-continue:hover {
+    background-color: #6379f4;
+    border: 2px solid transparent;
+    color: #ffffff;
+    opacity: 0.6;
+  }
+}
+
 @media screen and (max-width: 575px) {
   section.search .search-receiver .pencil input.form-control.notes {
     width: 300px;

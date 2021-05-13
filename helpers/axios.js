@@ -1,6 +1,5 @@
 const axios = require("axios");
 const axiosApiInstance = axios.create();
-// const Swal = require("sweetalert2");
 import Router from "next/router";
 
 axiosApiInstance.interceptors.request.use(
@@ -21,27 +20,18 @@ axiosApiInstance.interceptors.response.use(
   },
   async function (error) {
     if (error.response.status === 401) {
-      localStorage.clear("token");
-      Router.push("/");
-      // if (error.response.data.message === "Token is expired") {
-      //   localStorage.removeItem("token");
-      //   Router.push("/");
-      // }
-      // if (error.response.data.message === "Token is not active") {
-      //   localStorage.removeItem("token");
-      //   Router.push("/");
-      // }
-      // if (error.response.data.message === "Invalid signature") {
-      //   localStorage.removeItem("token");
-      //   Router.push("/");
-      // Swal.fire({
-      //   title: "Warning!",
-      //   text: "Do not change the token",
-      //   icon: "warning",
-      //   confirmButtonText: "Ok",
-      //   confirmButtonColor: "#6379F4",
-      // });
-      // }
+      if (error.response.data.message === "Token is expired") {
+        localStorage.clear();
+        Router.push("/auth/login");
+      }
+      if (error.response.data.message === "Token is not active") {
+        localStorage.clear();
+        Router.push("/auth/login");
+      }
+      if (error.response.data.message === "Invalid signature") {
+        localStorage.clear();
+        Router.push("/auth/login");
+      }
     }
     return Promise.reject(error);
   }

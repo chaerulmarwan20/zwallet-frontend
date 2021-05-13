@@ -23,8 +23,8 @@ export default function Sidebar(props) {
       if (result.isConfirmed) {
         localStorage.clear();
         Swal.fire({
-          title: "Logout",
-          text: "Successfully",
+          title: "Success!",
+          text: "Logout successfully",
           icon: "success",
           confirmButtonColor: "#6379F4",
         }).then((result) => {
@@ -36,7 +36,7 @@ export default function Sidebar(props) {
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
-          title: "Logout",
+          title: "Logout!",
           text: "Cancelled :)",
           icon: "info",
           confirmButtonColor: "#6379F4",

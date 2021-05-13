@@ -84,6 +84,11 @@ section.profile .option {
   background-color: #e5e8ed;
   border-radius: 10px;
   cursor: pointer;
+  transition: 0.5s ease;
+}
+
+section.profile .option:hover {
+  opacity: 0.6;
 }
 
 section.profile .option p {

@@ -110,8 +110,8 @@ export default function index() {
       if (result.isConfirmed) {
         localStorage.clear();
         Swal.fire({
-          title: "Logout",
-          text: "Successfully",
+          title: "Success!",
+          text: "Logout successfully",
           icon: "success",
           confirmButtonColor: "#6379F4",
         }).then((result) => {
@@ -123,7 +123,7 @@ export default function index() {
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
-          title: "Logout",
+          title: "Logout!",
           text: "Cancelled :)",
           icon: "info",
           confirmButtonColor: "#6379F4",
@@ -294,7 +294,7 @@ export default function index() {
                   </div>
                 )}
               </div>
-              <form>
+              <form className="d-flex flex-column align-items-center">
                 <div className="form-group person">
                   <img
                     src={`/images/${
@@ -399,7 +399,7 @@ export default function index() {
                 </div>
               </form>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer d-flex justify-content-center justify-content-md-end">
               <Button
                 type="button"
                 className="btn btn-edit"

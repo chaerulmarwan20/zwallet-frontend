@@ -120,6 +120,11 @@ section.history .transaction .btn-order {
   background-color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+  transition: 0.5s ease;
+}
+
+section.history .transaction .btn-order:hover {
+  opacity: 0.6;
 }
 
 section.history .transaction .btn-order.active {
@@ -137,6 +142,11 @@ section.history .transaction select.custom-select {
   line-height: 25px;
   color: #6379f4;
   cursor: pointer;
+  transition: 0.5s ease;
+}
+
+section.history .transaction select.custom-select:hover {
+  opacity: 0.6;
 }
 
 section.history .transaction select.custom-select option {
@@ -211,6 +221,28 @@ section.history .transaction .detail-notification span.price {
   font-size: 18px;
   line-height: 25px;
   color: #43484f;
+}
+
+@media screen and (max-width: 991px) {
+  section.history .transaction ul.pagination-custom li button:hover {
+    background-color: #fff;
+    box-shadow: inherit;
+    border: 0.5px solid #dedede;
+    color: #4e4b66;
+    opacity: 0.6;
+  }
+
+  section.history
+    .transaction
+    ul.pagination-custom
+    li
+    button.page-active:hover {
+    background-color: #6379f4;
+    border: 0.5px solid transparent;
+    color: #fff;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    opacity: 0.6;
+  }
 }
 
 @media screen and (max-width: 575px) {

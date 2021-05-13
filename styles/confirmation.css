@@ -186,9 +186,17 @@ section.confirmation .modal-content .modal-footer {
   border: 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
   section.confirmation .modal-content .modal-footer .btn-continue {
     width: 150px;
     height: 55px;
+  }
+
+  section.confirmation .transfer .btn-continue:hover,
+  section.confirmation .modal-content .modal-footer .btn-continue:hover {
+    background-color: #6379f4;
+    border: 2px solid transparent;
+    color: #ffffff;
+    opacity: 0.6;
   }
 }

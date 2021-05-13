@@ -168,6 +168,11 @@ section.status .transfer .btn-download {
   background-color: rgba(99, 121, 244, 0.15);
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 12px;
+  transition: 0.5s ease;
+}
+
+section.status .transfer .btn-download:hover {
+  opacity: 0.6;
 }
 
 section.status .transfer .btn-download span {
@@ -183,6 +188,11 @@ section.status .transfer .btn-share {
   background-color: rgba(99, 121, 244, 0.15);
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 12px;
+  transition: 0.5 ease;
+}
+
+section.status .transfer .btn-share:hover {
+  opacity: 0.6;
 }
 
 section.status .transfer .btn-try {
@@ -206,4 +216,13 @@ section.status .transfer .btn-try:hover {
   background-color: #ffffff;
   border: 2px solid #6379f4;
   color: #6379f4;
+}
+
+@media screen and (max-width: 991px) {
+  section.status .transfer .btn-back:hover {
+    background-color: #6379f4;
+    border: 2px solid transparent;
+    color: #ffffff;
+    opacity: 0.6;
+  }
 }
