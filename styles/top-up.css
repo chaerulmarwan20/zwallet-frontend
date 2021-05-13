@@ -223,6 +223,10 @@ section.top-up .modal-content .modal-footer {
 }
 
 @media screen and (max-width: 991px) {
+  section.top-up {
+    margin-top: 140px;
+  }
+
   section.top-up .modal-content .modal-footer .btn-continue {
     width: 150px;
     height: 55px;

@@ -224,6 +224,10 @@ section.history .transaction .detail-notification span.price {
 }
 
 @media screen and (max-width: 991px) {
+  section.history {
+    margin-top: 140px;
+  }
+
   section.history .transaction ul.pagination-custom li button:hover {
     background-color: #fff;
     box-shadow: inherit;

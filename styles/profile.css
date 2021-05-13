@@ -212,6 +212,12 @@ section.profile .modal-content .modal-footer {
   border: 0;
 }
 
+@media screen and (max-width: 991px) {
+  section.profile {
+    margin-top: 140px;
+  }
+}
+
 @media screen and (max-width: 575px) {
   section.profile .option {
     width: 300px;

@@ -187,6 +187,10 @@ section.confirmation .modal-content .modal-footer {
 }
 
 @media screen and (max-width: 991px) {
+  section.confirmation {
+    margin-top: 140px;
+  }
+
   section.confirmation .modal-content .modal-footer .btn-continue {
     width: 150px;
     height: 55px;

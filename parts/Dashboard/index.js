@@ -83,7 +83,7 @@ export default function index() {
   };
 
   const { activeIndex, data } = chart;
-  const activeItem = data[activeIndex];
+  // const activeItem = data[activeIndex];
 
   const handleClickTransfer = () => {
     router.push("/transfer");
@@ -204,7 +204,7 @@ export default function index() {
           </Button>
         </div>
       </div>
-      <Row className="mt-4 mt-xl-3">
+      <Row className="mt-4">
         <Col className="col-12 col-xl-7">
           <div className="charts p-4">
             <div className="d-flex justify-content-between">

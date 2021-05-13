@@ -135,6 +135,10 @@ section.change-pin .details button.btn-pin.active:hover {
 }
 
 @media screen and (max-width: 991px) {
+  section.change-pin {
+    margin-top: 140px;
+  }
+
   section.change-pin .details button.btn-continue.active:hover,
   section.change-pin .details button.btn-pin.active:hover {
     cursor: pointer;

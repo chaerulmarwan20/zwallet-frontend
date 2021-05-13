@@ -217,6 +217,10 @@ section.search .search-receiver .btn-continue:hover {
 }
 
 @media screen and (max-width: 991px) {
+  section.search {
+    margin-top: 140px;
+  }
+
   section.search .search-receiver .btn-continue:hover {
     background-color: #6379f4;
     border: 2px solid transparent;

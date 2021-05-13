@@ -139,6 +139,10 @@ section.phone .details button.btn-phone.active:hover {
 }
 
 @media screen and (max-width: 991px) {
+  section.phone {
+    margin-top: 140px;
+  }
+
   section.phone .details button.btn-phone.active:hover {
     cursor: pointer;
     border: 2px solid transparent;

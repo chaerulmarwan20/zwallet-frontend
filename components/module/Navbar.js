@@ -47,8 +47,8 @@ export default function Navbar(props) {
       if (result.isConfirmed) {
         localStorage.clear();
         Swal.fire({
-          title: "Logout",
-          text: "Successfull.",
+          title: "Success!",
+          text: "Logout successfully",
           icon: "success",
           confirmButtonColor: "#6379F4",
         }).then((result) => {
@@ -60,7 +60,7 @@ export default function Navbar(props) {
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
-          title: "Logout",
+          title: "Logout!",
           text: "Cancelled :)",
           icon: "info",
           confirmButtonColor: "#6379F4",

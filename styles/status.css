@@ -219,6 +219,10 @@ section.status .transfer .btn-try:hover {
 }
 
 @media screen and (max-width: 991px) {
+  section.status {
+    margin-top: 140px;
+  }
+
   section.status .transfer .btn-back:hover {
     background-color: #6379f4;
     border: 2px solid transparent;

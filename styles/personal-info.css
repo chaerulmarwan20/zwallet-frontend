@@ -92,6 +92,12 @@ section.personal .information .details a:hover {
   opacity: 0.6;
 }
 
+@media screen and (max-width: 991px) {
+  section.personal {
+    margin-top: 140px;
+  }
+}
+
 @media screen and (max-width: 575px) {
   section.personal .information .details p {
     font-size: 20px;
