@@ -35,7 +35,7 @@ export default function index() {
   });
   const [data, setData] = useState({
     balanceLeft: "",
-    notes: "",
+    notes: "-",
   });
   const [amount, setAmount] = useState("");
   const [idUser, setIdUser] = useState(null);
