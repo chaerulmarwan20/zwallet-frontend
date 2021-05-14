@@ -70,7 +70,7 @@ $ npm install
 3. Create environment variable.
 
 ```
-$ cp .env.example .env
+$ cp .env.example next.config.js
 ```
 
 4. Run this application.
