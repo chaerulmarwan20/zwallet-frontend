@@ -67,13 +67,7 @@ $ cd zwallet-frontend
 $ npm install
 ```
 
-3. Create environment variable.
-
-```
-$ cp .env.example next.config.js
-```
-
-4. Run this application.
+3. Run this application.
 
 ```
 $ npm run dev
