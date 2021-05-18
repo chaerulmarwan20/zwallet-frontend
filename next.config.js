@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    api: "https://zwallet-banking.vercel.app/api/v1",
-    image: "https://zwallet-banking.vercel.app/",
+    api: "https://zwallet-apps.fwdev.online/api/v1",
+    image: "https://zwallet-apps.fwdev.online/",
   },
 };
