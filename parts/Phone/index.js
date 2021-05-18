@@ -1,7 +1,9 @@
+import React from "react";
 import { useRouter } from "next/router";
-import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { addPhoneNumber, findUser } from "../../configs/redux/actions/user";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
@@ -12,44 +14,53 @@ export default function index() {
 
   const router = useRouter();
 
-  const [data, setData] = useState({
-    phoneNumber: "",
+  const formik = useFormik({
+    initialValues: {
+      phoneNumber: "",
+    },
+    validationSchema: Yup.object({
+      phoneNumber: Yup.number()
+        .typeError("Invalid phone number")
+        .positive("A phone number can't start with a minus")
+        .integer("A phone number can't include a decimal point")
+        .required("Required!"),
+    }),
+    onSubmit: (values) => {
+      dispatch(addPhoneNumber(values))
+        .then((res) => {
+          formik.resetForm();
+          dispatch(findUser())
+            .then((res) => {})
+            .catch((err) => {
+              Swal.fire({
+                title: "Error!",
+                text: err.message,
+                icon: "error",
+                confirmButtonText: "Ok",
+                confirmButtonColor: "#6379F4",
+              });
+            });
+          Swal.fire({
+            title: "Success!",
+            text: res,
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          }).then(() => {
+            router.push("/profile");
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        });
+    },
   });
-
-  const handleFormChange = (event) => {
-    const dataNew = { ...data };
-    dataNew[event.target.name] = event.target.value;
-    setData(dataNew);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(addPhoneNumber(data))
-      .then((res) => {
-        setData({
-          phoneNumber: "",
-        });
-        dispatch(findUser());
-        Swal.fire({
-          title: "Success!",
-          text: res,
-          icon: "success",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        }).then(() => {
-          router.push("/profile");
-        });
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
-      });
-  };
 
   return (
     <Col className="col-lg-8 col-xl-9">
@@ -63,10 +74,12 @@ export default function index() {
         <form className="mt-5 d-flex flex-column align-items-center">
           <div className="form-group phone">
             <img
-              src={`${
-                data.phoneNumber !== ""
-                  ? "/images/phone-2-blue.png"
-                  : "/images/phone-2-grey.png"
+              src={`/images/${
+                formik.errors.phoneNumber && formik.touched.phoneNumber
+                  ? "phone-2-grey.png"
+                  : formik.values.phoneNumber !== ""
+                  ? "phone-2-blue.png"
+                  : "phone-2-grey.png"
               }`}
               width={24}
               height={24}
@@ -83,19 +96,28 @@ export default function index() {
             <Input
               type="text"
               name="phoneNumber"
-              className={`${data.phoneNumber !== "" ? "active" : ""}`}
-              value={data.phoneNumber}
+              className={`${
+                formik.errors.phoneNumber && formik.touched.phoneNumber
+                  ? "error"
+                  : formik.values.phoneNumber !== ""
+                  ? "active"
+                  : ""
+              }`}
+              value={formik.values.phoneNumber}
+              onChange={formik.handleChange}
               placeholder="Enter your phone number"
-              onChange={handleFormChange}
             />
+            {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+              <small className="error">{formik.errors.phoneNumber}</small>
+            )}
           </div>
           <Button
             type="button"
             className={`btn btn-phone mt-5 ${
-              data.phoneNumber !== "" ? "active" : ""
+              formik.values.phoneNumber !== "" ? "active" : ""
             }`}
-            disabled={data.phoneNumber !== "" ? false : true}
-            onClick={handleSubmit}
+            disabled={formik.values.phoneNumber !== "" ? false : true}
+            onClick={formik.handleSubmit}
           >
             Add Phone Number
           </Button>

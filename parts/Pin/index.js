@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import PinInput from "react-pin-input";
 import Swal from "sweetalert2";
-import { creatPin } from "../../configs/redux/actions/user";
+import { createPin } from "../../configs/redux/actions/user";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
 import Row from "../../components/module/Row";
@@ -40,7 +40,7 @@ export default function index(props) {
     event.preventDefault();
     const pin = data.value;
     onClear.clear();
-    dispatch(creatPin(email, pin))
+    dispatch(createPin(email, pin))
       .then((res) => {
         setData({
           value: "",

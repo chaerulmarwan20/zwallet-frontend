@@ -1,7 +1,9 @@
-import { React, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { forgot } from "../../configs/redux/actions/user";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
@@ -17,55 +19,50 @@ export default function index() {
 
   const { loading } = useSelector((state) => state.user);
 
-  const [data, setData] = useState({
-    email: "",
-  });
-
   const handleClick = () => {
     router.push("/");
   };
 
-  const handleFormChange = (event) => {
-    const dataNew = { ...data };
-    dataNew[event.target.name] = event.target.value;
-    setData(dataNew);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(forgot(data.email))
-      .then((res) => {
-        setData({
-          email: "",
-        });
-        Swal.fire({
-          title: "Success!",
-          text: res,
-          icon: "success",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
-      })
-      .catch((err) => {
-        if (err.message === `"email" must be a valid email`) {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email("Invalid email format").required("Required!"),
+    }),
+    onSubmit: (values) => {
+      dispatch(forgot(values.email))
+        .then((res) => {
+          formik.resetForm();
           Swal.fire({
-            title: "Error!",
-            text: "Email must be a valid email",
-            icon: "error",
+            title: "Success!",
+            text: res,
+            icon: "success",
             confirmButtonText: "Ok",
             confirmButtonColor: "#6379F4",
           });
-        } else {
-          Swal.fire({
-            title: "Error!",
-            text: err.message,
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
-        }
-      });
-  };
+        })
+        .catch((err) => {
+          if (err.message === `"email" must be a valid email`) {
+            Swal.fire({
+              title: "Error!",
+              text: "Email must be a valid email",
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: err.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          }
+        });
+    },
+  });
 
   return (
     <>
@@ -96,10 +93,12 @@ export default function index() {
               <form className="mt-5">
                 <div className="form-group mail">
                   <img
-                    src={`${
-                      data.email !== ""
-                        ? "/images/mail-blue.png"
-                        : "/images/mail-grey.png"
+                    src={`/images/${
+                      formik.errors.email && formik.touched.email
+                        ? "mail-grey.png"
+                        : formik.values.email !== ""
+                        ? "mail-blue.png"
+                        : "mail-grey.png"
                     }`}
                     width={24}
                     height={24}
@@ -109,20 +108,29 @@ export default function index() {
                   <Input
                     type="text"
                     name="email"
-                    className={`${data.email !== "" ? "active" : ""}`}
-                    value={data.email}
+                    className={`${
+                      formik.errors.email && formik.touched.email
+                        ? "error"
+                        : formik.values.email !== ""
+                        ? "active"
+                        : ""
+                    }`}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
                     placeholder="Enter your e-mail"
-                    onChange={handleFormChange}
                   />
+                  {formik.errors.email && formik.touched.email && (
+                    <small className="error">{formik.errors.email}</small>
+                  )}
                 </div>
               </form>
               <Button
                 type="button"
                 className={`btn btn-confirm mt-5 ${
-                  data.email !== "" ? "active" : ""
+                  formik.values.email !== "" ? "active" : ""
                 }`}
-                disabled={data.email !== "" ? false : true}
-                onClick={handleSubmit}
+                disabled={formik.values.email !== "" ? false : true}
+                onClick={formik.handleSubmit}
               >
                 {!loading ? "Confirm" : "Please wait..."}
               </Button>

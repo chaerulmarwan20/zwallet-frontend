@@ -115,6 +115,7 @@ section.sign-up .aside input.form-control {
   color: #3a3d42;
   padding-left: 40px;
   padding-bottom: 11px;
+  background-color: transparent;
 }
 
 section.sign-up .aside input.form-control::placeholder {
@@ -130,6 +131,13 @@ section.sign-up .aside input.form-control.active {
 
 section.sign-up .aside input.form-control.error {
   border-bottom: 1.5px solid #ff5b37;
+}
+
+section.sign-up .aside small.error {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 32px;
+  color: #ff5b37;
 }
 
 section.sign-up .aside button.btn-sign-up {

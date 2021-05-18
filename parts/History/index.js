@@ -183,10 +183,10 @@ export default function index() {
                   className="custom-select mr-3"
                   onChange={handleChangeSort}
                 >
-                  <option value="id">Sort by Id</option>
-                  <option value="fullName">Sort by Name</option>
-                  <option value="amount">Sort by Amount</option>
-                  <option value="type">Sort by Type</option>
+                  <option value="id">Sort by id</option>
+                  <option value="fullName">Sort by name</option>
+                  <option value="amount">Sort by amount</option>
+                  <option value="type">Sort by type</option>
                 </select>
                 <select
                   className="custom-select mt-3 mt-md-0"

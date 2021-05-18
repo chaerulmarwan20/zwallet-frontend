@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { signUp } from "../../configs/redux/actions/user";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
@@ -19,20 +21,55 @@ export default function index() {
   const { loading } = useSelector((state) => state.user);
 
   const [type, setType] = useState("password");
-  const [data, setData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    firstName: "firstName",
-    lastName: "lastName",
-    phoneNumber: "000000000000",
-  });
 
-  const handleFormChange = (event) => {
-    const dataNew = { ...data };
-    dataNew[event.target.name] = event.target.value;
-    setData(dataNew);
-  };
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      username: Yup.string()
+        .min(3, "Minimum 3 characters")
+        .required("Required!"),
+      email: Yup.string().email("Invalid email format").required("Required!"),
+      password: Yup.string()
+        .min(8, "Minimum 8 characters")
+        .required("Required!"),
+    }),
+    onSubmit: (values) => {
+      dispatch(signUp(values))
+        .then((res) => {
+          formik.resetForm();
+          Swal.fire({
+            title: "Success!",
+            text: res,
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        })
+        .catch((err) => {
+          if (err.message === `"email" must be a valid email`) {
+            Swal.fire({
+              title: "Error!",
+              text: "Email must be a valid email",
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: err.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          }
+        });
+    },
+  });
 
   const handleClick = () => {
     router.push("/");
@@ -44,47 +81,6 @@ export default function index() {
     } else {
       setType("text");
     }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(signUp(data))
-      .then((res) => {
-        setData({
-          username: "",
-          email: "",
-          password: "",
-          firstName: "firstName",
-          lastName: "lastName",
-          phoneNumber: "000000000000",
-        });
-        Swal.fire({
-          title: "Success!",
-          text: res,
-          icon: "success",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
-      })
-      .catch((err) => {
-        if (err.message === `"email" must be a valid email`) {
-          Swal.fire({
-            title: "Error!",
-            text: "Email must be a valid email",
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
-        } else {
-          Swal.fire({
-            title: "Error!",
-            text: err.message,
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
-        }
-      });
   };
 
   return (
@@ -116,7 +112,9 @@ export default function index() {
                 <div className="form-group person">
                   <img
                     src={`/images/${
-                      data.username !== ""
+                      formik.errors.username && formik.touched.username
+                        ? "person-grey.png"
+                        : formik.values.username !== ""
                         ? "person-blue.png"
                         : "person-grey.png"
                     }`}
@@ -129,15 +127,28 @@ export default function index() {
                     type="text"
                     name="username"
                     placeholder="Enter your username"
-                    className={`${data.username !== "" ? "active" : ""}`}
-                    value={data.username}
-                    onChange={handleFormChange}
+                    className={`${
+                      formik.errors.username && formik.touched.username
+                        ? "error"
+                        : formik.values.username !== ""
+                        ? "active"
+                        : ""
+                    }`}
+                    value={formik.values.username}
+                    onChange={formik.handleChange}
                   />
+                  {formik.errors.username && formik.touched.username && (
+                    <small className="error">{formik.errors.username}</small>
+                  )}
                 </div>
                 <div className="form-group mail">
                   <img
                     src={`/images/${
-                      data.email !== "" ? "mail-blue.png" : "mail-grey.png"
+                      formik.errors.email && formik.touched.email
+                        ? "mail-grey.png"
+                        : formik.values.email !== ""
+                        ? "mail-blue.png"
+                        : "mail-grey.png"
                     }`}
                     width={24}
                     height={24}
@@ -148,15 +159,28 @@ export default function index() {
                     type="text"
                     name="email"
                     placeholder="Enter your e-mail"
-                    className={`${data.email !== "" ? "active" : ""}`}
-                    value={data.email}
-                    onChange={handleFormChange}
+                    className={`${
+                      formik.errors.email && formik.touched.email
+                        ? "error"
+                        : formik.values.email !== ""
+                        ? "active"
+                        : ""
+                    }`}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
                   />
+                  {formik.errors.email && formik.touched.email && (
+                    <small className="error">{formik.errors.email}</small>
+                  )}
                 </div>
                 <div className="form-group password">
                   <img
                     src={`/images/${
-                      data.password !== "" ? "lock-blue.png" : "lock-grey.png"
+                      formik.errors.password && formik.touched.password
+                        ? "lock-grey.png"
+                        : formik.values.password !== ""
+                        ? "lock-blue.png"
+                        : "lock-grey.png"
                     }`}
                     width={24}
                     height={24}
@@ -167,10 +191,19 @@ export default function index() {
                     type={type}
                     name="password"
                     placeholder="Create your password"
-                    className={`${data.password !== "" ? "active" : ""}`}
-                    value={data.password}
-                    onChange={handleFormChange}
+                    className={`${
+                      formik.errors.password && formik.touched.password
+                        ? "error"
+                        : formik.values.password !== ""
+                        ? "active"
+                        : ""
+                    }`}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
                   />
+                  {formik.errors.password && formik.touched.password && (
+                    <small className="error">{formik.errors.password}</small>
+                  )}
                   <img
                     src="/images/eye-crossed.png"
                     width={24}
@@ -185,20 +218,20 @@ export default function index() {
               <Button
                 type="button"
                 className={`btn btn-sign-up mt-5 ${
-                  data.username !== "" &&
-                  data.email !== "" &&
-                  data.password !== ""
+                  formik.values.username !== "" &&
+                  formik.values.email !== "" &&
+                  formik.values.password !== ""
                     ? "active"
                     : ""
                 }`}
                 disabled={
-                  data.username !== "" &&
-                  data.email !== "" &&
-                  data.password !== ""
+                  formik.values.username !== "" &&
+                  formik.values.email !== "" &&
+                  formik.values.password !== ""
                     ? false
                     : true
                 }
-                onClick={handleSubmit}
+                onClick={formik.handleSubmit}
               >
                 {!loading ? "Sign Up" : "Please wait..."}
               </Button>

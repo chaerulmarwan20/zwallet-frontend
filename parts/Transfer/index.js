@@ -15,7 +15,6 @@ import Button from "../../components/module/Button";
 import Rupiah from "../../helpers/rupiah";
 
 export default function index() {
-  const Url = process.env.api;
   const UrlImage = process.env.image;
 
   const router = useRouter();
@@ -298,7 +297,7 @@ export default function index() {
                 <div className="form-group pencil">
                   <img
                     src={`${
-                      data.notes !== ""
+                      data.notes !== "-" && data.notes !== ""
                         ? "/images/pencil-blue.png"
                         : "/images/pencil.png"
                     }`}
@@ -309,7 +308,9 @@ export default function index() {
                   />
                   <Input
                     type="text"
-                    className={`notes ${data.notes !== "" ? "active" : ""}`}
+                    className={`notes ${
+                      data.notes !== "-" && data.notes !== "" ? "active" : ""
+                    }`}
                     name="notes"
                     placeholder="Add some notes"
                     onChange={handleFormChangeTransfer}

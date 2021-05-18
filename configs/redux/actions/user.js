@@ -56,7 +56,7 @@ export const verify = (email, token) => (dispatch) => {
   });
 };
 
-export const creatPin = (email, pin) => (dispatch) => {
+export const createPin = (email, pin) => (dispatch) => {
   return new Promise((resolve, reject) => {
     const Url = process.env.api;
     axios

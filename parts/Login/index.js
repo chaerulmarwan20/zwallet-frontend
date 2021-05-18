@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { login } from "../../configs/redux/actions/user";
 import Auth from "../../components/module/Auth";
 import Container from "../../components/module/Container";
@@ -17,10 +19,56 @@ export default function index() {
   const dispatch = useDispatch();
 
   const [type, setType] = useState("password");
-  const [showError, setShowError] = useState(false);
-  const [data, setData] = useState({
-    email: "",
-    password: "",
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email("Invalid email format").required("Required!"),
+      password: Yup.string()
+        .min(8, "Minimum 8 characters")
+        .required("Required!"),
+    }),
+    onSubmit: (values) => {
+      dispatch(login(values))
+        .then((res) => {
+          formik.resetForm();
+          Swal.fire({
+            title: "Success!",
+            text: res,
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/dashboard");
+            } else {
+              router.push("/dashboard");
+            }
+          });
+        })
+        .catch((err) => {
+          if (err.message === `"email" must be a valid email`) {
+            Swal.fire({
+              title: "Error!",
+              text: "Email must be a valid email",
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: err.message,
+              icon: "error",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#6379F4",
+            });
+          }
+        });
+    },
   });
 
   const handleToggle = () => {
@@ -33,55 +81,6 @@ export default function index() {
 
   const handleClick = () => {
     router.push("/");
-  };
-
-  const handleFormChange = (event) => {
-    const dataNew = { ...data };
-    dataNew[event.target.name] = event.target.value;
-    setData(dataNew);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(login(data))
-      .then((res) => {
-        setData({
-          email: "",
-          password: "",
-        });
-        Swal.fire({
-          title: "Success!",
-          text: res,
-          icon: "success",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push("/dashboard");
-          } else {
-            router.push("/dashboard");
-          }
-        });
-      })
-      .catch((err) => {
-        if (err.message === `"email" must be a valid email`) {
-          Swal.fire({
-            title: "Error!",
-            text: "Email must be a valid email",
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
-        } else {
-          Swal.fire({
-            title: "Error!",
-            text: err.message,
-            icon: "error",
-            confirmButtonText: "Ok",
-            confirmButtonColor: "#6379F4",
-          });
-        }
-      });
   };
 
   return (
@@ -115,7 +114,11 @@ export default function index() {
                 <div className="form-group mail">
                   <img
                     src={`/images/${
-                      data.email !== "" ? "mail-blue.png" : "mail-grey.png"
+                      formik.errors.email && formik.touched.email
+                        ? "mail-grey.png"
+                        : formik.values.email !== ""
+                        ? "mail-blue.png"
+                        : "mail-grey.png"
                     }`}
                     width={24}
                     height={24}
@@ -125,16 +128,29 @@ export default function index() {
                   <Input
                     type="text"
                     name="email"
-                    className={`${data.email !== "" ? "active" : ""}`}
-                    value={data.email}
+                    className={`${
+                      formik.errors.email && formik.touched.email
+                        ? "error"
+                        : formik.values.email !== ""
+                        ? "active"
+                        : ""
+                    }`}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
                     placeholder="Enter your e-mail"
-                    onChange={handleFormChange}
                   />
+                  {formik.errors.email && formik.touched.email && (
+                    <small className="error">{formik.errors.email}</small>
+                  )}
                 </div>
                 <div className="form-group password">
                   <img
                     src={`/images/${
-                      data.password !== "" ? "lock-blue.png" : "lock-grey.png"
+                      formik.errors.password && formik.touched.password
+                        ? "lock-grey.png"
+                        : formik.values.password !== ""
+                        ? "lock-blue.png"
+                        : "lock-grey.png"
                     }`}
                     width={24}
                     height={24}
@@ -144,11 +160,20 @@ export default function index() {
                   <Input
                     type={type}
                     name="password"
-                    className={`${data.password !== "" ? "active" : ""}`}
-                    value={data.password}
+                    className={`${
+                      formik.errors.password && formik.touched.password
+                        ? "error"
+                        : formik.values.password !== ""
+                        ? "active"
+                        : ""
+                    }`}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
                     placeholder="Enter your password"
-                    onChange={handleFormChange}
                   />
+                  {formik.errors.password && formik.touched.password && (
+                    <small className="error">{formik.errors.password}</small>
+                  )}
                   <img
                     src="/images/eye-crossed.png"
                     width={24}
@@ -160,23 +185,22 @@ export default function index() {
                 </div>
               </form>
               <Link href="/auth/reset">
-                <a className="forgot float-right mt-2">Forgot password?</a>
+                <a className="forgot float-right">Forgot password?</a>
               </Link>
               <br />
-              {showError === true && (
-                <p className="error text-center mt-4">
-                  Email or Password Invalid
-                </p>
-              )}
               <Button
                 type="button"
-                className={`btn btn-login ${
-                  data.email !== "" && data.password !== "" ? "active" : ""
-                } ${showError === true ? "mt-3" : "mt-5"}`}
+                className={`btn btn-login mt-5 ${
+                  formik.values.email !== "" && formik.values.password !== ""
+                    ? "active"
+                    : ""
+                }`}
                 disabled={
-                  data.email !== "" && data.password !== "" ? false : true
+                  formik.values.email !== "" && formik.values.password !== ""
+                    ? false
+                    : true
                 }
-                onClick={handleSubmit}
+                onClick={formik.handleSubmit}
               >
                 Login
               </Button>

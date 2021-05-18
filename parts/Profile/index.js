@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { findUser, updateUser } from "../../configs/redux/actions/user";
 import Col from "../../components/module/Col";
 import Input from "../../components/module/Input";
@@ -43,11 +45,83 @@ export default function index() {
     router.push("/profile/pin/change");
   };
 
-  const handleFormChange = (event) => {
-    const dataNew = { ...data };
-    dataNew[event.target.name] = event.target.value;
-    setData(dataNew);
-  };
+  const formik = useFormik({
+    initialValues: {},
+    validationSchema: Yup.object({
+      username: Yup.string()
+        .min(3, "Minimum 3 characters")
+        .required("Required!"),
+      firstName: Yup.string().required("Required!"),
+      lastName: Yup.string().required("Required!"),
+      phoneNumber: Yup.number()
+        .typeError("Invalid phone number")
+        .positive("A phone number can't start with a minus")
+        .integer("A phone number can't include a decimal point")
+        .required("Required!"),
+    }),
+    onSubmit: (values) => {
+      const formData = new FormData();
+      formData.append("username", values.username);
+      formData.append("firstName", values.firstName);
+      formData.append("lastName", values.lastName);
+      formData.append("phoneNumber", values.phoneNumber);
+      if (status) {
+        formData.append("image", dataImage.image);
+      }
+      dispatch(updateUser(formData))
+        .then((res) => {
+          formik.resetForm();
+          dispatch(findUser())
+            .then((res) => {
+              const result = res;
+              if (result.firstName === "firstName") {
+                result.firstName = "";
+              }
+              if (result.lastName === "lastName") {
+                result.lastName = "";
+              }
+              if (result.phoneNumber === "000000000000") {
+                result.phoneNumber = "";
+              }
+              formik.setValues({
+                username: result.username,
+                firstName: result.firstName,
+                lastName: result.lastName,
+                phoneNumber: result.phoneNumber,
+              });
+            })
+            .catch((err) => {
+              Swal.fire({
+                title: "Error!",
+                text: err.message,
+                icon: "error",
+                confirmButtonText: "Ok",
+                confirmButtonColor: "#6379F4",
+              });
+            });
+          Swal.fire({
+            title: "Success!",
+            text: res,
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Error!",
+            text: err.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#6379F4",
+          });
+          setStatus(false);
+          setDataImage({
+            image: user.image,
+          });
+        });
+    },
+  });
 
   const handleChangeImage = (event) => {
     const imgFiles = event.target.files[0];
@@ -56,43 +130,6 @@ export default function index() {
     setDataImage({
       image: imgFiles,
     });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append("username", data.username);
-    formData.append("firstName", data.firstName);
-    formData.append("lastName", data.lastName);
-    formData.append("phoneNumber", data.phoneNumber);
-    if (status) {
-      formData.append("image", dataImage.image);
-    }
-    dispatch(updateUser(formData))
-      .then((res) => {
-        dispatch(findUser());
-        Swal.fire({
-          title: "Success!",
-          text: res,
-          icon: "success",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: "Error!",
-          text: err.message,
-          icon: "error",
-          confirmButtonText: "Ok",
-          confirmButtonColor: "#6379F4",
-        });
-        setStatus(false);
-        setDataImage({
-          image: user.image,
-        });
-        getData();
-      });
   };
 
   const handleClickLogout = () => {
@@ -136,11 +173,21 @@ export default function index() {
     dispatch(findUser())
       .then((res) => {
         setImgUrl(`${UrlImage}${res.image}`);
-        setData({
-          username: res.username,
-          firstName: res.firstName,
-          lastName: res.lastName,
-          phoneNumber: res.phoneNumber,
+        const result = res;
+        if (result.firstName === "firstName") {
+          result.firstName = "";
+        }
+        if (result.lastName === "lastName") {
+          result.lastName = "";
+        }
+        if (result.phoneNumber === "000000000000") {
+          result.phoneNumber = "";
+        }
+        formik.setValues({
+          username: result.username,
+          firstName: result.firstName,
+          lastName: result.lastName,
+          phoneNumber: result.phoneNumber,
         });
       })
       .catch((err) => {
@@ -273,7 +320,6 @@ export default function index() {
               </Button>
             </div>
             <div className="modal-body">
-              <p>Change Image: Click your image</p>
               <div className="text-center img-container d-flex justify-content-center">
                 {user.image !== undefined && (
                   <div className="image">
@@ -291,6 +337,7 @@ export default function index() {
                       ref={imageRef}
                       onChange={(event) => handleChangeImage(event)}
                     />
+                    <div className="shadow">Edit</div>
                   </div>
                 )}
               </div>
@@ -298,7 +345,9 @@ export default function index() {
                 <div className="form-group person">
                   <img
                     src={`/images/${
-                      data.username !== ""
+                      formik.errors.username && formik.touched.username
+                        ? "person-grey.png"
+                        : formik.values.username !== ""
                         ? "person-blue.png"
                         : "person-grey.png"
                     }`}
@@ -311,15 +360,27 @@ export default function index() {
                     type="text"
                     name="username"
                     placeholder="Enter your username"
-                    className={`${data.username !== "" ? "active" : ""}`}
-                    value={data.username}
-                    onChange={handleFormChange}
+                    className={`${
+                      formik.errors.username && formik.touched.username
+                        ? "error"
+                        : formik.values.username !== ""
+                        ? "active"
+                        : ""
+                    }`}
+                    value={formik.values.username}
+                    onChange={formik.handleChange}
                   />
+                  {formik.errors.username && formik.touched.username && (
+                    <small className="error">{formik.errors.username}</small>
+                  )}
                 </div>
                 <div className="form-group person">
                   <img
                     src={`/images/${
-                      data.firstName !== "" && data.firstName !== "firstName"
+                      formik.errors.firstName && formik.touched.firstName
+                        ? "person-grey.png"
+                        : formik.values.firstName !== "" &&
+                          formik.values.firstName !== "firstName"
                         ? "person-blue.png"
                         : "person-grey.png"
                     }`}
@@ -333,18 +394,31 @@ export default function index() {
                     name="firstName"
                     placeholder="Enter your first name"
                     className={`${
-                      data.firstName !== "" && data.firstName !== "firstName"
+                      formik.errors.firstName && formik.touched.firstName
+                        ? "error"
+                        : formik.values.firstName !== "" &&
+                          formik.values.firstName !== "firstName"
                         ? "active"
                         : ""
                     }`}
-                    value={data.firstName === "firstName" ? "" : data.firstName}
-                    onChange={handleFormChange}
+                    value={
+                      formik.values.firstName === "firstName"
+                        ? ""
+                        : formik.values.firstName
+                    }
+                    onChange={formik.handleChange}
                   />
+                  {formik.errors.firstName && formik.touched.firstName && (
+                    <small className="error">{formik.errors.firstName}</small>
+                  )}
                 </div>
                 <div className="form-group person">
                   <img
                     src={`/images/${
-                      data.lastName !== "" && data.lastName !== "lastName"
+                      formik.errors.lastName && formik.touched.lastName
+                        ? "person-grey.png"
+                        : formik.values.lastName !== "" &&
+                          formik.values.lastName !== "lastName"
                         ? "person-blue.png"
                         : "person-grey.png"
                     }`}
@@ -358,19 +432,31 @@ export default function index() {
                     name="lastName"
                     placeholder="Enter your last name"
                     className={`${
-                      data.lastName !== "" && data.lastName !== "lastName"
+                      formik.errors.lastName && formik.touched.lastName
+                        ? "error"
+                        : formik.values.lastName !== "" &&
+                          formik.values.lastName !== "lastName"
                         ? "active"
                         : ""
                     }`}
-                    value={data.lastName === "lastName" ? "" : data.lastName}
-                    onChange={handleFormChange}
+                    value={
+                      formik.values.lastName === "lastName"
+                        ? ""
+                        : formik.values.lastName
+                    }
+                    onChange={formik.handleChange}
                   />
+                  {formik.errors.lastName && formik.touched.lastName && (
+                    <small className="error">{formik.errors.lastName}</small>
+                  )}
                 </div>
                 <div className="form-group phone">
                   <img
                     src={`/images/${
-                      data.phoneNumber !== "" &&
-                      data.phoneNumber !== "000000000000"
+                      formik.errors.phoneNumber && formik.touched.phoneNumber
+                        ? "phone-2-grey.png"
+                        : formik.values.phoneNumber !== "" &&
+                          formik.values.phoneNumber !== "000000000000"
                         ? "phone-2-blue.png"
                         : "phone-2-grey.png"
                     }`}
@@ -384,18 +470,23 @@ export default function index() {
                     name="phoneNumber"
                     placeholder="Enter your phone number"
                     className={`${
-                      data.phoneNumber !== "" &&
-                      data.phoneNumber !== "000000000000"
+                      formik.errors.phoneNumber && formik.touched.phoneNumber
+                        ? "error"
+                        : formik.values.phoneNumber !== "" &&
+                          formik.values.phoneNumber !== "000000000000"
                         ? "active"
                         : ""
                     }`}
                     value={
-                      data.phoneNumber === "000000000000"
+                      formik.values.phoneNumber === "000000000000"
                         ? ""
-                        : data.phoneNumber
+                        : formik.values.phoneNumber
                     }
-                    onChange={handleFormChange}
+                    onChange={formik.handleChange}
                   />
+                  {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+                    <small className="error">{formik.errors.phoneNumber}</small>
+                  )}
                 </div>
               </form>
             </div>
@@ -403,8 +494,7 @@ export default function index() {
               <Button
                 type="button"
                 className="btn btn-edit"
-                onClick={handleSubmit}
-                isDismiss
+                onClick={formik.handleSubmit}
               >
                 Edit
               </Button>

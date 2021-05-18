@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import { animateScroll as scroll } from "react-scroll";
 import Swal from "sweetalert2";
 import { findUser } from "../../configs/redux/actions/user";
 import { getTransaction } from "../../configs/redux/actions/transaction";
@@ -25,7 +26,7 @@ export default function Navbar(props) {
 
   const showNotification = () => {
     if (notification === false) {
-      window.scrollTo(0, 0);
+      scroll.scrollToTop();
       setNotification(true);
     } else {
       setNotification(false);
