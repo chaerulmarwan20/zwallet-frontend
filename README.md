@@ -25,19 +25,19 @@ Zwallet is a digital wallet application that simplifies your financial needs and
 
 - Transfer
 
-- Realtime Balance
+- Realtime balance
 
-- Upload Image Profile
+- Upload image profile
 
-- Reset Password
+- Reset password
 
-- PIN Security while Transfer, and Topup
+- PIN security while transfer, and topup
 
-- Change Password
+- Change password
 
-- Change Pin
+- Change pin
 
-- Change Profile
+- Change profile
 
 ## Built With
 
