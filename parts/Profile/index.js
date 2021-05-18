@@ -491,13 +491,27 @@ export default function index() {
               </form>
             </div>
             <div className="modal-footer d-flex justify-content-center justify-content-md-end">
-              <Button
-                type="button"
-                className="btn btn-edit"
-                onClick={formik.handleSubmit}
-              >
-                Edit
-              </Button>
+              {formik.errors.username ||
+              formik.errors.firstName ||
+              formik.errors.lastName ||
+              formik.errors.phoneNumber ? (
+                <Button
+                  type="button"
+                  className="btn btn-edit"
+                  onClick={formik.handleSubmit}
+                >
+                  Edit
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  className="btn btn-edit"
+                  onClick={formik.handleSubmit}
+                  isDismiss
+                >
+                  Edit
+                </Button>
+              )}
             </div>
           </div>
         </div>
