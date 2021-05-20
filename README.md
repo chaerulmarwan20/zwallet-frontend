@@ -77,12 +77,12 @@ $ npm run dev
 
 <p align="center">
   <span>
-    <img width="400" height="400" src="./public/images/Zwallet-Landing.png">   
-    <img width="400" height="400" src="./public/images/Zwallet-Login.png">   
-    <img width="400" height="400" src="./public/images/Zwallet-Dashboard.png">   
-    <img width="400" height="400" src="./public/images/Zwallet-Transfer.png">
-    <img width="400" height="400" src="./public/images/Zwallet-Top-Up.png">   
-    <img width="400" height="400" src="./public/images/Zwallet-Profile.png">
+    <img width="400" height="420" src="./public/images/Zwallet-Landing.png">   
+    <img width="400" height="420" src="./public/images/Zwallet-Login.png">   
+    <img width="400" height="420" src="./public/images/Zwallet-Dashboard.png">   
+    <img width="400" height="420" src="./public/images/Zwallet-Transfer.png">
+    <img width="400" height="420" src="./public/images/Zwallet-Top-Up.png">   
+    <img width="400" height="420" src="./public/images/Zwallet-Profile.png">
   </span>
 </p>
 
