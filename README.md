@@ -77,7 +77,7 @@ $ npm run dev
 
 <p align="center">
   <span>
-    <img width="400" height="400" src="./public/images/Zwallet-Landing.png">   
+    <img width="400" height="400" src="./public/images/Zwallets.png">   
     <img width="400" height="400" src="./public/images/Zwallet-Login.png">   
     <img width="400" height="400" src="./public/images/Zwallet-Dashboard.png">   
     <img width="400" height="400" src="./public/images/Zwallet-Transfer.png">
