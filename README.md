@@ -77,12 +77,12 @@ $ npm run dev
 
 <p align="center">
   <span>
-    <img width="400" height="400" src="./public/images/Zwallet-Landing-Pages.png">   
-    <img width="400" height="400" src="./public/images/Zwallet-Login.png">   
-    <img width="400" height="400" src="./public/images/Zwallet-Dashboard.png">   
-    <img width="400" height="400" src="./public/images/Zwallet-Transfer.png">
-    <img width="400" height="400" src="./public/images/Zwallet-Top-Up.png">   
-    <img width="400" height="400" src="./public/images/Zwallet-Profile.png">
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290562-ee977c00-bc76-11eb-81f6-0eb3a44ecb90.png">   
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290561-edfee580-bc76-11eb-9ab1-4912043d722a.png">   
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290560-ed664f00-bc76-11eb-84d5-f4442cf723ad.png">   
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290558-eccdb880-bc76-11eb-97e8-b5a6b818b3f0.png">
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290556-eb9c8b80-bc76-11eb-992a-cfafb1dbe581.png">   
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290546-e9d2c800-bc76-11eb-9d8b-f23d4b009793.png">
   </span>
 </p>
 
