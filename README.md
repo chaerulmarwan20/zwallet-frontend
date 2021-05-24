@@ -11,7 +11,8 @@
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Screenshots](#screenshots)
-- [Related Project](#related-project)
+- [Link](#link)
+- [Author](#author)
 
 ## Introduction
 
@@ -54,7 +55,7 @@ Zwallet is a digital wallet application that simplifies your financial needs and
 
 ## Installation
 
-1. Open your terminal or command prompt. Then, clone the repo.
+1. Clone the repository.
 
 ```
 $ git clone git clone https://github.com/chaerulmarwan20/zwallet-frontend.git
@@ -64,10 +65,15 @@ $ git clone git clone https://github.com/chaerulmarwan20/zwallet-frontend.git
 
 ```
 $ cd zwallet-frontend
+```
+
+3. Install package.
+
+```
 $ npm install
 ```
 
-3. Run this application.
+4. Run this application.
 
 ```
 $ npm run dev
@@ -85,7 +91,11 @@ $ npm run dev
   </span>
 </p>
 
-## Related Project
+## Link
 
 - :white_check_mark: [`Backend Zwallet`](https://github.com/chaerulmarwan20/zwallet-backend)
-- :rocket: [`Production`](https://zwallet-banking.vercel.app/)
+- :rocket: [`Publication`](https://zwallet-banking.vercel.app/)
+
+## Author
+
+- [Chaerul Marwan](https://github.com/chaerulmarwan20)
