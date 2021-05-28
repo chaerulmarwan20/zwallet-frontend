@@ -85,9 +85,9 @@ $ npm run dev
   <span>
     <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290562-ee977c00-bc76-11eb-81f6-0eb3a44ecb90.png">   
     <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290561-edfee580-bc76-11eb-9ab1-4912043d722a.png">   
-    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290560-ed664f00-bc76-11eb-84d5-f4442cf723ad.png">   
-    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290558-eccdb880-bc76-11eb-97e8-b5a6b818b3f0.png">
-    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119290546-e9d2c800-bc76-11eb-9d8b-f23d4b009793.png">
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119995703-0f096280-bff8-11eb-8d3f-4e48884572c6.png">   
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119995699-0e70cc00-bff8-11eb-8147-20b39e9000f9.png">
+    <img width="400" height="200" src="https://user-images.githubusercontent.com/76175402/119995691-0ca70880-bff8-11eb-917a-24fb5f082e98.png">
   </span>
 </p>
 
