@@ -82,7 +82,15 @@ export default function index() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (amount === "") {
+    if (amount.charAt(0) === "-") {
+      Swal.fire({
+        title: "Error!",
+        text: "Amount can't start with a minus",
+        icon: "error",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#6379F4",
+      });
+    } else if (amount === "") {
       Swal.fire({
         title: "Error!",
         text: "Amount is a required field",
@@ -123,7 +131,7 @@ export default function index() {
             idUser,
             Number(result),
             userCredit.credit - Number(result),
-            data.notes
+            data.notes === "" ? "-" : data.notes
           )
         )
           .then(({ id, message }) => {
